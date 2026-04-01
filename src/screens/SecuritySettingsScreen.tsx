@@ -36,12 +36,12 @@ export const SecuritySettingsScreen: React.FC = () => {
   const handleTogglePassphrase = async () => {
     if (authEnabled) {
       setAlertState(showAlert(
-        'Disable Passphrase Lock',
-        'Are you sure you want to disable passphrase protection?',
+        '禁用密码锁定',
+        '您确定要禁用密码保护吗？',
         [
-          { text: 'Cancel', style: 'cancel' },
+          { text: '取消', style: 'cancel' },
           {
-            text: 'Disable',
+            text: '禁用',
             style: 'destructive',
             onPress: () => {
               setAlertState(hideAlert());
@@ -72,16 +72,16 @@ export const SecuritySettingsScreen: React.FC = () => {
         >
           <Icon name="arrow-left" size={20} color={colors.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>Security</Text>
+        <Text style={styles.title}>安全</Text>
       </View>
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
         <Card style={styles.section}>
-          <Text style={styles.sectionTitle}>App Lock</Text>
+          <Text style={styles.sectionTitle}>应用锁定</Text>
           <View style={styles.settingRow}>
             <View style={styles.settingInfo}>
-              <Text style={styles.settingLabel}>Passphrase Lock</Text>
-              <Text style={styles.settingHint}>Require passphrase to open app</Text>
+              <Text style={styles.settingLabel}>密码锁定</Text>
+              <Text style={styles.settingHint}>打开应用时需要密码</Text>
             </View>
             <Switch
               value={authEnabled}
@@ -93,7 +93,7 @@ export const SecuritySettingsScreen: React.FC = () => {
 
           {authEnabled && (
             <Button
-              title="Change Passphrase"
+              title="修改密码"
               variant="primary"
               size="medium"
               onPress={handleChangePassphrase}
@@ -106,7 +106,7 @@ export const SecuritySettingsScreen: React.FC = () => {
         <Card style={styles.infoCard}>
           <Icon name="info" size={18} color={colors.textMuted} />
           <Text style={styles.infoText}>
-            When enabled, the app will lock automatically when you switch away or close it. Your passphrase is stored securely on device and never transmitted.
+            启用后，当您切换或关闭应用时，应用会自动锁定。您的密码安全存储在设备上，永远不会被传输。
           </Text>
         </Card>
       </ScrollView>

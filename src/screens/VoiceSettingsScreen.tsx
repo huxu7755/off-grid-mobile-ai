@@ -41,13 +41,13 @@ export const VoiceSettingsScreen: React.FC = () => {
         >
           <Icon name="arrow-left" size={20} color={colors.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>Voice Transcription</Text>
+        <Text style={styles.title}>语音转录</Text>
       </View>
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
         <Card style={styles.section}>
           <Text style={styles.description}>
-            Download a Whisper model to enable on-device voice input. All transcription happens locally - no data is sent to any server.
+            下载Whisper模型以启用设备上的语音输入。所有转录都在本地进行 - 没有数据被发送到任何服务器。
           </Text>
 
           {(() => {
@@ -58,20 +58,20 @@ export const VoiceSettingsScreen: React.FC = () => {
                     <Text style={styles.modelName}>
                       {WHISPER_MODELS.find(m => m.id === whisperModelId)?.name || whisperModelId}
                     </Text>
-                    <Text style={styles.modelStatus}>Downloaded</Text>
+                    <Text style={styles.modelStatus}>已下载</Text>
                   </View>
                   <Button
-                    title="Remove Model"
+                    title="移除模型"
                     variant="outline"
                     size="small"
                     onPress={() => {
                       setAlertState(showAlert(
-                        'Remove Whisper Model',
-                        'This will disable voice input until you download a model again.',
+                        '移除Whisper模型',
+                        '这将禁用语音输入，直到您再次下载模型。',
                         [
-                          { text: 'Cancel', style: 'cancel' },
+                          { text: '取消', style: 'cancel' },
                           {
-                            text: 'Remove',
+                            text: '移除',
                             style: 'destructive',
                             onPress: () => {
                               setAlertState(hideAlert());
@@ -91,7 +91,7 @@ export const VoiceSettingsScreen: React.FC = () => {
                 <View style={styles.downloading}>
                   <ActivityIndicator size="small" color={colors.primary} />
                   <Text style={styles.downloadingText}>
-                    Downloading... {Math.round(whisperProgress * 100)}%
+                    正在下载... {Math.round(whisperProgress * 100)}%
                   </Text>
                   <View style={styles.progressBar}>
                     <View
@@ -103,7 +103,7 @@ export const VoiceSettingsScreen: React.FC = () => {
             }
             return (
               <View style={styles.modelList}>
-                <Text style={styles.selectLabel}>Select a model to download:</Text>
+                <Text style={styles.selectLabel}>选择要下载的模型：</Text>
                 {WHISPER_MODELS.slice(0, 3).map((model) => (
                   <TouchableOpacity
                     key={model.id}
@@ -132,9 +132,9 @@ export const VoiceSettingsScreen: React.FC = () => {
           <View style={styles.privacyIconContainer}>
             <Icon name="mic" size={18} color={colors.textSecondary} />
           </View>
-          <Text style={styles.privacyTitle}>Privacy First</Text>
+          <Text style={styles.privacyTitle}>隐私优先</Text>
           <Text style={styles.privacyText}>
-            Voice transcription happens entirely on your device. Your audio is never sent to any server or stored anywhere.
+            语音转录完全在您的设备上进行。您的音频永远不会被发送到任何服务器或存储在任何地方。
           </Text>
         </Card>
       </ScrollView>

@@ -51,12 +51,12 @@ export const RemoteServersScreen: React.FC = () => {
     try {
       const result = await testConnection(serverId);
       if (result.success) {
-        setAlertState(showAlert('Success', `Connected successfully (${result.latency}ms)`));
+        setAlertState(showAlert('成功', `连接成功 (${result.latency}ms)`));
       } else {
-        setAlertState(showAlert('Connection Failed', result.error || 'Unknown error'));
+        setAlertState(showAlert('连接失败', result.error || '未知错误'));
       }
     } catch (error) {
-      setAlertState(showAlert('Error', error instanceof Error ? error.message : 'Unknown error'));
+      setAlertState(showAlert('错误', error instanceof Error ? error.message : '未知错误'));
     } finally {
       setTestingId(null);
     }
@@ -67,13 +67,13 @@ export const RemoteServersScreen: React.FC = () => {
     try {
       const discovered = await discoverLANServers();
       if (discovered.length === 0) {
-        setAlertState(showAlert('No Servers Found', 'No LLM servers were found on your local network.'));
+        setAlertState(showAlert('未找到服务器', '在您的本地网络上未找到LLM服务器。'));
         return;
       }
       const existingEndpoints = new Set(servers.map(s => s.endpoint));
       const newServers = discovered.filter(d => !existingEndpoints.has(d.endpoint));
       if (newServers.length === 0) {
-        setAlertState(showAlert('Already Added', 'All discovered servers are already in your list.'));
+        setAlertState(showAlert('已添加', '所有发现的服务器都已在您的列表中。'));
         return;
       }
       const added = await Promise.all(
@@ -86,10 +86,10 @@ export const RemoteServersScreen: React.FC = () => {
         )
       );
       added.forEach(s => remoteServerManager.testConnection(s.id).catch(() => { }));
-      setAlertState(showAlert('Discovery Complete', `Added ${newServers.length} server${newServers.length > 1 ? 's' : ''}.`));
+      setAlertState(showAlert('发现完成', `已添加 ${newServers.length} 个服务器。`));
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unknown error';
-      setAlertState(showAlert('Scan Failed', message));
+      const message = error instanceof Error ? error.message : '未知错误';
+      setAlertState(showAlert('扫描失败', message));
     } finally {
       setIsScanning(false);
     }
@@ -97,12 +97,12 @@ export const RemoteServersScreen: React.FC = () => {
 
   const handleDeleteServer = useCallback((server: typeof servers[0]) => {
     setAlertState(showAlert(
-      'Delete Server',
-      `Are you sure you want to delete "${server.name}"?`,
+      '删除服务器',
+      `您确定要删除 "${server.name}" 吗？`,
       [
-        { text: 'Cancel', style: 'cancel' },
+        { text: '取消', style: 'cancel' },
         {
-          text: 'Delete',
+          text: '删除',
           style: 'destructive',
           onPress: async () => {
             if (activeServerId === server.id) setActiveServerId(null);
@@ -119,7 +119,7 @@ export const RemoteServersScreen: React.FC = () => {
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Icon name="chevron-left" size={24} color={theme.colors.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>Remote Servers</Text>
+        <Text style={styles.title}>远程服务器</Text>
       </View>
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
@@ -128,13 +128,13 @@ export const RemoteServersScreen: React.FC = () => {
             <View style={styles.emptyIcon}>
               <Icon name="wifi" size={32} color={theme.colors.textMuted} />
             </View>
-            <Text style={styles.emptyTitle}>No Remote Servers</Text>
+            <Text style={styles.emptyTitle}>无远程服务器</Text>
             <Text style={styles.emptyText}>
-              Connect to Ollama, LM Studio, or other LLM servers on your network
+              连接到您网络上的Ollama、LM Studio或其他LLM服务器
             </Text>
             <TouchableOpacity style={styles.addButton} onPress={() => setShowAddModal(true)}>
               <Icon name="plus" size={20} color={theme.colors.background} />
-              <Text style={styles.addButtonText}>Add Server</Text>
+              <Text style={styles.addButtonText}>添加服务器</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.scanButton} onPress={handleScanNetwork} disabled={isScanning}>
               {isScanning ? (
@@ -142,7 +142,7 @@ export const RemoteServersScreen: React.FC = () => {
               ) : (
                 <Icon name="wifi" size={20} color={theme.colors.text} />
               )}
-              <Text style={styles.scanButtonText}>{isScanning ? 'Scanning...' : 'Scan Network'}</Text>
+              <Text style={styles.scanButtonText}>{isScanning ? '正在扫描...' : '扫描网络'}</Text>
             </TouchableOpacity>
           </View>
         ) : (
@@ -155,10 +155,10 @@ export const RemoteServersScreen: React.FC = () => {
               if (health?.isHealthy === true) statusColor = styles.statusDotActive;
               else if (health?.isHealthy === false) statusColor = styles.statusDotInactive;
 
-              let statusText = 'Unknown';
-              if (isTesting) statusText = 'Testing...';
-              else if (health?.isHealthy === true) statusText = 'Connected';
-              else if (health?.isHealthy === false) statusText = 'Offline';
+              let statusText = '未知';
+              if (isTesting) statusText = '正在测试...';
+              else if (health?.isHealthy === true) statusText = '已连接';
+              else if (health?.isHealthy === false) statusText = '离线';
 
               return (
                 <View key={server.id} style={styles.serverItem}>
@@ -185,7 +185,7 @@ export const RemoteServersScreen: React.FC = () => {
                       ) : (
                         <>
                           <Icon name="refresh-cw" size={16} color={theme.colors.text} />
-                          <Text style={styles.actionButtonText}>Test</Text>
+                          <Text style={styles.actionButtonText}>测试</Text>
                         </>
                       )}
                     </TouchableOpacity>
@@ -194,14 +194,14 @@ export const RemoteServersScreen: React.FC = () => {
                       onPress={() => setEditingServer(server)}
                     >
                       <Icon name="edit-2" size={16} color={theme.colors.text} />
-                      <Text style={styles.actionButtonText}>Edit</Text>
+                      <Text style={styles.actionButtonText}>编辑</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                       style={[styles.actionButton, styles.deleteButton]}
                       onPress={() => handleDeleteServer(server)}
                     >
                       <Icon name="trash-2" size={16} color={theme.colors.error} />
-                      <Text style={[styles.actionButtonText, styles.deleteButtonText]}>Delete</Text>
+                      <Text style={[styles.actionButtonText, styles.deleteButtonText]}>删除</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -210,7 +210,7 @@ export const RemoteServersScreen: React.FC = () => {
 
             <TouchableOpacity style={styles.addButton} onPress={() => setShowAddModal(true)}>
               <Icon name="plus" size={20} color={theme.colors.background} />
-              <Text style={styles.addButtonText}>Add Another Server</Text>
+              <Text style={styles.addButtonText}>添加另一个服务器</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.scanButton} onPress={handleScanNetwork} disabled={isScanning}>
               {isScanning ? (
@@ -218,16 +218,16 @@ export const RemoteServersScreen: React.FC = () => {
               ) : (
                 <Icon name="wifi" size={20} color={theme.colors.text} />
               )}
-              <Text style={styles.scanButtonText}>{isScanning ? 'Scanning...' : 'Scan Network'}</Text>
+              <Text style={styles.scanButtonText}>{isScanning ? '正在扫描...' : '扫描网络'}</Text>
             </TouchableOpacity>
           </>
         )}
 
         <View style={styles.infoCard}>
-          <Text style={styles.infoTitle}>About Remote Servers</Text>
+          <Text style={styles.infoTitle}>关于远程服务器</Text>
           <Text style={styles.infoText}>
-            Connect to LLM servers running on your local network, such as Ollama or LM Studio.{'\n\n'}
-            Make sure your server is running and accessible from your device. For security, only connect to servers on trusted networks.
+            连接到在您本地网络上运行的LLM服务器，例如Ollama或LM Studio。{'\n\n'}
+            确保您的服务器正在运行并且可以从您的设备访问。为了安全起见，只连接到受信任网络上的服务器。
           </Text>
         </View>
       </ScrollView>

@@ -60,12 +60,12 @@ export const StorageSettingsScreen: React.FC = () => {
   const handleClearAllStaleDownloads = useCallback(() => {
     setAlertState(
       showAlert(
-        'Clear Stale Downloads',
-        `Clear ${staleDownloads.length} stale download entry(s)?`,
+        '清除过期下载',
+        `清除 ${staleDownloads.length} 个过期下载条目？`,
         [
-          { text: 'Cancel', style: 'cancel' },
+          { text: '取消', style: 'cancel' },
           {
-            text: 'Clear All',
+            text: '全部清除',
             style: 'destructive',
             onPress: () => {
               setAlertState(hideAlert());
@@ -91,54 +91,54 @@ export const StorageSettingsScreen: React.FC = () => {
         >
           <Icon name="arrow-left" size={20} color={colors.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>Storage</Text>
+        <Text style={styles.title}>存储</Text>
       </View>
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
         <Card style={styles.section}>
-          <Text style={styles.sectionTitle}>Storage Usage</Text>
+          <Text style={styles.sectionTitle}>存储使用</Text>
           <View style={styles.storageBar}>
             <View style={[styles.storageUsed, { width: `${Math.min(usedPercentage, 100)}%` }]} />
           </View>
           <View style={styles.storageLegend}>
             <View style={styles.legendItem}>
               <View style={[styles.legendDot, { backgroundColor: colors.primary }]} />
-              <Text style={styles.legendText}>Used: {hardwareService.formatBytes(storageUsed)}</Text>
+              <Text style={styles.legendText}>已用: {hardwareService.formatBytes(storageUsed)}</Text>
             </View>
             <View style={styles.legendItem}>
               <View style={[styles.legendDot, { backgroundColor: colors.surfaceLight }]} />
-              <Text style={styles.legendText}>Free: {hardwareService.formatBytes(availableStorage)}</Text>
+              <Text style={styles.legendText}>可用: {hardwareService.formatBytes(availableStorage)}</Text>
             </View>
           </View>
         </Card>
 
         <Card style={styles.section}>
-          <Text style={styles.sectionTitle}>Breakdown</Text>
+          <Text style={styles.sectionTitle}>明细</Text>
           <View style={styles.infoRow}>
             <View style={styles.infoRowLeft}>
               <Icon name="cpu" size={18} color={colors.primary} />
-              <Text style={styles.infoLabel}>LLM Models</Text>
+              <Text style={styles.infoLabel}>LLM模型</Text>
             </View>
             <Text style={styles.infoValue}>{downloadedModels.length}</Text>
           </View>
           <View style={styles.infoRow}>
             <View style={styles.infoRowLeft}>
               <Icon name="image" size={18} color={colors.primary} />
-              <Text style={styles.infoLabel}>Image Models</Text>
+              <Text style={styles.infoLabel}>图像模型</Text>
             </View>
             <Text style={styles.infoValue}>{downloadedImageModels.length}</Text>
           </View>
           <View style={styles.infoRow}>
             <View style={styles.infoRowLeft}>
               <Icon name="hard-drive" size={18} color={colors.primary} />
-              <Text style={styles.infoLabel}>Model Storage</Text>
+              <Text style={styles.infoLabel}>模型存储</Text>
             </View>
             <Text style={styles.infoValue}>{hardwareService.formatBytes(storageUsed)}</Text>
           </View>
           <View style={[styles.infoRow, styles.lastRow]}>
             <View style={styles.infoRowLeft}>
               <Icon name="message-circle" size={18} color={colors.primary} />
-              <Text style={styles.infoLabel}>Conversations</Text>
+              <Text style={styles.infoLabel}>对话</Text>
             </View>
             <Text style={styles.infoValue}>{conversations.length}</Text>
           </View>
@@ -146,7 +146,7 @@ export const StorageSettingsScreen: React.FC = () => {
 
         {downloadedModels.length > 0 && (
           <Card style={styles.section}>
-            <Text style={styles.sectionTitle}>LLM Models</Text>
+            <Text style={styles.sectionTitle}>LLM模型</Text>
             {downloadedModels.map((model, index) => (
               <View
                 key={model.id}
@@ -164,7 +164,7 @@ export const StorageSettingsScreen: React.FC = () => {
 
         {downloadedImageModels.length > 0 && (
           <Card style={styles.section}>
-            <Text style={styles.sectionTitle}>Image Models</Text>
+            <Text style={styles.sectionTitle}>图像模型</Text>
             {downloadedImageModels.map((model, index) => (
               <View
                 key={model.id}
@@ -190,23 +190,23 @@ export const StorageSettingsScreen: React.FC = () => {
         {staleDownloads.length > 0 && (
           <Card style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Stale Downloads</Text>
+              <Text style={styles.sectionTitle}>过期下载</Text>
               <TouchableOpacity
                 style={styles.clearAllButton}
                 onPress={handleClearAllStaleDownloads}
               >
-                <Text style={styles.clearAllText}>Clear All</Text>
+                <Text style={styles.clearAllText}>全部清除</Text>
               </TouchableOpacity>
             </View>
             <Text style={[styles.hint, { textAlign: 'left' as const, marginBottom: SPACING.md }]}>
-              These download entries have invalid or missing data and can be safely cleared.
+              这些下载条目数据无效或缺失，可以安全清除。
             </Text>
             {staleDownloads.map(([downloadId, info]) => (
               <View key={downloadId} style={styles.orphanedRow}>
                 <View style={styles.orphanedInfo}>
-                  <Text style={styles.orphanedName}>Download #{downloadId}</Text>
+                  <Text style={styles.orphanedName}>下载 #{downloadId}</Text>
                   <Text style={styles.orphanedMeta}>
-                    {info?.fileName ?? 'Unknown file'} • {info?.modelId ?? 'Unknown model'}
+                    {info?.fileName ?? '未知文件'} • {info?.modelId ?? '未知模型'}
                   </Text>
                 </View>
                 <TouchableOpacity
@@ -223,7 +223,7 @@ export const StorageSettingsScreen: React.FC = () => {
         <OrphanedFilesSection onStorageChange={loadStorageInfo} />
 
         <Text style={styles.hint}>
-          To free up space, you can delete models from the Models tab.
+          要释放空间，您可以从模型标签页删除模型。
         </Text>
       </ScrollView>
 

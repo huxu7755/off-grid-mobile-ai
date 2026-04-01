@@ -37,7 +37,7 @@ export const NoModelScreen: React.FC<{
           <Icon name="arrow-left" size={20} color={colors.text} />
         </TouchableOpacity>
         <View style={styles.headerLeft}>
-          <Text style={styles.headerTitle}>New Chat</Text>
+          <Text style={styles.headerTitle}>新聊天</Text>
         </View>
         <View style={styles.headerActions} />
       </View>
@@ -46,15 +46,15 @@ export const NoModelScreen: React.FC<{
       <View style={styles.noModelIconContainer}>
         <Icon name="cpu" size={32} color={colors.textMuted} />
       </View>
-      <Text style={styles.noModelTitle}>No Model Selected</Text>
+      <Text style={styles.noModelTitle}>未选择模型</Text>
       <Text style={styles.noModelText}>
         {downloadedModelsCount > 0
-          ? 'Select a model to start chatting.'
-          : 'Download a model from the Models tab to start chatting.'}
+          ? '选择一个模型开始聊天。'
+          : '从模型标签页下载模型开始聊天。'}
       </Text>
       {downloadedModelsCount > 0 && (
         <TouchableOpacity style={styles.selectModelButton} onPress={() => setShowModelSelector(true)}>
-          <Text style={styles.selectModelButtonText}>Select Model</Text>
+          <Text style={styles.selectModelButtonText}>选择模型</Text>
         </TouchableOpacity>
       )}
     </View>
@@ -84,19 +84,19 @@ export const LoadingScreen: React.FC<{
           <Icon name="arrow-left" size={20} color={colors.text} />
         </TouchableOpacity>
         <View style={styles.headerLeft}>
-          <Text style={styles.headerTitle}>Loading Model</Text>
+          <Text style={styles.headerTitle}>正在加载模型</Text>
         </View>
         <View style={styles.headerActions} />
       </View>
     </View>
     <View style={styles.loadingContainer}>
       <ActivityIndicator size="large" color={colors.primary} />
-      <Text style={styles.loadingText}>Loading {loadingModelName}</Text>
+      <Text style={styles.loadingText}>正在加载 {loadingModelName}</Text>
       {modelSize ? <Text style={styles.loadingSubtext}>{modelSize}</Text> : null}
       <Text style={styles.loadingHint}>
-        Preparing model for inference. This may take a moment for larger models.
+        正在准备模型进行推理。对于较大的模型，这可能需要一点时间。
       </Text>
-      {hasVision && <Text style={styles.loadingHint}>Vision capabilities will be enabled.</Text>}
+      {hasVision && <Text style={styles.loadingHint}>视觉功能将被启用。</Text>}
     </View>
   </SafeAreaView>
 );
@@ -175,30 +175,30 @@ export const EmptyChat: React.FC<{
       </View>
     </AnimatedEntry>
     <AnimatedEntry index={1} staggerMs={60}>
-      <Text style={styles.emptyChatTitle}>Start a Conversation</Text>
+      <Text style={styles.emptyChatTitle}>开始对话</Text>
     </AnimatedEntry>
     <AnimatedEntry index={2} staggerMs={60}>
       <Text style={styles.emptyChatText}>
-        Type a message below to begin chatting with {activeModelName || activeModel?.name || 'Unknown'}.
+        在下方输入消息，开始与 {activeModelName || activeModel?.name || 'Unknown'} 聊天。
       </Text>
     </AnimatedEntry>
     <AnimatedEntry index={3} staggerMs={60}>
       <TouchableOpacity style={styles.projectHint} onPress={() => setShowProjectSelector(true)}>
         <View style={styles.projectHintIcon}>
           <Text style={styles.projectHintIconText}>
-            {activeProject?.name?.charAt(0).toUpperCase() || 'D'}
+            {activeProject?.name?.charAt(0).toUpperCase() || '默'}
           </Text>
         </View>
         <Text style={styles.projectHintText}>
-          Project: {activeProject?.name || 'Default'} — tap to change
+          项目: {activeProject?.name || '默认'} — 点击更改
         </Text>
       </TouchableOpacity>
     </AnimatedEntry>
     <AnimatedEntry index={4} staggerMs={60}>
       <Text style={styles.privacyText}>
         {isRemote
-          ? 'This conversation uses a remote model. Your messages will be sent to the remote server.'
-          : 'This conversation is completely private. All processing happens on your device.'}
+          ? '此对话使用远程模型。您的消息将被发送到远程服务器。'
+          : '此对话完全私密。所有处理都在您的设备上进行。'}
       </Text>
     </AnimatedEntry>
   </View>
@@ -225,7 +225,7 @@ export const ImageProgressIndicator: React.FC<{
             </View>
             <View style={styles.imageProgressInfo}>
               <Text style={styles.imageProgressTitle}>
-                {imagePreviewPath ? 'Refining Image' : 'Generating Image'}
+                {imagePreviewPath ? '正在优化图像' : '正在生成图像'}
               </Text>
               {imageGenerationStatus && (
                 <Text style={styles.imageProgressStatus}>{imageGenerationStatus}</Text>
@@ -274,11 +274,11 @@ export const ImageViewerModal: React.FC<{
           <View style={styles.imageViewerActions}>
             <TouchableOpacity style={styles.imageViewerButton} onPress={onSave}>
               <Icon name="download" size={24} color={colors.text} />
-              <Text style={styles.imageViewerButtonText}>Save</Text>
+              <Text style={styles.imageViewerButtonText}>保存</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.imageViewerButton} onPress={onClose}>
               <Icon name="x" size={24} color={colors.text} />
-              <Text style={styles.imageViewerButtonText}>Close</Text>
+              <Text style={styles.imageViewerButtonText}>关闭</Text>
             </TouchableOpacity>
           </View>
         </View>

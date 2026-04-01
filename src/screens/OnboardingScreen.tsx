@@ -224,7 +224,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
         <View style={styles.header}>
           {!isLastSlide && (
             <Button
-              title="Skip"
+              title="跳过"
               variant="ghost"
               onPress={handleSkip}
               testID="onboarding-skip"
@@ -254,7 +254,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
 
         <View style={styles.footer}>
           <Button
-            title={isLastSlide ? 'Get Started' : 'Next'}
+            title={isLastSlide ? '开始使用' : '下一步'}
             onPress={handleNext}
             size="large"
             style={styles.nextButton}

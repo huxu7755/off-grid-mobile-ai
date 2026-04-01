@@ -33,28 +33,28 @@ export const DeviceInfoScreen: React.FC = () => {
         >
           <Icon name="arrow-left" size={20} color={colors.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>Device Information</Text>
+        <Text style={styles.title}>设备信息</Text>
       </View>
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
         <Card style={styles.section}>
-          <Text style={styles.sectionTitle}>Hardware</Text>
+          <Text style={styles.sectionTitle}>硬件</Text>
           <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Model</Text>
+            <Text style={styles.infoLabel}>型号</Text>
             <Text style={styles.infoValue}>{deviceInfo?.deviceModel}</Text>
           </View>
           <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>System</Text>
+            <Text style={styles.infoLabel}>系统</Text>
             <Text style={styles.infoValue}>
               {deviceInfo?.systemName} {deviceInfo?.systemVersion}
             </Text>
           </View>
           <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Total RAM</Text>
+            <Text style={styles.infoLabel}>总内存</Text>
             <Text style={styles.infoValue}>{totalRamGB.toFixed(1)} GB</Text>
           </View>
           <View style={[styles.infoRow, styles.lastRow]}>
-            <Text style={styles.infoLabel}>Device Tier</Text>
+            <Text style={styles.infoLabel}>设备等级</Text>
             <Text style={[styles.infoValue, styles.tierBadge]}>
               {deviceTier.charAt(0).toUpperCase() + deviceTier.slice(1)}
             </Text>
@@ -62,31 +62,31 @@ export const DeviceInfoScreen: React.FC = () => {
         </Card>
 
         <Card style={styles.section}>
-          <Text style={styles.sectionTitle}>Compatibility</Text>
+          <Text style={styles.sectionTitle}>兼容性</Text>
           <Text style={styles.description}>
-            Your device tier determines which models will run smoothly. Higher RAM allows larger, more capable models.
+            您的设备等级决定了哪些模型可以流畅运行。更高的内存允许使用更大、更强大的模型。
           </Text>
 
           <View style={styles.tierInfo}>
             <View style={[styles.tierItem, deviceTier === 'low' && styles.tierItemActive]}>
-              <Text style={[styles.tierName, deviceTier === 'low' && styles.tierNameActive]}>Low</Text>
+              <Text style={[styles.tierName, deviceTier === 'low' && styles.tierNameActive]}>低</Text>
               <Text style={styles.tierDesc}>{'< 4GB RAM'}</Text>
-              <Text style={styles.tierModels}>Small models only</Text>
+              <Text style={styles.tierModels}>仅小型模型</Text>
             </View>
             <View style={[styles.tierItem, deviceTier === 'medium' && styles.tierItemActive]}>
-              <Text style={[styles.tierName, deviceTier === 'medium' && styles.tierNameActive]}>Medium</Text>
+              <Text style={[styles.tierName, deviceTier === 'medium' && styles.tierNameActive]}>中</Text>
               <Text style={styles.tierDesc}>4-6GB RAM</Text>
-              <Text style={styles.tierModels}>Most models</Text>
+              <Text style={styles.tierModels}>大多数模型</Text>
             </View>
             <View style={[styles.tierItem, deviceTier === 'high' && styles.tierItemActive]}>
-              <Text style={[styles.tierName, deviceTier === 'high' && styles.tierNameActive]}>High</Text>
+              <Text style={[styles.tierName, deviceTier === 'high' && styles.tierNameActive]}>高</Text>
               <Text style={styles.tierDesc}>{'>6GB RAM'}</Text>
-              <Text style={styles.tierModels}>All models</Text>
+              <Text style={styles.tierModels}>所有模型</Text>
             </View>
             <View style={[styles.tierItem, deviceTier === 'flagship' && styles.tierItemActive]}>
-              <Text style={[styles.tierName, deviceTier === 'flagship' && styles.tierNameActive]}>Flagship</Text>
+              <Text style={[styles.tierName, deviceTier === 'flagship' && styles.tierNameActive]}>旗舰</Text>
               <Text style={styles.tierDesc}>{'8GB+ RAM'}</Text>
-              <Text style={styles.tierModels}>All models + largest</Text>
+              <Text style={styles.tierModels}>所有模型 + 最大模型</Text>
             </View>
           </View>
         </Card>

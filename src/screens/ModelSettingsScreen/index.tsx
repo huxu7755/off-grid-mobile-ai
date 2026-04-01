@@ -37,12 +37,12 @@ export const ModelSettingsScreen: React.FC = () => {
 
   const handleReset = () => {
     setAlertState(showAlert(
-      'Reset All Settings',
-      'This will restore all model settings to their defaults. You may need to reload the model for changes to take effect.',
+      '重置所有设置',
+      '这将将所有模型设置恢复为默认值。您可能需要重新加载模型以使更改生效。',
       [
-        { text: 'Cancel', style: 'cancel' },
+        { text: '取消', style: 'cancel' },
         {
-          text: 'Reset',
+          text: '重置',
           style: 'destructive',
           onPress: () => { resetSettings(); setAlertState(hideAlert()); },
         },
@@ -56,7 +56,7 @@ export const ModelSettingsScreen: React.FC = () => {
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Icon name="arrow-left" size={20} color={colors.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>Model Settings</Text>
+        <Text style={styles.title}>模型设置</Text>
       </View>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
         <AttachStep index={6} fill>
@@ -66,7 +66,7 @@ export const ModelSettingsScreen: React.FC = () => {
             activeOpacity={0.7}
             testID="system-prompt-accordion"
           >
-            <Text style={styles.accordionTitle}>Default System Prompt</Text>
+            <Text style={styles.accordionTitle}>默认系统提示词</Text>
             <Icon
               name={promptOpen ? 'chevron-up' : 'chevron-down'}
               size={16}
@@ -82,7 +82,7 @@ export const ModelSettingsScreen: React.FC = () => {
           activeOpacity={0.7}
           testID="image-generation-accordion"
         >
-          <Text style={styles.accordionTitle}>Image Generation</Text>
+          <Text style={styles.accordionTitle}>图像生成</Text>
           <Icon
             name={imageOpen ? 'chevron-up' : 'chevron-down'}
             size={16}
@@ -97,7 +97,7 @@ export const ModelSettingsScreen: React.FC = () => {
           activeOpacity={0.7}
           testID="text-generation-accordion"
         >
-          <Text style={styles.accordionTitle}>Text Generation</Text>
+          <Text style={styles.accordionTitle}>文本生成</Text>
           <Icon
             name={textOpen ? 'chevron-up' : 'chevron-down'}
             size={16}
@@ -107,7 +107,7 @@ export const ModelSettingsScreen: React.FC = () => {
         {textOpen && <TextGenerationSection />}
 
         <Button
-          title="Reset All to Defaults"
+          title="重置所有为默认值"
           variant="ghost"
           size="small"
           onPress={handleReset}
