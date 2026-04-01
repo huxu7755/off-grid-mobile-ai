@@ -119,7 +119,7 @@ export const GalleryScreen: React.FC = () => {
             )}
             <View style={styles.genBannerInfo}>
               <Text style={styles.genBannerTitle} numberOfLines={1}>
-                {imageGenState.previewPath ? 'Refining...' : 'Generating...'}
+                {imageGenState.previewPath ? '优化中...' : '生成中...'}
               </Text>
               <Text style={styles.genBannerPrompt} numberOfLines={1}>
                 {imageGenState.prompt}

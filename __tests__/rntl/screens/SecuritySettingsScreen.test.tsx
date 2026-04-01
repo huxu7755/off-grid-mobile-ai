@@ -161,16 +161,16 @@ describe('SecuritySettingsScreen', () => {
   // Basic Rendering
   // ============================================================================
   describe('basic rendering', () => {
-    it('renders "Security" title', () => {
+    it('渲染"安全"标题', () => {
       const { getByText } = render(<SecuritySettingsScreen />);
-      expect(getByText('Security')).toBeTruthy();
+      expect(getByText('安全')).toBeTruthy();
     });
 
-    it('shows App Lock section', () => {
+    it('显示应用锁定部分', () => {
       const { getByText } = render(<SecuritySettingsScreen />);
-      expect(getByText('App Lock')).toBeTruthy();
-      expect(getByText('Passphrase Lock')).toBeTruthy();
-      expect(getByText('Require passphrase to open app')).toBeTruthy();
+      expect(getByText('应用锁定')).toBeTruthy();
+      expect(getByText('密码锁定')).toBeTruthy();
+      expect(getByText('打开应用时需要密码')).toBeTruthy();
     });
 
     it('back button calls goBack', () => {
@@ -182,17 +182,17 @@ describe('SecuritySettingsScreen', () => {
       expect(mockGoBack).toHaveBeenCalled();
     });
 
-    it('shows info card about passphrase behavior', () => {
+    it('显示关于密码行为的信息卡片', () => {
       const { getByText } = render(<SecuritySettingsScreen />);
       expect(
-        getByText(/the app will lock automatically/i)
+        getByText(/当您切换或关闭应用时，应用会自动锁定/i)
       ).toBeTruthy();
     });
 
-    it('shows info about passphrase being stored on device', () => {
+    it('显示关于密码存储在设备上的信息', () => {
       const { getByText } = render(<SecuritySettingsScreen />);
       expect(
-        getByText(/stored securely on device and never transmitted/i)
+        getByText(/安全存储在设备上，永远不会被传输/i)
       ).toBeTruthy();
     });
   });
@@ -223,13 +223,13 @@ describe('SecuritySettingsScreen', () => {
       expect(queryByTestId('passphrase-setup')).toBeTruthy();
     });
 
-    it('shows "Set Passphrase" text when enabling (not changing)', () => {
+    it('当启用时显示"设置密码"文本（不是修改）', () => {
       const { getAllByRole, getByText } = render(<SecuritySettingsScreen />);
       const switches = getAllByRole('switch');
 
       fireEvent(switches[0], 'valueChange', true);
 
-      expect(getByText('Set Passphrase')).toBeTruthy();
+      expect(getByText('设置密码')).toBeTruthy();
     });
   });
 
@@ -258,7 +258,7 @@ describe('SecuritySettingsScreen', () => {
       expect(queryByTestId('alert-title')?.props.children).toBe('Disable Passphrase Lock');
     });
 
-    it('shows confirmation alert with Disable and Cancel buttons', () => {
+    it('显示确认警告，带有禁用和取消按钮', () => {
       const { getAllByRole, queryByTestId, getByText } = render(<SecuritySettingsScreen />);
       const switches = getAllByRole('switch');
 
@@ -267,8 +267,8 @@ describe('SecuritySettingsScreen', () => {
 
       // Alert should be visible with correct title and buttons
       expect(queryByTestId('custom-alert')).toBeTruthy();
-      expect(queryByTestId('alert-title')?.props.children).toBe('Disable Passphrase Lock');
-      expect(getByText('Disable')).toBeTruthy();
+      expect(queryByTestId('alert-title')?.props.children).toBe('禁用密码锁定');
+      expect(getByText('禁用')).toBeTruthy();
       expect(getByText('取消')).toBeTruthy();
     });
 

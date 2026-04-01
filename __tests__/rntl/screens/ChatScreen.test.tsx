@@ -1313,7 +1313,7 @@ describe('ChatScreen', () => {
       const { getByText } = renderChatScreen();
       expect(getByText('正在生成图像')).toBeTruthy();
       expect(getByText('5/20')).toBeTruthy();
-      expect(getByText('Generating...')).toBeTruthy();
+      expect(getByText('生成中...')).toBeTruthy();
     });
 
     it('shows "正在优化图像" when preview is available', () => {

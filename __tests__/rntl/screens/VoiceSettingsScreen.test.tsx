@@ -191,9 +191,9 @@ describe('VoiceSettingsScreen', () => {
       expect(queryByText('Whisper Medium')).toBeNull();
     });
 
-    it('shows "Select a model to download" label', () => {
+    it('显示"选择要下载的模型"标签', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Select a model to download:')).toBeTruthy();
+      expect(getByText('选择要下载的模型：')).toBeTruthy();
     });
 
     it('shows model size for each option', () => {
@@ -205,9 +205,9 @@ describe('VoiceSettingsScreen', () => {
 
     it('shows model description for each option', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Fastest, lower accuracy')).toBeTruthy();
-      expect(getByText('Good accuracy')).toBeTruthy();
-      expect(getByText('Better accuracy')).toBeTruthy();
+      expect(getByText('最快，仅英语，适合基本转录')).toBeTruthy();
+      expect(getByText('快速，支持多种语言')).toBeTruthy();
+      expect(getByText('更好的准确性，仅英语')).toBeTruthy();
     });
 
     it('calls downloadModel when a model option is pressed', () => {
@@ -239,19 +239,19 @@ describe('VoiceSettingsScreen', () => {
       expect(getByText('Whisper Base')).toBeTruthy();
     });
 
-    it('shows "Downloaded" status badge', () => {
+    it('显示"已下载"状态标签', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Downloaded')).toBeTruthy();
+      expect(getByText('已下载')).toBeTruthy();
     });
 
-    it('shows "Remove Model" button', () => {
+    it('显示"移除模型"按钮', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Remove Model')).toBeTruthy();
+      expect(getByText('移除模型')).toBeTruthy();
     });
 
-    it('does not show download options when model is downloaded', () => {
+    it('当模型已下载时不显示下载选项', () => {
       const { queryByText } = render(<VoiceSettingsScreen />);
-      expect(queryByText('Select a model to download:')).toBeNull();
+      expect(queryByText('选择要下载的模型：')).toBeNull();
     });
 
     it('shows model id as fallback when model not found in WHISPER_MODELS', () => {
@@ -263,15 +263,15 @@ describe('VoiceSettingsScreen', () => {
       expect(getByText('unknown-model')).toBeTruthy();
     });
 
-    it('pressing Remove Model shows confirmation alert', () => {
+    it('按下移除模型按钮显示确认警告', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      fireEvent.press(getByText('Remove Model'));
+      fireEvent.press(getByText('移除模型'));
       expect(mockShowAlert).toHaveBeenCalledWith(
-        'Remove Whisper Model',
-        'This will disable voice input until you download a model again.',
+        '移除Whisper模型',
+        '这将禁用语音输入，直到您再次下载模型。',
         expect.arrayContaining([
-          expect.objectContaining({ text: 'Cancel', style: 'cancel' }),
-          expect.objectContaining({ text: 'Remove', style: 'destructive' }),
+          expect.objectContaining({ text: '取消', style: 'cancel' }),
+          expect.objectContaining({ text: '移除', style: 'destructive' }),
         ]),
       );
     });
@@ -289,44 +289,44 @@ describe('VoiceSettingsScreen', () => {
       };
     });
 
-    it('shows downloading state with percentage', () => {
+    it('显示下载状态和百分比', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Downloading... 45%')).toBeTruthy();
+      expect(getByText('正在下载... 45%')).toBeTruthy();
     });
 
-    it('does not show download options during download', () => {
+    it('下载期间不显示下载选项', () => {
       const { queryByText } = render(<VoiceSettingsScreen />);
-      expect(queryByText('Select a model to download:')).toBeNull();
+      expect(queryByText('选择要下载的模型：')).toBeNull();
     });
 
-    it('shows 0% at start of download', () => {
+    it('下载开始时显示0%', () => {
       mockWhisperStoreValues = {
         ...mockWhisperStoreValues,
         isDownloading: true,
         downloadProgress: 0,
       };
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Downloading... 0%')).toBeTruthy();
+      expect(getByText('正在下载... 0%')).toBeTruthy();
     });
 
-    it('shows 100% near end of download', () => {
+    it('下载接近结束时显示100%', () => {
       mockWhisperStoreValues = {
         ...mockWhisperStoreValues,
         isDownloading: true,
         downloadProgress: 1,
       };
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Downloading... 100%')).toBeTruthy();
+      expect(getByText('正在下载... 100%')).toBeTruthy();
     });
 
-    it('rounds progress percentage', () => {
+    it('四舍五入进度百分比', () => {
       mockWhisperStoreValues = {
         ...mockWhisperStoreValues,
         isDownloading: true,
         downloadProgress: 0.678,
       };
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Downloading... 68%')).toBeTruthy();
+      expect(getByText('正在下载... 68%')).toBeTruthy();
     });
   });
 

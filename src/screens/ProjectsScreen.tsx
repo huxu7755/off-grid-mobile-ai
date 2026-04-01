@@ -50,12 +50,12 @@ export const ProjectsScreen: React.FC = () => {
 
   const handleDeleteProject = (project: Project) => {
     setAlertState(showAlert(
-      'Delete Project',
-      `Delete "${project.name}"? This will not delete the chats associated with this project.`,
+      '删除项目',
+      `删除"${project.name}"？这不会删除与此项目关联的聊天。`,
       [
-        { text: 'Cancel', style: 'cancel' },
+        { text: '取消', style: 'cancel' },
         {
-          text: 'Delete',
+          text: '删除',
           style: 'destructive',
           onPress: () => {
             setAlertState(hideAlert());

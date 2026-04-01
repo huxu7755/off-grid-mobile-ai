@@ -90,16 +90,16 @@ describe('ProjectsScreen', () => {
   // Basic Rendering
   // ==========================================================================
   describe('basic rendering', () => {
-    it('renders "Projects" title', () => {
+    it('渲染"项目"标题', () => {
       const { getByText } = render(<ProjectsScreen />);
-      expect(getByText('Projects')).toBeTruthy();
+      expect(getByText('项目')).toBeTruthy();
     });
 
-    it('renders the subtitle description', () => {
+    it('渲染副标题描述', () => {
       const { getByText } = render(<ProjectsScreen />);
       expect(
         getByText(
-          'Projects group related chats with shared context and instructions.',
+          '项目将相关聊天按主题分组，共享上下文和指令。',
         ),
       ).toBeTruthy();
     });
@@ -114,9 +114,9 @@ describe('ProjectsScreen', () => {
   // Empty State
   // ==========================================================================
   describe('empty state', () => {
-    it('shows "No Projects Yet" when there are no projects', () => {
+    it('当没有项目时显示"暂无项目"', () => {
       const { getByText } = render(<ProjectsScreen />);
-      expect(getByText('No Projects Yet')).toBeTruthy();
+      expect(getByText('暂无项目')).toBeTruthy();
     });
 
     it('shows empty state description text', () => {
