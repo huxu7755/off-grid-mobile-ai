@@ -181,11 +181,11 @@ describe('AppNavigator', () => {
     it('renders all five tab labels', () => {
       const { getAllByText } = renderAppNavigator();
 
-      expect(getAllByText('Home').length).toBeGreaterThanOrEqual(1);
-      expect(getAllByText('Chats').length).toBeGreaterThanOrEqual(1);
-      expect(getAllByText('Projects').length).toBeGreaterThanOrEqual(1);
-      expect(getAllByText('Models').length).toBeGreaterThanOrEqual(1);
-      expect(getAllByText('Settings').length).toBeGreaterThanOrEqual(1);
+      expect(getAllByText('首页').length).toBeGreaterThanOrEqual(1);
+      expect(getAllByText('聊天').length).toBeGreaterThanOrEqual(1);
+      expect(getAllByText('项目').length).toBeGreaterThanOrEqual(1);
+      expect(getAllByText('模型').length).toBeGreaterThanOrEqual(1);
+      expect(getAllByText('设置').length).toBeGreaterThanOrEqual(1);
     });
 
     it('renders all tab buttons with testIDs', () => {
@@ -274,11 +274,11 @@ describe('AppNavigator', () => {
       const { getAllByText, getByTestId } = renderAppNavigator();
 
       // All tab labels should be visible
-      expect(getAllByText('Home').length).toBeGreaterThanOrEqual(1);
-      expect(getAllByText('Chats').length).toBeGreaterThanOrEqual(1);
-      expect(getAllByText('Projects').length).toBeGreaterThanOrEqual(1);
-      expect(getAllByText('Models').length).toBeGreaterThanOrEqual(1);
-      expect(getAllByText('Settings').length).toBeGreaterThanOrEqual(1);
+      expect(getAllByText('首页').length).toBeGreaterThanOrEqual(1);
+      expect(getAllByText('聊天').length).toBeGreaterThanOrEqual(1);
+      expect(getAllByText('项目').length).toBeGreaterThanOrEqual(1);
+      expect(getAllByText('模型').length).toBeGreaterThanOrEqual(1);
+      expect(getAllByText('设置').length).toBeGreaterThanOrEqual(1);
 
       // All tab buttons should be pressable
       expect(getByTestId('home-tab')).toBeTruthy();
