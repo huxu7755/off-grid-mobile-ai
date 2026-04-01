@@ -130,24 +130,24 @@ describe('RemoteServersScreen', () => {
   describe('empty state', () => {
     it('renders empty state when no servers', () => {
       const { getByText } = render(<RemoteServersScreen />);
-      expect(getByText('No Remote Servers')).toBeTruthy();
+      expect(getByText('无远程服务器')).toBeTruthy();
     });
 
     it('shows empty state description', () => {
       const { getByText } = render(<RemoteServersScreen />);
       expect(
-        getByText(/Connect to Ollama, LM Studio, or other LLM servers/),
+        getByText(/连接到您网络上的Ollama、LM Studio或其他LLM服务器/),
       ).toBeTruthy();
     });
 
-    it('shows "Add Server" button in empty state', () => {
+    it('shows "添加服务器" button in empty state', () => {
       const { getByText } = render(<RemoteServersScreen />);
-      expect(getByText('Add Server')).toBeTruthy();
+      expect(getByText('添加服务器')).toBeTruthy();
     });
 
     it('renders info card about remote servers', () => {
       const { getByText } = render(<RemoteServersScreen />);
-      expect(getByText('About Remote Servers')).toBeTruthy();
+      expect(getByText('关于远程服务器')).toBeTruthy();
     });
   });
 
@@ -169,10 +169,10 @@ describe('RemoteServersScreen', () => {
       useRemoteServerStore.setState({ servers: [server] });
 
       const { queryByText } = render(<RemoteServersScreen />);
-      expect(queryByText('No Remote Servers')).toBeNull();
+      expect(queryByText('无远程服务器')).toBeNull();
     });
 
-    it('shows "Connected" status for healthy server', () => {
+    it('shows "已连接" status for healthy server', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({
         servers: [server],
@@ -180,10 +180,10 @@ describe('RemoteServersScreen', () => {
       });
 
       const { getByText } = render(<RemoteServersScreen />);
-      expect(getByText('Connected')).toBeTruthy();
+      expect(getByText('已连接')).toBeTruthy();
     });
 
-    it('shows "Offline" status for unhealthy server', () => {
+    it('shows "离线" status for unhealthy server', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({
         servers: [server],
@@ -191,15 +191,15 @@ describe('RemoteServersScreen', () => {
       });
 
       const { getByText } = render(<RemoteServersScreen />);
-      expect(getByText('Offline')).toBeTruthy();
+      expect(getByText('离线')).toBeTruthy();
     });
 
-    it('shows "Unknown" status when health not checked', () => {
+    it('shows "未知" status when health not checked', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({ servers: [server] });
 
       const { getByText } = render(<RemoteServersScreen />);
-      expect(getByText('Unknown')).toBeTruthy();
+      expect(getByText('未知')).toBeTruthy();
     });
 
     it('renders multiple servers', () => {
@@ -214,12 +214,12 @@ describe('RemoteServersScreen', () => {
       expect(getByText('Server B')).toBeTruthy();
     });
 
-    it('shows "Add Another Server" button when servers exist', () => {
+    it('shows "添加另一个服务器" button when servers exist', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({ servers: [server] });
 
       const { getByText } = render(<RemoteServersScreen />);
-      expect(getByText('Add Another Server')).toBeTruthy();
+      expect(getByText('添加另一个服务器')).toBeTruthy();
     });
   });
 
@@ -227,7 +227,7 @@ describe('RemoteServersScreen', () => {
   // Server Actions
   // ==========================================================================
   describe('server actions', () => {
-    test.each(['Test', 'Edit', 'Delete'])('renders %s button', (label) => {
+    test.each(['测试', '编辑', '删除'])('renders %s button', (label) => {
       const server = createMockServer();
       useRemoteServerStore.setState({ servers: [server] });
 
@@ -240,7 +240,7 @@ describe('RemoteServersScreen', () => {
   // Test Connection
   // ==========================================================================
   describe('test connection', () => {
-    it('calls testConnection when Test button pressed', async () => {
+    it('calls testConnection when 测试 button pressed', async () => {
       const mockTestConnection = jest.fn().mockResolvedValue({ success: true, latency: 50 });
       const server = createMockServer();
       useRemoteServerStore.setState({
@@ -249,7 +249,7 @@ describe('RemoteServersScreen', () => {
       });
 
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Test'));
+      fireEvent.press(getByText('测试'));
 
       await waitFor(() => {
         expect(mockTestConnection).toHaveBeenCalledWith(server.id);
@@ -265,10 +265,10 @@ describe('RemoteServersScreen', () => {
       });
 
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Test'));
+      fireEvent.press(getByText('测试'));
 
       await waitFor(() => {
-        expect(mockShowAlert).toHaveBeenCalledWith('Success', expect.stringContaining('100ms'));
+        expect(mockShowAlert).toHaveBeenCalledWith('成功', expect.stringContaining('100ms'));
       });
     });
 
@@ -284,10 +284,10 @@ describe('RemoteServersScreen', () => {
       });
 
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Test'));
+      fireEvent.press(getByText('测试'));
 
       await waitFor(() => {
-        expect(mockShowAlert).toHaveBeenCalledWith('Connection Failed', 'Connection refused');
+        expect(mockShowAlert).toHaveBeenCalledWith('连接失败', 'Connection refused');
       });
     });
 
@@ -300,10 +300,10 @@ describe('RemoteServersScreen', () => {
       });
 
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Test'));
+      fireEvent.press(getByText('测试'));
 
       await waitFor(() => {
-        expect(mockShowAlert).toHaveBeenCalledWith('Error', 'Network error');
+        expect(mockShowAlert).toHaveBeenCalledWith('错误', 'Network error');
       });
     });
   });
@@ -312,19 +312,19 @@ describe('RemoteServersScreen', () => {
   // Delete Server
   // ==========================================================================
   describe('delete server', () => {
-    it('shows confirmation alert when Delete pressed', () => {
+    it('shows confirmation alert when 删除 pressed', () => {
       const server = createMockServer({ name: 'My Server' });
       useRemoteServerStore.setState({ servers: [server] });
 
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Delete'));
+      fireEvent.press(getByText('删除'));
 
       expect(mockShowAlert).toHaveBeenCalledWith(
-        'Delete Server',
+        '删除服务器',
         expect.stringContaining('My Server'),
         expect.arrayContaining([
-          expect.objectContaining({ text: 'Cancel' }),
-          expect.objectContaining({ text: 'Delete', style: 'destructive' }),
+          expect.objectContaining({ text: '取消' }),
+          expect.objectContaining({ text: '删除', style: 'destructive' }),
         ]),
       );
     });
@@ -334,11 +334,11 @@ describe('RemoteServersScreen', () => {
       useRemoteServerStore.setState({ servers: [server] });
 
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Delete'));
+      fireEvent.press(getByText('删除'));
 
       // Get the delete callback from the alert
       const alertCall = mockShowAlert.mock.calls[0];
-      const deleteButton = alertCall[2]!.find((btn: any) => btn.text === 'Delete');
+      const deleteButton = alertCall[2]!.find((btn: any) => btn.text === '删除');
 
       // Execute the delete callback
       await deleteButton!.onPress!();
@@ -356,10 +356,10 @@ describe('RemoteServersScreen', () => {
       });
 
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Delete'));
+      fireEvent.press(getByText('删除'));
 
       const alertCall = mockShowAlert.mock.calls[0];
-      const deleteButton = alertCall[2]!.find((btn: any) => btn.text === 'Delete');
+      const deleteButton = alertCall[2]!.find((btn: any) => btn.text === '删除');
       await deleteButton!.onPress!();
 
       expect(mockSetActiveServerId).toHaveBeenCalledWith(null);
@@ -377,11 +377,11 @@ describe('RemoteServersScreen', () => {
 
       const { getAllByText } = render(<RemoteServersScreen />);
       // Delete server-1 (not active) - find by name first
-      const deleteButtons = getAllByText('Delete');
+      const deleteButtons = getAllByText('删除');
       fireEvent.press(deleteButtons[0]);
 
       const alertCall = mockShowAlert.mock.calls[0];
-      const deleteButton = alertCall[2]!.find((btn: any) => btn.text === 'Delete');
+      const deleteButton = alertCall[2]!.find((btn: any) => btn.text === '删除');
       await deleteButton!.onPress!();
 
       expect(mockSetActiveServerId).not.toHaveBeenCalled();
@@ -459,17 +459,17 @@ describe('RemoteServersScreen', () => {
   // Edit Server Modal
   // ==========================================================================
   describe('edit server modal', () => {
-    it('sets editingServer when Edit button pressed', () => {
+    it('sets editingServer when 编辑 button pressed', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({ servers: [server] });
 
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Edit'));
+      fireEvent.press(getByText('编辑'));
 
       // The component sets editingServer state - we verify the modal would show
       // RemoteServerModal is mocked, so we can't verify it directly
       // But we can verify the state change happens (component doesn't crash)
-      expect(getByText('Edit')).toBeTruthy();
+      expect(getByText('编辑')).toBeTruthy();
     });
   });
 
@@ -477,14 +477,14 @@ describe('RemoteServersScreen', () => {
   // Add Another Server button (when servers exist)
   // ==========================================================================
   describe('add another server', () => {
-    it('opens add modal when "Add Another Server" is pressed', () => {
+    it('opens add modal when "添加另一个服务器" is pressed', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({ servers: [server] });
 
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Add Another Server'));
+      fireEvent.press(getByText('添加另一个服务器'));
       // Modal becomes visible (not crashable)
-      expect(getByText('Add Another Server')).toBeTruthy();
+      expect(getByText('添加另一个服务器')).toBeTruthy();
     });
   });
 
@@ -492,9 +492,9 @@ describe('RemoteServersScreen', () => {
   // Info card
   // ==========================================================================
   describe('info card', () => {
-    it('renders About Remote Servers info card', () => {
+    it('renders 关于远程服务器 info card', () => {
       const { getByText } = render(<RemoteServersScreen />);
-      expect(getByText('About Remote Servers')).toBeTruthy();
+      expect(getByText('关于远程服务器')).toBeTruthy();
     });
   });
 
@@ -502,24 +502,24 @@ describe('RemoteServersScreen', () => {
   // Scan Network
   // ==========================================================================
   describe('scan network', () => {
-    it('renders Scan Network button in empty state', () => {
+    it('renders 扫描网络 button in empty state', () => {
       const { getByText } = render(<RemoteServersScreen />);
-      expect(getByText('Scan Network')).toBeTruthy();
+      expect(getByText('扫描网络')).toBeTruthy();
     });
 
-    it('renders Scan Network button when servers exist', () => {
+    it('renders 扫描网络 button when servers exist', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({ servers: [server] });
       const { getByText } = render(<RemoteServersScreen />);
-      expect(getByText('Scan Network')).toBeTruthy();
+      expect(getByText('扫描网络')).toBeTruthy();
     });
 
-    it('shows "No Servers Found" alert when scan finds nothing', async () => {
+    it('shows "未找到服务器" alert when scan finds nothing', async () => {
       mockDiscoverLANServers.mockResolvedValue([]);
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Scan Network'));
+      fireEvent.press(getByText('扫描网络'));
       await waitFor(() => {
-        expect(mockShowAlert).toHaveBeenCalledWith('No Servers Found', expect.any(String));
+        expect(mockShowAlert).toHaveBeenCalledWith('未找到服务器', expect.any(String));
       });
     });
 
@@ -528,34 +528,34 @@ describe('RemoteServersScreen', () => {
         { endpoint: 'http://192.168.1.10:11434', type: 'ollama', name: 'Ollama (192.168.1.10)' }, // NOSONAR
       ]);
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Scan Network'));
+      fireEvent.press(getByText('扫描网络'));
       await waitFor(() => {
         expect(remoteServerManager.addServer).toHaveBeenCalledWith(
           expect.objectContaining({ endpoint: 'http://192.168.1.10:11434' }), // NOSONAR
         );
-        expect(mockShowAlert).toHaveBeenCalledWith('Discovery Complete', expect.stringContaining('1 server'));
+        expect(mockShowAlert).toHaveBeenCalledWith('发现完成', expect.stringContaining('1 个服务器'));
       });
     });
 
-    it('shows "Already Added" when all discovered servers already exist', async () => {
+    it('shows "已添加" when all discovered servers already exist', async () => {
       const server = createMockServer({ endpoint: 'http://192.168.1.10:11434' }); // NOSONAR
       useRemoteServerStore.setState({ servers: [server] });
       mockDiscoverLANServers.mockResolvedValue([
         { endpoint: 'http://192.168.1.10:11434', type: 'ollama', name: 'Ollama (192.168.1.10)' }, // NOSONAR
       ]);
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Scan Network'));
+      fireEvent.press(getByText('扫描网络'));
       await waitFor(() => {
-        expect(mockShowAlert).toHaveBeenCalledWith('Already Added', expect.any(String));
+        expect(mockShowAlert).toHaveBeenCalledWith('已添加', expect.any(String));
       });
     });
 
-    it('shows "Scan Failed" alert on error', async () => {
+    it('shows "扫描失败" alert on error', async () => {
       mockDiscoverLANServers.mockRejectedValue(new Error('Permission denied'));
       const { getByText } = render(<RemoteServersScreen />);
-      fireEvent.press(getByText('Scan Network'));
+      fireEvent.press(getByText('扫描网络'));
       await waitFor(() => {
-        expect(mockShowAlert).toHaveBeenCalledWith('Scan Failed', 'Permission denied');
+        expect(mockShowAlert).toHaveBeenCalledWith('扫描失败', 'Permission denied');
       });
     });
   });

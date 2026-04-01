@@ -79,14 +79,14 @@ describe('ModelSettingsScreen', () => {
   describe('basic rendering', () => {
     it('renders without crashing', () => {
       const { getByText } = renderScreen();
-      expect(getByText('Model Settings')).toBeTruthy();
+      expect(getByText('模型设置')).toBeTruthy();
     });
 
     it('shows all section titles as accordion headers', () => {
       const { getByText } = renderScreen();
-      expect(getByText('Default System Prompt')).toBeTruthy();
-      expect(getByText('Image Generation')).toBeTruthy();
-      expect(getByText('Text Generation')).toBeTruthy();
+      expect(getByText('默认系统提示词')).toBeTruthy();
+      expect(getByText('图像生成')).toBeTruthy();
+      expect(getByText('文本生成')).toBeTruthy();
     });
 
     it('shows section help text for system prompt when expanded', () => {
@@ -960,7 +960,7 @@ describe('ModelSettingsScreen', () => {
     it('shows confirmation alert when pressed', () => {
       const { getByTestId, getByText } = renderScreen();
       fireEvent.press(getByTestId('reset-settings-button'));
-      expect(getByText('Reset All Settings')).toBeTruthy();
+      expect(getByText('重置所有设置')).toBeTruthy();
     });
 
     it('resets all settings to defaults when confirmed', () => {
@@ -977,7 +977,7 @@ describe('ModelSettingsScreen', () => {
 
       const { getByTestId, getByText } = renderScreen();
       fireEvent.press(getByTestId('reset-settings-button'));
-      fireEvent.press(getByText('Reset'));
+      fireEvent.press(getByText('重置'));
 
       const s = useAppStore.getState().settings;
       expect(s.temperature).toBe(0.7);

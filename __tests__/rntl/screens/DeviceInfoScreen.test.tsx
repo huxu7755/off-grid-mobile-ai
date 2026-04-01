@@ -81,9 +81,9 @@ describe('DeviceInfoScreen', () => {
     jest.clearAllMocks();
   });
 
-  it('renders "Device Information" title', () => {
+  it('renders "设备信息" title', () => {
     const { getByText } = render(<DeviceInfoScreen />);
-    expect(getByText('Device Information')).toBeTruthy();
+    expect(getByText('设备信息')).toBeTruthy();
   });
 
   it('shows device model', () => {
@@ -103,8 +103,8 @@ describe('DeviceInfoScreen', () => {
 
   it('shows device tier', () => {
     const { getAllByText } = render(<DeviceInfoScreen />);
-    // "High" appears both in the tier badge and in the compatibility section
-    const highTexts = getAllByText('High');
+    // "高" appears both in the tier badge and in the compatibility section
+    const highTexts = getAllByText('高');
     expect(highTexts.length).toBeGreaterThanOrEqual(1);
   });
 
@@ -116,24 +116,24 @@ describe('DeviceInfoScreen', () => {
     expect(mockGoBack).toHaveBeenCalled();
   });
 
-  it('highlights "Low" tier when device tier is low', () => {
+  it('highlights "低" tier when device tier is low', () => {
     const { hardwareService } = require('../../../src/services');
     (hardwareService.getDeviceTier as jest.Mock).mockReturnValue('low');
     (hardwareService.getTotalMemoryGB as jest.Mock).mockReturnValue(3.0);
 
     const { getAllByText } = render(<DeviceInfoScreen />);
-    // "Low" should appear in the compatibility section
-    const lowTexts = getAllByText('Low');
+    // "低" should appear in the compatibility section
+    const lowTexts = getAllByText('低');
     expect(lowTexts.length).toBeGreaterThanOrEqual(1);
   });
 
-  it('highlights "Medium" tier when device tier is medium', () => {
+  it('highlights "中" tier when device tier is medium', () => {
     const { hardwareService } = require('../../../src/services');
     (hardwareService.getDeviceTier as jest.Mock).mockReturnValue('medium');
     (hardwareService.getTotalMemoryGB as jest.Mock).mockReturnValue(5.0);
 
     const { getAllByText } = render(<DeviceInfoScreen />);
-    const mediumTexts = getAllByText('Medium');
+    const mediumTexts = getAllByText('中');
     expect(mediumTexts.length).toBeGreaterThanOrEqual(1);
   });
 });

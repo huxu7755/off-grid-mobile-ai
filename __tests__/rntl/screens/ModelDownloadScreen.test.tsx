@@ -193,9 +193,9 @@ jest.mock('../../../src/screens/ModelDownloadHelpers', () => {
       mockOnAddManually.mockImplementation(onAddManually);
       return (
         <View testID="network-section">
-          <Text>Network Models</Text>
-          {isCheckingNetwork && <Text testID="network-checking">Scanning...</Text>}
-          {isScanning && <Text testID="network-scanning">Scanning network...</Text>}
+          <Text>网络模型</Text>
+          {isCheckingNetwork && <Text testID="network-checking">扫描中...</Text>}
+          {isScanning && <Text testID="network-scanning">扫描网络...</Text>}
           {servers && servers.map((s: any) => (
             <Text key={s.id} testID={`network-server-${s.id}`}>{s.name}</Text>
           ))}
@@ -299,7 +299,7 @@ describe('ModelDownloadScreen', () => {
     await flushPromises();
 
     expect(result.getByTestId('network-section')).toBeTruthy();
-    expect(result.getByText('Network Models')).toBeTruthy();
+    expect(result.getByText('网络模型')).toBeTruthy();
   });
 
   it('renders "Download to Your Device" section title', async () => {

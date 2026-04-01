@@ -283,7 +283,7 @@ jest.mock('../../../src/components', () => ({
         )}
         {onOpenSettings && (
           <TouchableOpacity testID="open-settings-from-input" onPress={onOpenSettings}>
-            <Text>Settings</Text>
+            <Text>设置</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -318,25 +318,25 @@ jest.mock('../../../src/components', () => ({
     if (!visible) return null;
     return (
       <View testID="settings-modal">
-        <Text>Settings</Text>
+        <Text>设置</Text>
         {onDeleteConversation && (
           <TouchableOpacity testID="delete-conversation-btn" onPress={onDeleteConversation}>
-            <Text>Delete Conversation</Text>
+            <Text>删除对话</Text>
           </TouchableOpacity>
         )}
         {onOpenProject && (
           <TouchableOpacity testID="open-project-btn" onPress={onOpenProject}>
-            <Text>Project: {activeProjectName || 'Default'}</Text>
+            <Text>项目: {activeProjectName || '默认'}</Text>
           </TouchableOpacity>
         )}
         {onOpenGallery && (
           <TouchableOpacity testID="open-gallery-btn" onPress={onOpenGallery}>
-            <Text>Open Gallery</Text>
+            <Text>打开图库</Text>
           </TouchableOpacity>
         )}
-        {conversationImageCount > 0 && <Text testID="image-count">{conversationImageCount} images</Text>}
+        {conversationImageCount > 0 && <Text testID="image-count">{conversationImageCount} 图片</Text>}
         <TouchableOpacity testID="close-settings" onPress={onClose}>
-          <Text>Close</Text>
+          <Text>关闭</Text>
         </TouchableOpacity>
       </View>
     );
@@ -538,38 +538,38 @@ describe('ChatScreen', () => {
   // No Model State
   // ============================================================================
   describe('no model state', () => {
-    it('shows "No Model Selected" when no model active', () => {
+    it('shows "未选择模型" when no model active', () => {
       const { getByText } = renderChatScreen();
-      expect(getByText('No Model Selected')).toBeTruthy();
+      expect(getByText('未选择模型')).toBeTruthy();
     });
 
-    it('shows "Select a model to start chatting" when models downloaded but none active', () => {
+    it('shows "选择一个模型开始聊天" when models downloaded but none active', () => {
       const model = createDownloadedModel();
       useAppStore.setState({ downloadedModels: [model] });
 
       const { getByText } = renderChatScreen();
-      expect(getByText('Select a model to start chatting.')).toBeTruthy();
+      expect(getByText('选择一个模型开始聊天。')).toBeTruthy();
     });
 
-    it('shows "Download a model" text when no models downloaded', () => {
+    it('shows "下载模型" text when no models downloaded', () => {
       const { getByText } = renderChatScreen();
-      expect(getByText('Download a model from the Models tab to start chatting.')).toBeTruthy();
+      expect(getByText('从模型标签页下载模型开始聊天。')).toBeTruthy();
     });
 
-    it('shows "Select Model" button when models exist but none active', () => {
+    it('shows "选择模型" button when models exist but none active', () => {
       const model = createDownloadedModel();
       useAppStore.setState({ downloadedModels: [model] });
 
       const { getByText } = renderChatScreen();
-      expect(getByText('Select Model')).toBeTruthy();
+      expect(getByText('选择模型')).toBeTruthy();
     });
 
-    it('does not show "Select Model" button when no models downloaded', () => {
+    it('does not show "选择模型" button when no models downloaded', () => {
       const { queryByText } = renderChatScreen();
-      expect(queryByText('Select Model')).toBeNull();
+      expect(queryByText('选择模型')).toBeNull();
     });
 
-    it('opens model selector when "Select Model" is pressed', () => {
+    it('opens model selector when "选择模型" is pressed', () => {
       const model = createDownloadedModel();
       useAppStore.setState({ downloadedModels: [model] });
 
@@ -578,8 +578,8 @@ describe('ChatScreen', () => {
       // Initially no modal
       expect(queryByTestId('model-selector-modal')).toBeNull();
 
-      // Press Select Model
-      fireEvent.press(getByText('Select Model'));
+      // Press 选择模型
+      fireEvent.press(getByText('选择模型'));
 
       // Modal should open
       expect(queryByTestId('model-selector-modal')).toBeTruthy();
@@ -669,10 +669,10 @@ describe('ChatScreen', () => {
   // Empty Chat State
   // ============================================================================
   describe('empty chat state', () => {
-    it('shows "Start a Conversation" for new chat', () => {
+    it('shows "开始对话" for new chat', () => {
       setupFullChat();
       const { getByText } = renderChatScreen();
-      expect(getByText('Start a Conversation')).toBeTruthy();
+      expect(getByText('开始对话')).toBeTruthy();
     });
 
     it('shows model name in empty chat message', () => {
@@ -696,13 +696,13 @@ describe('ChatScreen', () => {
     it('shows privacy text', () => {
       setupFullChat();
       const { getByText } = renderChatScreen();
-      expect(getByText(/completely private/)).toBeTruthy();
+      expect(getByText(/完全私密/)).toBeTruthy();
     });
 
-    it('shows project hint with "Default" when no project assigned', () => {
+    it('shows project hint with "默认" when no project assigned', () => {
       setupFullChat();
       const { getAllByText } = renderChatScreen();
-      expect(getAllByText(/Default/).length).toBeGreaterThan(0);
+      expect(getAllByText(/默认/).length).toBeGreaterThan(0);
     });
 
     it('shows project name when project is assigned', () => {
@@ -801,7 +801,7 @@ describe('ChatScreen', () => {
       mockRoute.params = { conversationId };
 
       const { queryByText } = renderChatScreen();
-      expect(queryByText('Start a Conversation')).toBeNull();
+      expect(queryByText('开始对话')).toBeNull();
     });
   });
 
@@ -897,7 +897,7 @@ describe('ChatScreen', () => {
       });
 
       const { getByText } = renderChatScreen();
-      expect(getByText('No Model Selected')).toBeTruthy();
+      expect(getByText('未选择模型')).toBeTruthy();
     });
 
     it('shows "Type a message..." placeholder when model is selected', () => {
@@ -990,7 +990,7 @@ describe('ChatScreen', () => {
       // The ChatScreen will attempt to create a conversation in useEffect,
       // but if that fails, handleSend should show an alert
       const { getByText } = renderChatScreen();
-      expect(getByText('Start a Conversation')).toBeTruthy();
+      expect(getByText('开始对话')).toBeTruthy();
     });
 
     it('enqueues message when already generating', async () => {
@@ -1114,7 +1114,7 @@ describe('ChatScreen', () => {
       expect(conversations.length).toBeGreaterThan(0);
     });
 
-    it('shows "New Chat" as title for conversations without a title', () => {
+    it('shows "新聊天" as title for conversations without a title', () => {
       const { modelId, conversationId } = setupFullChat();
       useChatStore.setState({
         conversations: [createConversation({
@@ -1127,7 +1127,7 @@ describe('ChatScreen', () => {
       mockRoute.params = { conversationId };
 
       const { getByText } = renderChatScreen();
-      expect(getByText('New Chat')).toBeTruthy();
+      expect(getByText('新聊天')).toBeTruthy();
     });
   });
 
@@ -1151,27 +1151,27 @@ describe('ChatScreen', () => {
       fireEvent.press(getByTestId('delete-conversation-btn'));
 
       expect(queryByTestId('custom-alert')).toBeTruthy();
-      expect(getByTestId('alert-title').props.children).toBe('Delete Conversation');
+      expect(getByTestId('alert-title').props.children).toBe('删除对话');
     });
 
-    it('shows Cancel and Delete buttons in confirmation alert', () => {
+    it('shows 取消 and 删除 buttons in confirmation alert', () => {
       setupFullChat();
 
       const { getByTestId } = renderChatScreen();
       fireEvent.press(getByTestId('chat-settings-icon'));
       fireEvent.press(getByTestId('delete-conversation-btn'));
 
-      expect(getByTestId('alert-button-Cancel')).toBeTruthy();
-      expect(getByTestId('alert-button-Delete')).toBeTruthy();
+      expect(getByTestId('alert-button-取消')).toBeTruthy();
+      expect(getByTestId('alert-button-删除')).toBeTruthy();
     });
 
-    it('closes alert when Cancel is pressed', () => {
+    it('closes alert when 取消 is pressed', () => {
       setupFullChat();
 
       const { getByTestId, queryByTestId } = renderChatScreen();
       fireEvent.press(getByTestId('chat-settings-icon'));
       fireEvent.press(getByTestId('delete-conversation-btn'));
-      fireEvent.press(getByTestId('alert-button-Cancel'));
+      fireEvent.press(getByTestId('alert-button-取消'));
 
       expect(queryByTestId('custom-alert')).toBeNull();
     });
@@ -1207,13 +1207,13 @@ describe('ChatScreen', () => {
     it('shows project hint in empty chat state', () => {
       setupFullChat();
       const { getByText } = renderChatScreen();
-      expect(getByText(/Project:/)).toBeTruthy();
+      expect(getByText(/项目:/)).toBeTruthy();
     });
 
-    it('shows "Default" when no project assigned', () => {
+    it('shows "默认" when no project assigned', () => {
       setupFullChat();
       const { getAllByText } = renderChatScreen();
-      expect(getAllByText(/Default/).length).toBeGreaterThan(0);
+      expect(getAllByText(/默认/).length).toBeGreaterThan(0);
     });
 
     it('shows project name in settings modal when project is assigned', () => {
@@ -1311,12 +1311,12 @@ describe('ChatScreen', () => {
       });
 
       const { getByText } = renderChatScreen();
-      expect(getByText('Generating Image')).toBeTruthy();
+      expect(getByText('正在生成图像')).toBeTruthy();
       expect(getByText('5/20')).toBeTruthy();
       expect(getByText('Generating...')).toBeTruthy();
     });
 
-    it('shows "Refining Image" when preview is available', () => {
+    it('shows "正在优化图像" when preview is available', () => {
       setupFullChat();
 
       const generatingState = {
@@ -1332,14 +1332,14 @@ describe('ChatScreen', () => {
       });
 
       const { getByText } = renderChatScreen();
-      expect(getByText('Refining Image')).toBeTruthy();
+      expect(getByText('正在优化图像')).toBeTruthy();
     });
 
     it('does not show progress indicator when not generating', () => {
       setupFullChat();
       const { queryByText } = renderChatScreen();
-      expect(queryByText('Generating Image')).toBeNull();
-      expect(queryByText('Refining Image')).toBeNull();
+      expect(queryByText('正在生成图像')).toBeNull();
+      expect(queryByText('正在优化图像')).toBeNull();
     });
   });
 

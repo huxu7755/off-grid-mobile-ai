@@ -131,29 +131,29 @@ describe('OnboardingScreen', () => {
     expect(getByTestId('onboarding-screen')).toBeTruthy();
   });
 
-  it('shows Next button on first slide', () => {
+  it('shows 下一步 button on first slide', () => {
     const { getByText } = render(<OnboardingScreen navigation={navigation} />);
-    expect(getByText('Next')).toBeTruthy();
+    expect(getByText('下一步')).toBeTruthy();
   });
 
-  it('shows Skip button on non-last slide', () => {
+  it('shows 跳过 button on non-last slide', () => {
     const { getByText } = render(<OnboardingScreen navigation={navigation} />);
-    expect(getByText('Skip')).toBeTruthy();
+    expect(getByText('跳过')).toBeTruthy();
   });
 
-  it('calls completeOnboarding when Skip is pressed', () => {
+  it('calls completeOnboarding when 跳过 is pressed', () => {
     const { getByText } = render(<OnboardingScreen navigation={navigation} />);
-    fireEvent.press(getByText('Skip'));
+    fireEvent.press(getByText('跳过'));
 
     expect(mockSetOnboardingComplete).toHaveBeenCalledWith(true);
     expect(mockReplace).toHaveBeenCalledWith('ModelDownload');
   });
 
-  it('does not complete onboarding when Next is pressed on non-last slide', () => {
+  it('does not complete onboarding when 下一步 is pressed on non-last slide', () => {
     // Note: scrollToIndex throws in test env, but the branch is covered
     try {
       const { getByText } = render(<OnboardingScreen navigation={navigation} />);
-      fireEvent.press(getByText('Next'));
+      fireEvent.press(getByText('下一步'));
     } catch {
       // scrollToIndex invariant error is expected in test env
     }
