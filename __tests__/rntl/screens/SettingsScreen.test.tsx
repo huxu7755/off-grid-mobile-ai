@@ -83,9 +83,9 @@ describe('SettingsScreen', () => {
     jest.clearAllMocks();
   });
 
-  it('renders "Settings" title', () => {
+  it('renders "设置" title', () => {
     const { getByText } = render(<SettingsScreen />);
-    expect(getByText('Settings')).toBeTruthy();
+    expect(getByText('设置')).toBeTruthy();
   });
 
   it('renders version number', () => {
@@ -95,47 +95,47 @@ describe('SettingsScreen', () => {
 
   it('renders navigation items', () => {
     const { getByText } = render(<SettingsScreen />);
-    expect(getByText('Model Settings')).toBeTruthy();
-    expect(getByText('Voice Transcription')).toBeTruthy();
-    expect(getByText('Security')).toBeTruthy();
-    expect(getByText('Device Information')).toBeTruthy();
-    expect(getByText('Storage')).toBeTruthy();
+    expect(getByText('模型设置')).toBeTruthy();
+    expect(getByText('语音转录')).toBeTruthy();
+    expect(getByText('安全')).toBeTruthy();
+    expect(getByText('设备信息')).toBeTruthy();
+    expect(getByText('存储')).toBeTruthy();
   });
 
   it('renders navigation item descriptions', () => {
     const { getByText } = render(<SettingsScreen />);
-    expect(getByText('System prompt, generation, and performance')).toBeTruthy();
-    expect(getByText('On-device speech to text')).toBeTruthy();
-    expect(getByText('Passphrase and app lock')).toBeTruthy();
-    expect(getByText('Hardware and compatibility')).toBeTruthy();
-    expect(getByText('Models and data usage')).toBeTruthy();
+    expect(getByText('系统提示词、生成和性能')).toBeTruthy();
+    expect(getByText('设备上的语音转文本')).toBeTruthy();
+    expect(getByText('密码和应用锁定')).toBeTruthy();
+    expect(getByText('硬件和兼容性')).toBeTruthy();
+    expect(getByText('模型和数据使用情况')).toBeTruthy();
   });
 
   it('navigates to correct screen when nav item is pressed', () => {
     const { getByText } = render(<SettingsScreen />);
-    fireEvent.press(getByText('Model Settings'));
+    fireEvent.press(getByText('模型设置'));
     expect(mockNavigate).toHaveBeenCalledWith('ModelSettings');
   });
 
   it('navigates to each settings screen', () => {
     const { getByText } = render(<SettingsScreen />);
 
-    fireEvent.press(getByText('Voice Transcription'));
+    fireEvent.press(getByText('语音转录'));
     expect(mockNavigate).toHaveBeenCalledWith('VoiceSettings');
 
-    fireEvent.press(getByText('Security'));
+    fireEvent.press(getByText('安全'));
     expect(mockNavigate).toHaveBeenCalledWith('SecuritySettings');
 
-    fireEvent.press(getByText('Device Information'));
+    fireEvent.press(getByText('设备信息'));
     expect(mockNavigate).toHaveBeenCalledWith('DeviceInfo');
 
-    fireEvent.press(getByText('Storage'));
+    fireEvent.press(getByText('存储'));
     expect(mockNavigate).toHaveBeenCalledWith('StorageSettings');
   });
 
   it('renders theme selector with system/light/dark options', () => {
     const { getByText } = render(<SettingsScreen />);
-    expect(getByText('Appearance')).toBeTruthy();
+    expect(getByText('外观')).toBeTruthy();
   });
 
   it('calls setThemeMode when theme option is pressed', () => {
@@ -147,16 +147,16 @@ describe('SettingsScreen', () => {
 
   it('renders Privacy First section', () => {
     const { getByText } = render(<SettingsScreen />);
-    expect(getByText('Privacy First')).toBeTruthy();
+    expect(getByText('隐私优先')).toBeTruthy();
     expect(
-      getByText(/All your data stays on this device/),
+      getByText(/您的所有数据都保存在此设备上/),
     ).toBeTruthy();
   });
 
   it('renders about section text', () => {
     const { getByText } = render(<SettingsScreen />);
-    expect(getByText('Version')).toBeTruthy();
-    expect(getByText(/Off Grid brings AI/)).toBeTruthy();
+    expect(getByText('版本')).toBeTruthy();
+    expect(getByText(/Off Grid将AI带到您的设备/)).toBeTruthy();
   });
 
   it('renders Reset Onboarding button in __DEV__ mode', () => {
