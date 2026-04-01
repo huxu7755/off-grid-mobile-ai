@@ -87,7 +87,7 @@ jobs:
           echo "" >> release-notes.md
           echo "$COMMITS" >> release-notes.md
           echo "" >> release-notes.md
-          echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ env.LAST_TAG:-v0.0.0 }}...v${{ env.NEW_VERSION }}" >> release-notes.md
+          echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ env.LAST_TAG || 'v0.0.0' }}...v${{ env.NEW_VERSION }}" >> release-notes.md
 
           cat release-notes.md
 
