@@ -176,7 +176,7 @@ export const ModelDownloadScreen: React.FC<Props> = ({ navigation }) => {
       <SafeAreaView style={styles.container}>
         <View testID="model-download-loading" style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={colors.primary} />
-          <Text style={styles.loadingText}>Analyzing your device...</Text>
+          <Text style={styles.loadingText}>正在分析您的设备...</Text>
         </View>
       </SafeAreaView>
     );
