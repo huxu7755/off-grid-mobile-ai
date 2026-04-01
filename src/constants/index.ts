@@ -102,27 +102,27 @@ If asked about yourself, you can mention you're a local AI assistant that priori
 export const ONBOARDING_SLIDES = [
   {
     id: 'freedom',
-    keyword: 'YOURS',
-    title: 'Your AI.\nNo Strings Attached.',
-    description: 'No subscriptions, no sign-ups, no company reading your chats. An AI that lives on your device and answers to no one else.',
+    keyword: '专属',
+    title: '您的AI，\n无拘无束。',
+    description: '无订阅，无需注册，无人读取您的聊天内容。一个运行在您设备上的AI，只听命于您。',
   },
   {
     id: 'magic',
-    keyword: 'MAGIC',
-    title: 'Just Talk.\nIt Figures Out the Rest.',
-    description: 'Describe an image \u2014 it creates one. Show it a photo \u2014 it understands. Attach a document \u2014 it reads it. One conversation, no modes, no friction.',
+    keyword: '智能',
+    title: '只需对话，\n一切搞定。',
+    description: '描述图像 — 它会创建。展示照片 — 它能理解。附加文档 — 它会阅读。一次对话，无需切换模式，无摩擦体验。',
   },
   {
     id: 'create',
-    keyword: 'CREATE',
-    title: 'Say It Simply.\nGet Something Stunning.',
-    description: 'Type \u201Cimagine a cat on the moon\u201D and watch your words become a vivid image in seconds. AI enhances your ideas automatically \u2014 no prompt engineering needed.',
+    keyword: '创作',
+    title: '简单描述，\n惊艳呈现。',
+    description: '输入“想象一只猫在月球上”，看着您的文字在几秒钟内变成生动的图像。AI自动增强您的想法 — 无需提示工程。',
   },
   {
     id: 'hardware',
-    keyword: 'READY',
-    title: 'Powered\nYour Way.',
-    description: 'Run models on your phone with Metal and Neural Engine acceleration \u2014 or connect to powerful models already on your home network. We\u2019ll find the best setup for you.',
+    keyword: '就绪',
+    title: '由您驱动，\n随心所欲。',
+    description: '在手机上使用Metal和神经引擎加速运行模型 — 或连接到家庭网络中已有的强大模型。我们会为您找到最佳设置。',
   },
 ];
 

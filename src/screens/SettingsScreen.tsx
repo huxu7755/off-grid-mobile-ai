@@ -60,14 +60,14 @@ export const SettingsScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <Text style={styles.title}>Settings</Text>
+        <Text style={styles.title}>设置</Text>
       </View>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
 
         {/* Theme Selector */}
         <AnimatedEntry index={0} staggerMs={40} trigger={focusTrigger}>
           <View style={styles.themeToggleRow}>
-            <Text style={styles.themeToggleLabel}>Appearance</Text>
+            <Text style={styles.themeToggleLabel}>外观</Text>
             <View style={styles.themeSelector}>
               {([
                 { mode: 'system' as const, icon: 'monitor' },
@@ -96,14 +96,15 @@ export const SettingsScreen: React.FC = () => {
         {/* Navigation Items */}
         <AttachStep index={5} fill>
           <View style={styles.navSection}>
-            {[
-              { icon: 'sliders', title: 'Model Settings', desc: 'System prompt, generation, and performance', screen: 'ModelSettings' as const },
-              { icon: 'wifi', title: 'Remote Servers', desc: 'Connect to Ollama, LM Studio, and more', screen: 'RemoteServers' as const },
-              { icon: 'mic', title: 'Voice Transcription', desc: 'On-device speech to text', screen: 'VoiceSettings' as const },
-              { icon: 'lock', title: 'Security', desc: 'Passphrase and app lock', screen: 'SecuritySettings' as const },
-              { icon: 'smartphone', title: 'Device Information', desc: 'Hardware and compatibility', screen: 'DeviceInfo' as const },
-              { icon: 'hard-drive', title: 'Storage', desc: 'Models and data usage', screen: 'StorageSettings' as const },
-            ].map((item, index, arr) => (
+            {
+              [
+                { icon: 'sliders', title: '模型设置', desc: '系统提示词、生成和性能', screen: 'ModelSettings' as const },
+                { icon: 'wifi', title: '远程服务器', desc: '连接Ollama、LM Studio等', screen: 'RemoteServers' as const },
+                { icon: 'mic', title: '语音转录', desc: '设备上的语音转文本', screen: 'VoiceSettings' as const },
+                { icon: 'lock', title: '安全', desc: '密码和应用锁定', screen: 'SecuritySettings' as const },
+                { icon: 'smartphone', title: '设备信息', desc: '硬件和兼容性', screen: 'DeviceInfo' as const },
+                { icon: 'hard-drive', title: '存储', desc: '模型和数据使用情况', screen: 'StorageSettings' as const },
+              ].map((item, index, arr) => (
               <AnimatedListItem
                 key={item.screen}
                 index={index + 1}
@@ -133,8 +134,8 @@ export const SettingsScreen: React.FC = () => {
                 <Icon name="star" size={16} color={colors.textSecondary} />
               </View>
               <View style={styles.navItemContent}>
-                <Text style={styles.navItemTitle}>Star on GitHub</Text>
-                <Text style={styles.navItemDesc}>Support the open-source project</Text>
+                <Text style={styles.navItemTitle}>在GitHub上星标</Text>
+                <Text style={styles.navItemDesc}>支持开源项目</Text>
               </View>
               <Icon name="external-link" size={14} color={colors.textMuted} />
             </TouchableOpacity>
@@ -143,8 +144,8 @@ export const SettingsScreen: React.FC = () => {
                 <Icon name="share-2" size={16} color={colors.textSecondary} />
               </View>
               <View style={styles.navItemContent}>
-                <Text style={styles.navItemTitle}>Share on X</Text>
-                <Text style={styles.navItemDesc}>Tell others about Off Grid</Text>
+                <Text style={styles.navItemTitle}>在X上分享</Text>
+                <Text style={styles.navItemDesc}>向他人介绍Off Grid</Text>
               </View>
               <Icon name="external-link" size={14} color={colors.textMuted} />
             </TouchableOpacity>
@@ -155,11 +156,11 @@ export const SettingsScreen: React.FC = () => {
         <AnimatedEntry index={7} staggerMs={40} trigger={focusTrigger}>
           <Card style={styles.section}>
             <View style={styles.aboutRow}>
-              <Text style={styles.aboutLabel}>Version</Text>
+              <Text style={styles.aboutLabel}>版本</Text>
               <Text style={styles.aboutValue}>{packageJson.version}</Text>
             </View>
             <Text style={styles.aboutText}>
-              Off Grid brings AI to your device without compromising your privacy.
+              Off Grid将AI带到您的设备，同时保护您的隐私。
             </Text>
           </Card>
         </AnimatedEntry>
@@ -170,10 +171,10 @@ export const SettingsScreen: React.FC = () => {
             <View style={styles.privacyIconContainer}>
               <Icon name="shield" size={18} color={colors.textSecondary} />
             </View>
-            <Text style={styles.privacyTitle}>Privacy First</Text>
+            <Text style={styles.privacyTitle}>隐私优先</Text>
             <Text style={styles.privacyText}>
-              All your data stays on this device. No conversations, prompts, or
-              personal information is ever sent to any server.
+              您的所有数据都保存在此设备上。任何对话、提示或
+              个人信息都不会发送到任何服务器。
             </Text>
           </Card>
         </AnimatedEntry>
