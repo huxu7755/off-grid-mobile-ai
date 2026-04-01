@@ -177,8 +177,8 @@ describe('AppNavigator', () => {
     });
   });
 
-  describe('Tab bar rendering', () => {
-    it('renders all five tab labels', () => {
+  describe('标签栏渲染', () => {
+    it('渲染所有五个标签页标签', () => {
       const { getAllByText } = renderAppNavigator();
 
       expect(getAllByText('首页').length).toBeGreaterThanOrEqual(1);
@@ -188,7 +188,7 @@ describe('AppNavigator', () => {
       expect(getAllByText('设置').length).toBeGreaterThanOrEqual(1);
     });
 
-    it('renders all tab buttons with testIDs', () => {
+    it('渲染所有带testIDs的标签页按钮', () => {
       const { getByTestId } = renderAppNavigator();
 
       expect(getByTestId('home-tab')).toBeTruthy();
@@ -199,17 +199,17 @@ describe('AppNavigator', () => {
     });
   });
 
-  describe('Tab bar safe area insets', () => {
-    it('uses minimum paddingBottom of 20 when bottom inset is 0 (gesture navigation)', () => {
+  describe('标签栏安全区域内边距', () => {
+    it('当底部内边距为0时使用最小paddingBottom 20（手势导航）', () => {
       mockInsets.bottom = 0;
       const { getByTestId } = renderAppNavigator();
 
-      // Tab bar should render — verify via a tab button
+      // 标签栏应该渲染 - 通过标签按钮验证
       const homeTab = getByTestId('home-tab');
       expect(homeTab).toBeTruthy();
 
-      // Find the tab bar container (parent of tab buttons)
-      // The tab bar style should have height: 60 + 20 = 80 and paddingBottom: 20
+      // 找到标签栏容器（标签按钮的父级）
+      // 标签栏样式应该有高度：60 + 20 = 80 和 paddingBottom: 20
       const tabBar = getByTestId('home-tab').parent?.parent;
       if (tabBar && tabBar.props?.style) {
         const flatStyle = Array.isArray(tabBar.props.style)
@@ -224,14 +224,14 @@ describe('AppNavigator', () => {
       }
     });
 
-    it('uses device bottom inset when larger than minimum (3-button navigation)', () => {
+    it('当设备底部内边距大于最小值时使用设备底部内边距（三按钮导航）', () => {
       mockInsets.bottom = 48;
       const { getByTestId } = renderAppNavigator();
 
       const homeTab = getByTestId('home-tab');
       expect(homeTab).toBeTruthy();
 
-      // The tab bar style should have height: 60 + 48 = 108 and paddingBottom: 48
+      // 标签栏样式应该有高度：60 + 48 = 108 和 paddingBottom: 48
       const tabBar = getByTestId('home-tab').parent?.parent;
       if (tabBar && tabBar.props?.style) {
         const flatStyle = Array.isArray(tabBar.props.style)
@@ -246,7 +246,7 @@ describe('AppNavigator', () => {
       }
     });
 
-    it('uses device bottom inset of 34 for iPhone-style safe area', () => {
+    it('对于iPhone风格的安全区域使用34的设备底部内边距', () => {
       mockInsets.bottom = 34;
       const { getByTestId } = renderAppNavigator();
 
@@ -267,13 +267,13 @@ describe('AppNavigator', () => {
       }
     });
 
-    it('renders all tabs with large bottom inset (regression test for nav bar overlap)', () => {
-      // This is the key regression test: with a 48dp bottom inset (3-button Android nav),
-      // all tabs should still be visible and not clipped by the system navigation bar
+    it('渲染所有带有大底部内边距的标签页（导航栏重叠的回归测试）', () => {
+      // 这是关键的回归测试：对于48dp的底部内边距（三按钮Android导航），
+      // 所有标签页应该仍然可见，不会被系统导航栏裁剪
       mockInsets.bottom = 48;
       const { getAllByText, getByTestId } = renderAppNavigator();
 
-      // All tab labels should be visible
+      // 所有标签页标签应该可见
       expect(getAllByText('首页').length).toBeGreaterThanOrEqual(1);
       expect(getAllByText('聊天').length).toBeGreaterThanOrEqual(1);
       expect(getAllByText('项目').length).toBeGreaterThanOrEqual(1);

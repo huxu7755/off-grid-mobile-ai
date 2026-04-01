@@ -76,67 +76,67 @@ describe('ModelSettingsScreen', () => {
   // ============================================================================
   // Basic Rendering
   // ============================================================================
-  describe('basic rendering', () => {
-    it('renders without crashing', () => {
+  describe('基本渲染', () => {
+    it('渲染时不崩溃', () => {
       const { getByText } = renderScreen();
       expect(getByText('模型设置')).toBeTruthy();
     });
 
-    it('shows all section titles as accordion headers', () => {
+    it('显示所有部分标题作为手风琴头部', () => {
       const { getByText } = renderScreen();
       expect(getByText('默认系统提示词')).toBeTruthy();
       expect(getByText('图像生成')).toBeTruthy();
       expect(getByText('文本生成')).toBeTruthy();
     });
 
-    it('shows section help text for system prompt when expanded', () => {
+    it('展开时显示系统提示词部分的帮助文本', () => {
       const { getByText } = renderWithSections('prompt');
-      expect(getByText(/Instructions given to the model/)).toBeTruthy();
+      expect(getByText(/提供给模型的指令/)).toBeTruthy();
     });
 
-    it('sections are collapsed by default', () => {
+    it('部分默认折叠', () => {
       const { queryByText } = renderScreen();
-      // Content inside collapsed sections should not be visible
+      // 折叠部分内的内容不应可见
       expect(queryByText('Temperature')).toBeNull();
       expect(queryByText('CPU Threads')).toBeNull();
-      expect(queryByText(/Instructions given to the model/)).toBeNull();
+      expect(queryByText(/提供给模型的指令/)).toBeNull();
     });
 
-    it('shows section help text for image generation when expanded', () => {
+    it('展开时显示图像生成部分的帮助文本', () => {
       const { getByText } = renderWithSections('image');
-      expect(getByText(/Control how image generation/)).toBeTruthy();
+      expect(getByText(/控制图像生成/)).toBeTruthy();
     });
 
-    it('shows section help text for text generation when expanded', () => {
+    it('展开时显示文本生成部分的帮助文本', () => {
       const { getByText } = renderWithSections('text');
-      expect(getByText(/Configure LLM behavior/)).toBeTruthy();
+      expect(getByText(/配置LLM行为/)).toBeTruthy();
     });
 
   });
 
   // ============================================================================
-  // Accordion Behavior
+  // 手风琴行为
   // ============================================================================
-  describe('accordion behavior', () => {
-    it('expands image generation section when header is pressed', () => {
+  describe('手风琴行为', () => {
+    it('当点击头部时展开图像生成部分', () => {
       const { getByTestId, queryByText } = renderScreen();
-      expect(queryByText('Automatic Detection')).toBeNull();
+      expect(queryByText('自动检测')).toBeNull();
 
       fireEvent.press(getByTestId('image-generation-accordion'));
-      expect(queryByText('Automatic Detection')).toBeTruthy();
+      expect(queryByText('自动检测')).toBeTruthy();
     });
 
-    it('collapses image generation section when header is pressed again', () => {
+    it('当再次点击头部时折叠图像生成部分', () => {
       const { getByTestId, queryByText } = renderScreen();
 
       fireEvent.press(getByTestId('image-generation-accordion'));
-      expect(queryByText('Automatic Detection')).toBeTruthy();
+      expect(queryByText('自动检测')).toBeTruthy();
 
       fireEvent.press(getByTestId('image-generation-accordion'));
-      expect(queryByText('Automatic Detection')).toBeNull();
+      expect(queryByText('自动检测')).toBeNull();
     });
 
-    it('expands text generation section when header is pressed', () => {
+    it('当点击头部时展开文本生成部分', () => {
       const { getByTestId, queryByText } = renderScreen();
       expect(queryByText('Temperature')).toBeNull();
 
@@ -144,22 +144,22 @@ describe('ModelSettingsScreen', () => {
       expect(queryByText('Temperature')).toBeTruthy();
     });
 
-    it('shows CPU Threads inside text generation section', () => {
+    it('在文本生成部分内显示CPU线程', () => {
       const { queryByText } = renderWithSections('text');
       expect(queryByText('CPU Threads')).toBeTruthy();
     });
   });
 
   // ============================================================================
-  // System Prompt
+  // 系统提示词
   // ============================================================================
-  describe('system prompt', () => {
-    it('shows default system prompt text', () => {
+  describe('系统提示词', () => {
+    it('显示默认系统提示词文本', () => {
       const { getByDisplayValue } = renderWithSections('prompt');
       expect(getByDisplayValue(/helpful AI assistant/)).toBeTruthy();
     });
 
-    it('updates system prompt when text changes', () => {
+    it('当文本更改时更新系统提示词', () => {
       const { getByDisplayValue } = renderWithSections('prompt');
       const input = getByDisplayValue(/helpful AI assistant/);
 

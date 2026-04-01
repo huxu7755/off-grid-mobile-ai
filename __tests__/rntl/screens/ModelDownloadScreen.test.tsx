@@ -257,14 +257,14 @@ describe('ModelDownloadScreen', () => {
   // ===========================================================================
   // Loading state
   // ===========================================================================
-  it('renders the loading state initially', () => {
+  it('初始渲染加载状态', () => {
     const { getByText } = render(
       <ModelDownloadScreen navigation={mockNavigation} />,
     );
     expect(getByText(/正在分析您的设备/)).toBeTruthy();
   });
 
-  it('renders with testID for loading state', () => {
+  it('渲染加载状态的testID', () => {
     const { getByTestId } = render(
       <ModelDownloadScreen navigation={mockNavigation} />,
     );
@@ -272,29 +272,29 @@ describe('ModelDownloadScreen', () => {
   });
 
   // ===========================================================================
-  // Loaded state
+  // 加载完成状态
   // ===========================================================================
-  it('renders the loaded state with "Set Up Your AI" title', async () => {
+  it('渲染加载完成状态，显示"设置您的AI"标题', async () => {
     mockGetModelFiles.mockResolvedValue([MOCK_FILE]);
 
     const result = render(<ModelDownloadScreen navigation={mockNavigation} />);
     await flushPromises();
 
     expect(result.getByTestId('model-download-screen')).toBeTruthy();
-    expect(result.getByText('Set Up Your AI')).toBeTruthy();
-    expect(result.getByText(/Connect to a model server/)).toBeTruthy();
+    expect(result.getByText('设置您的AI')).toBeTruthy();
+    expect(result.getByText(/连接到模型服务器/)).toBeTruthy();
   });
 
-  it('renders device info card after loading', async () => {
+  it('加载后渲染设备信息卡片', async () => {
     const result = render(<ModelDownloadScreen navigation={mockNavigation} />);
     await flushPromises();
 
-    expect(result.getByText('Your Device')).toBeTruthy();
+    expect(result.getByText('您的设备')).toBeTruthy();
     expect(result.getByText('Test Device')).toBeTruthy();
-    expect(result.getByText('Available Memory')).toBeTruthy();
+    expect(result.getByText('可用内存')).toBeTruthy();
   });
 
-  it('renders the NetworkSection', async () => {
+  it('渲染网络模型部分', async () => {
     const result = render(<ModelDownloadScreen navigation={mockNavigation} />);
     await flushPromises();
 
@@ -302,17 +302,17 @@ describe('ModelDownloadScreen', () => {
     expect(result.getByText('网络模型')).toBeTruthy();
   });
 
-  it('renders "Download to Your Device" section title', async () => {
+  it('渲染"下载到您的设备"部分标题', async () => {
     const result = render(<ModelDownloadScreen navigation={mockNavigation} />);
     await flushPromises();
 
-    expect(result.getByText('Download to Your Device')).toBeTruthy();
+    expect(result.getByText('下载到您的设备')).toBeTruthy();
   });
 
   // ===========================================================================
-  // Skip button
+  // 跳过按钮
   // ===========================================================================
-  it('skip button navigates to Main', async () => {
+  it('跳过按钮导航到主页', async () => {
     const result = render(<ModelDownloadScreen navigation={mockNavigation} />);
     await flushPromises();
 
@@ -322,9 +322,9 @@ describe('ModelDownloadScreen', () => {
   });
 
   // ===========================================================================
-  // Model rendering + download
+  // 模型渲染和下载
   // ===========================================================================
-  it('renders recommended models based on device RAM', async () => {
+  it('根据设备RAM渲染推荐模型', async () => {
     mockGetModelFiles.mockResolvedValue([MOCK_FILE]);
 
     const result = render(<ModelDownloadScreen navigation={mockNavigation} />);
@@ -333,13 +333,13 @@ describe('ModelDownloadScreen', () => {
     expect(result.getByTestId('recommended-model-0')).toBeTruthy();
   });
 
-  it('shows warning card when no compatible models', async () => {
+  it('当没有兼容模型时显示警告卡片', async () => {
     mockHardwareService.getTotalMemoryGB.mockReturnValue(1);
 
     const result = render(<ModelDownloadScreen navigation={mockNavigation} />);
     await flushPromises();
 
-    expect(result.getByText('Limited Compatibility')).toBeTruthy();
+    expect(result.getByText('有限兼容性')).toBeTruthy();
   });
 
   it('download button triggers handleDownload via background download', async () => {

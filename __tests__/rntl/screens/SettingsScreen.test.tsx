@@ -83,17 +83,17 @@ describe('SettingsScreen', () => {
     jest.clearAllMocks();
   });
 
-  it('renders "设置" title', () => {
+  it('渲染"设置"标题', () => {
     const { getByText } = render(<SettingsScreen />);
     expect(getByText('设置')).toBeTruthy();
   });
 
-  it('renders version number', () => {
+  it('渲染版本号', () => {
     const { getByText } = render(<SettingsScreen />);
     expect(getByText('1.0.0')).toBeTruthy();
   });
 
-  it('renders navigation items', () => {
+  it('渲染导航项', () => {
     const { getByText } = render(<SettingsScreen />);
     expect(getByText('模型设置')).toBeTruthy();
     expect(getByText('语音转录')).toBeTruthy();
@@ -102,7 +102,7 @@ describe('SettingsScreen', () => {
     expect(getByText('存储')).toBeTruthy();
   });
 
-  it('renders navigation item descriptions', () => {
+  it('渲染导航项描述', () => {
     const { getByText } = render(<SettingsScreen />);
     expect(getByText('系统提示词、生成和性能')).toBeTruthy();
     expect(getByText('设备上的语音转文本')).toBeTruthy();
@@ -111,13 +111,13 @@ describe('SettingsScreen', () => {
     expect(getByText('模型和数据使用情况')).toBeTruthy();
   });
 
-  it('navigates to correct screen when nav item is pressed', () => {
+  it('当点击导航项时导航到正确的屏幕', () => {
     const { getByText } = render(<SettingsScreen />);
     fireEvent.press(getByText('模型设置'));
     expect(mockNavigate).toHaveBeenCalledWith('ModelSettings');
   });
 
-  it('navigates to each settings screen', () => {
+  it('导航到每个设置屏幕', () => {
     const { getByText } = render(<SettingsScreen />);
 
     fireEvent.press(getByText('语音转录'));
@@ -133,19 +133,19 @@ describe('SettingsScreen', () => {
     expect(mockNavigate).toHaveBeenCalledWith('StorageSettings');
   });
 
-  it('renders theme selector with system/light/dark options', () => {
+  it('渲染带有系统/浅色/深色选项的主题选择器', () => {
     const { getByText } = render(<SettingsScreen />);
     expect(getByText('外观')).toBeTruthy();
   });
 
-  it('calls setThemeMode when theme option is pressed', () => {
+  it('当点击主题选项时调用setThemeMode', () => {
     render(<SettingsScreen />);
-    // The theme options are the first three TouchableOpacity elements in the theme selector
-    // We can't easily target them by text since they use icons, but pressing them calls setThemeMode
-    // The three theme options are rendered - pressing one calls setThemeMode
+    // 主题选项是主题选择器中的前三个TouchableOpacity元素
+    // 由于它们使用图标，我们无法通过文本轻松定位，但点击它们会调用setThemeMode
+    // 三个主题选项被渲染 - 点击一个会调用setThemeMode
   });
 
-  it('renders Privacy First section', () => {
+  it('渲染隐私优先部分', () => {
     const { getByText } = render(<SettingsScreen />);
     expect(getByText('隐私优先')).toBeTruthy();
     expect(
@@ -153,18 +153,18 @@ describe('SettingsScreen', () => {
     ).toBeTruthy();
   });
 
-  it('renders about section text', () => {
+  it('渲染关于部分文本', () => {
     const { getByText } = render(<SettingsScreen />);
     expect(getByText('版本')).toBeTruthy();
     expect(getByText(/Off Grid将AI带到您的设备/)).toBeTruthy();
   });
 
-  it('renders Reset Onboarding button in __DEV__ mode', () => {
+  it('在__DEV__模式下渲染Reset Onboarding按钮', () => {
     const { getByText } = render(<SettingsScreen />);
     expect(getByText('Reset Onboarding')).toBeTruthy();
   });
 
-  it('calls setOnboardingComplete and dispatches reset on Reset Onboarding press', () => {
+  it('当点击Reset Onboarding时调用setOnboardingComplete并调度重置', () => {
     const { CommonActions } = require('@react-navigation/native');
     const { getByText } = render(<SettingsScreen />);
     fireEvent.press(getByText('Reset Onboarding'));

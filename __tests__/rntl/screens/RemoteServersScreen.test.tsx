@@ -128,34 +128,34 @@ describe('RemoteServersScreen', () => {
   // Empty State
   // ==========================================================================
   describe('empty state', () => {
-    it('renders empty state when no servers', () => {
+    it('当没有服务器时渲染空状态', () => {
       const { getByText } = render(<RemoteServersScreen />);
       expect(getByText('无远程服务器')).toBeTruthy();
     });
 
-    it('shows empty state description', () => {
+    it('显示空状态描述', () => {
       const { getByText } = render(<RemoteServersScreen />);
       expect(
         getByText(/连接到您网络上的Ollama、LM Studio或其他LLM服务器/),
       ).toBeTruthy();
     });
 
-    it('shows "添加服务器" button in empty state', () => {
+    it('在空状态下显示"添加服务器"按钮', () => {
       const { getByText } = render(<RemoteServersScreen />);
       expect(getByText('添加服务器')).toBeTruthy();
     });
 
-    it('renders info card about remote servers', () => {
+    it('渲染关于远程服务器的信息卡片', () => {
       const { getByText } = render(<RemoteServersScreen />);
       expect(getByText('关于远程服务器')).toBeTruthy();
     });
   });
 
   // ==========================================================================
-  // Server List
+  // 服务器列表
   // ==========================================================================
-  describe('server list', () => {
-    it('renders server name and endpoint', () => {
+  describe('服务器列表', () => {
+    it('渲染服务器名称和端点', () => {
       const server = createMockServer({ name: 'My Ollama', endpoint: 'http://192.168.1.100:11434' });
       useRemoteServerStore.setState({ servers: [server] });
 
@@ -164,7 +164,7 @@ describe('RemoteServersScreen', () => {
       expect(getByText('http://192.168.1.100:11434')).toBeTruthy();
     });
 
-    it('does not show empty state when servers exist', () => {
+    it('当服务器存在时不显示空状态', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({ servers: [server] });
 
@@ -172,7 +172,7 @@ describe('RemoteServersScreen', () => {
       expect(queryByText('无远程服务器')).toBeNull();
     });
 
-    it('shows "已连接" status for healthy server', () => {
+    it('为健康服务器显示"已连接"状态', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({
         servers: [server],
@@ -183,7 +183,7 @@ describe('RemoteServersScreen', () => {
       expect(getByText('已连接')).toBeTruthy();
     });
 
-    it('shows "离线" status for unhealthy server', () => {
+    it('为不健康服务器显示"离线"状态', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({
         servers: [server],
@@ -194,7 +194,7 @@ describe('RemoteServersScreen', () => {
       expect(getByText('离线')).toBeTruthy();
     });
 
-    it('shows "未知" status when health not checked', () => {
+    it('当健康状态未检查时显示"未知"状态', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({ servers: [server] });
 
@@ -202,7 +202,7 @@ describe('RemoteServersScreen', () => {
       expect(getByText('未知')).toBeTruthy();
     });
 
-    it('renders multiple servers', () => {
+    it('渲染多个服务器', () => {
       const servers = [
         createMockServer({ name: 'Server A' }),
         createMockServer({ name: 'Server B' }),
@@ -214,7 +214,7 @@ describe('RemoteServersScreen', () => {
       expect(getByText('Server B')).toBeTruthy();
     });
 
-    it('shows "添加另一个服务器" button when servers exist', () => {
+    it('当服务器存在时显示"添加另一个服务器"按钮', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({ servers: [server] });
 
@@ -499,22 +499,22 @@ describe('RemoteServersScreen', () => {
   });
 
   // ==========================================================================
-  // Scan Network
+  // 网络扫描
   // ==========================================================================
-  describe('scan network', () => {
-    it('renders 扫描网络 button in empty state', () => {
+  describe('网络扫描', () => {
+    it('在空状态下渲染"扫描网络"按钮', () => {
       const { getByText } = render(<RemoteServersScreen />);
       expect(getByText('扫描网络')).toBeTruthy();
     });
 
-    it('renders 扫描网络 button when servers exist', () => {
+    it('当服务器存在时渲染"扫描网络"按钮', () => {
       const server = createMockServer();
       useRemoteServerStore.setState({ servers: [server] });
       const { getByText } = render(<RemoteServersScreen />);
       expect(getByText('扫描网络')).toBeTruthy();
     });
 
-    it('shows "未找到服务器" alert when scan finds nothing', async () => {
+    it('当扫描未找到服务器时显示"未找到服务器"警报', async () => {
       mockDiscoverLANServers.mockResolvedValue([]);
       const { getByText } = render(<RemoteServersScreen />);
       fireEvent.press(getByText('扫描网络'));
@@ -523,7 +523,7 @@ describe('RemoteServersScreen', () => {
       });
     });
 
-    it('adds discovered servers and shows summary alert', async () => {
+    it('添加发现的服务器并显示摘要警报', async () => {
       mockDiscoverLANServers.mockResolvedValue([
         { endpoint: 'http://192.168.1.10:11434', type: 'ollama', name: 'Ollama (192.168.1.10)' }, // NOSONAR
       ]);
@@ -537,7 +537,7 @@ describe('RemoteServersScreen', () => {
       });
     });
 
-    it('shows "已添加" when all discovered servers already exist', async () => {
+    it('当所有发现的服务器已存在时显示"已添加"', async () => {
       const server = createMockServer({ endpoint: 'http://192.168.1.10:11434' }); // NOSONAR
       useRemoteServerStore.setState({ servers: [server] });
       mockDiscoverLANServers.mockResolvedValue([
@@ -550,7 +550,7 @@ describe('RemoteServersScreen', () => {
       });
     });
 
-    it('shows "扫描失败" alert on error', async () => {
+    it('在错误时显示"扫描失败"警报', async () => {
       mockDiscoverLANServers.mockRejectedValue(new Error('Permission denied'));
       const { getByText } = render(<RemoteServersScreen />);
       fireEvent.press(getByText('扫描网络'));

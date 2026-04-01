@@ -728,7 +728,7 @@ describe('ChatScreen', () => {
   // Message Display
   // ============================================================================
   describe('message display', () => {
-    it('renders user messages in the list', () => {
+    it('在列表中渲染用户消息', () => {
       const { modelId, conversationId } = setupFullChat();
       const msg = createUserMessage('Hello, AI!');
       useChatStore.setState({
@@ -746,7 +746,7 @@ describe('ChatScreen', () => {
       expect(getByTestId(`message-content-${msg.id}`).props.children).toBe('Hello, AI!');
     });
 
-    it('renders assistant messages in the list', () => {
+    it('在列表中渲染助手消息', () => {
       const { modelId, conversationId } = setupFullChat();
       const userMsg = createUserMessage('Hi');
       const assistantMsg = createAssistantMessage('Hello! How can I help?');
@@ -765,7 +765,7 @@ describe('ChatScreen', () => {
       expect(getByTestId(`message-role-${assistantMsg.id}`).props.children).toBe('assistant');
     });
 
-    it('renders multiple messages in order', () => {
+    it('按顺序渲染多条消息', () => {
       const { modelId, conversationId } = setupFullChat();
       const messages = [
         createUserMessage('First'),
@@ -788,7 +788,7 @@ describe('ChatScreen', () => {
       expect(getByTestId(`message-content-${messages[3].id}`).props.children).toBe('Response 2');
     });
 
-    it('does not show empty chat state when messages exist', () => {
+    it('当有消息时不显示空聊天状态', () => {
       const { modelId, conversationId } = setupFullChat();
       useChatStore.setState({
         conversations: [createConversation({

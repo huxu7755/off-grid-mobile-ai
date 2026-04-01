@@ -159,56 +159,56 @@ describe('StorageSettingsScreen', () => {
 
   // ---- Rendering tests ----
 
-  it('renders "Storage" title', () => {
+  it('渲染"存储"标题', () => {
     const { getByText } = render(<StorageSettingsScreen />);
-    expect(getByText('Storage')).toBeTruthy();
+    expect(getByText('存储')).toBeTruthy();
   });
 
-  it('back button calls goBack', () => {
+  it('返回按钮调用goBack', () => {
     const { UNSAFE_getAllByType } = render(<StorageSettingsScreen />);
     const touchables = UNSAFE_getAllByType(TouchableOpacity);
-    // The first TouchableOpacity is the back button
+    // 第一个TouchableOpacity是返回按钮
     fireEvent.press(touchables[0]);
     expect(mockGoBack).toHaveBeenCalled();
   });
 
-  it('shows storage info sections', () => {
+  it('显示存储信息部分', () => {
     const { getByText } = render(<StorageSettingsScreen />);
-    expect(getByText('Storage Usage')).toBeTruthy();
-    expect(getByText('Breakdown')).toBeTruthy();
+    expect(getByText('存储使用情况')).toBeTruthy();
+    expect(getByText('分类')).toBeTruthy();
   });
 
-  it('shows hint text at the bottom', () => {
+  it('在底部显示提示文本', () => {
     const { getByText } = render(<StorageSettingsScreen />);
-    expect(getByText(/To free up space/)).toBeTruthy();
+    expect(getByText(/要释放空间/)).toBeTruthy();
   });
 
-  // ---- Breakdown section tests ----
+  // ---- 分类部分测试 ----
 
-  it('shows LLM Models count in breakdown', () => {
+  it('在分类中显示LLM模型数量', () => {
     mockDownloadedModels = [
       { id: 'm1', name: 'Model 1', author: 'a', fileName: 'f', filePath: '/p', fileSize: 1024, quantization: 'Q4', downloadedAt: '' },
       { id: 'm2', name: 'Model 2', author: 'a', fileName: 'f', filePath: '/p', fileSize: 2048, quantization: 'Q8', downloadedAt: '' },
     ];
 
     const { getAllByText } = render(<StorageSettingsScreen />);
-    // "LLM Models" appears in breakdown AND section title
-    expect(getAllByText('LLM Models').length).toBeGreaterThanOrEqual(1);
+    // "LLM模型"出现在分类和部分标题中
+    expect(getAllByText('LLM模型').length).toBeGreaterThanOrEqual(1);
     expect(getAllByText('2').length).toBeGreaterThanOrEqual(1);
   });
 
-  it('shows Image Models count in breakdown', () => {
+  it('在分类中显示图像模型数量', () => {
     mockDownloadedImageModels = [
       { id: 'i1', name: 'Img Model', description: '', modelPath: '/p', downloadedAt: '', size: 1024, style: 'creative', backend: 'mnn' },
     ];
 
     const { getAllByText } = render(<StorageSettingsScreen />);
-    // "Image Models" appears in breakdown AND section title
-    expect(getAllByText('Image Models').length).toBeGreaterThanOrEqual(1);
+    // "图像模型"出现在分类和部分标题中
+    expect(getAllByText('图像模型').length).toBeGreaterThanOrEqual(1);
     expect(getAllByText('1').length).toBeGreaterThanOrEqual(1);
   });
 
-  it('shows Conversations count in breakdown', () => {
+  it('在分类中显示对话数量', () => {
     mockConversations = [
       { id: 'c1', title: 'Conv 1', messages: [], modelId: 'm1', createdAt: '', updatedAt: '' },
       { id: 'c2', title: 'Conv 2', messages: [], modelId: 'm1', createdAt: '', updatedAt: '' },
@@ -216,28 +216,28 @@ describe('StorageSettingsScreen', () => {
     ];
 
     const { getByText } = render(<StorageSettingsScreen />);
-    expect(getByText('Conversations')).toBeTruthy();
+    expect(getByText('对话')).toBeTruthy();
     expect(getByText('3')).toBeTruthy();
   });
 
-  it('shows Model Storage label in breakdown', () => {
+  it('在分类中显示模型存储标签', () => {
     const { getByText } = render(<StorageSettingsScreen />);
-    expect(getByText('Model Storage')).toBeTruthy();
+    expect(getByText('模型存储')).toBeTruthy();
   });
 
-  // ---- LLM Models section tests ----
+  // ---- LLM模型部分测试 ----
 
-  it('shows LLM Models section when models exist', () => {
+  it('当模型存在时显示LLM模型部分', () => {
     mockDownloadedModels = [
       { id: 'm1', name: 'Llama 3', author: 'meta', fileName: 'llama3.gguf', filePath: '/p', fileSize: 4 * 1024 * 1024 * 1024, quantization: 'Q4_K_M', downloadedAt: '' },
     ];
 
     const { getAllByText } = render(<StorageSettingsScreen />);
-    // "LLM Models" appears in breakdown AND as a section title
-    expect(getAllByText('LLM Models').length).toBeGreaterThanOrEqual(2);
+    // "LLM模型"出现在分类和作为部分标题
+    expect(getAllByText('LLM模型').length).toBeGreaterThanOrEqual(2);
   });
 
-  it('renders model name and quantization', () => {
+  it('渲染模型名称和量化', () => {
     mockDownloadedModels = [
       { id: 'm1', name: 'Phi-3 Mini', author: 'microsoft', fileName: 'phi3.gguf', filePath: '/p', fileSize: 2 * 1024 * 1024 * 1024, quantization: 'Q5_K_M', downloadedAt: '' },
     ];
@@ -247,16 +247,16 @@ describe('StorageSettingsScreen', () => {
     expect(getByText('Q5_K_M')).toBeTruthy();
   });
 
-  it('does not show LLM Models section when no models', () => {
+  it('当没有模型时不显示LLM模型部分', () => {
     const { queryAllByText } = render(<StorageSettingsScreen />);
-    // "LLM Models" appears once in breakdown
-    const llmTexts = queryAllByText('LLM Models');
-    expect(llmTexts.length).toBe(1); // Only breakdown, no separate section
+    // "LLM模型"在分类中出现一次
+    const llmTexts = queryAllByText('LLM模型');
+    expect(llmTexts.length).toBe(1); // 只有分类，没有单独的部分
   });
 
-  // ---- Image Models section tests ----
+  // ---- 图像模型部分测试 ----
 
-  it('shows Image Models section when image models exist', () => {
+  it('当图像模型存在时显示图像模型部分', () => {
     mockDownloadedImageModels = [
       { id: 'i1', name: 'SD Turbo', description: '', modelPath: '/p', downloadedAt: '', size: 2 * 1024 * 1024 * 1024, style: 'creative', backend: 'mnn' },
     ];

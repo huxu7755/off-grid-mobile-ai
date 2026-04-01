@@ -143,49 +143,49 @@ describe('VoiceSettingsScreen', () => {
   // ============================================================================
   // Basic Rendering
   // ============================================================================
-  describe('basic rendering', () => {
-    it('renders "Voice Transcription" title', () => {
+  describe('基本渲染', () => {
+    it('渲染"语音转录"标题', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Voice Transcription')).toBeTruthy();
+      expect(getByText('语音转录')).toBeTruthy();
     });
 
-    it('shows description text about Whisper', () => {
+    it('显示关于Whisper的描述文本', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
       expect(
-        getByText(/Download a Whisper model to enable on-device voice input/),
+        getByText(/下载Whisper模型以启用设备上的语音输入/),
       ).toBeTruthy();
     });
 
-    it('shows privacy card', () => {
+    it('显示隐私卡片', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Privacy First')).toBeTruthy();
+      expect(getByText('隐私优先')).toBeTruthy();
       expect(
-        getByText(/Voice transcription happens entirely on your device/),
+        getByText(/语音转录完全在您的设备上进行/),
       ).toBeTruthy();
     });
 
-    it('back button calls goBack', () => {
+    it('返回按钮调用goBack', () => {
       const { UNSAFE_getAllByType } = render(<VoiceSettingsScreen />);
       const { TouchableOpacity } = require('react-native');
       const touchables = UNSAFE_getAllByType(TouchableOpacity);
-      // The first TouchableOpacity is the back button
+      // 第一个TouchableOpacity是返回按钮
       fireEvent.press(touchables[0]);
       expect(mockGoBack).toHaveBeenCalled();
     });
   });
 
   // ============================================================================
-  // No Model Downloaded - Download Options
+  // 未下载模型 - 下载选项
   // ============================================================================
-  describe('download options (no model)', () => {
-    it('shows download options when no model is downloaded', () => {
+  describe('下载选项（无模型）', () => {
+    it('当未下载模型时显示下载选项', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
       expect(getByText('Whisper Tiny')).toBeTruthy();
       expect(getByText('Whisper Base')).toBeTruthy();
       expect(getByText('Whisper Small')).toBeTruthy();
     });
 
-    it('shows only first 3 models (slice(0, 3))', () => {
+    it('只显示前3个模型 (slice(0, 3))', () => {
       const { queryByText } = render(<VoiceSettingsScreen />);
       // 4th model (medium) should NOT be shown due to .slice(0, 3)
       expect(queryByText('Whisper Medium')).toBeNull();

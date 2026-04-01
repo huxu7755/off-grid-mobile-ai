@@ -112,36 +112,36 @@ describe('OnboardingScreen', () => {
     jest.clearAllMocks();
   });
 
-  it('renders first slide content', () => {
+  it('渲染第一页内容', () => {
     const { getByText } = render(<OnboardingScreen navigation={navigation} />);
     expect(getByText('Welcome')).toBeTruthy();
     expect(getByText('Off Grid')).toBeTruthy();
     expect(getByText('Your AI companion')).toBeTruthy();
   });
 
-  it('renders second slide content', () => {
+  it('渲染第二页内容', () => {
     const { getByText } = render(<OnboardingScreen navigation={navigation} />);
     expect(getByText('Private')).toBeTruthy();
     expect(getByText('On-Device')).toBeTruthy();
     expect(getByText('Everything stays local')).toBeTruthy();
   });
 
-  it('shows navigation dots', () => {
+  it('显示导航点', () => {
     const { getByTestId } = render(<OnboardingScreen navigation={navigation} />);
     expect(getByTestId('onboarding-screen')).toBeTruthy();
   });
 
-  it('shows 下一步 button on first slide', () => {
+  it('在第一页显示"下一步"按钮', () => {
     const { getByText } = render(<OnboardingScreen navigation={navigation} />);
     expect(getByText('下一步')).toBeTruthy();
   });
 
-  it('shows 跳过 button on non-last slide', () => {
+  it('在非最后一页显示"跳过"按钮', () => {
     const { getByText } = render(<OnboardingScreen navigation={navigation} />);
     expect(getByText('跳过')).toBeTruthy();
   });
 
-  it('calls completeOnboarding when 跳过 is pressed', () => {
+  it('当点击"跳过"时调用completeOnboarding', () => {
     const { getByText } = render(<OnboardingScreen navigation={navigation} />);
     fireEvent.press(getByText('跳过'));
 
@@ -149,39 +149,39 @@ describe('OnboardingScreen', () => {
     expect(mockReplace).toHaveBeenCalledWith('ModelDownload');
   });
 
-  it('does not complete onboarding when 下一步 is pressed on non-last slide', () => {
-    // Note: scrollToIndex throws in test env, but the branch is covered
+  it('当在非最后一页点击"下一步"时不完成引导', () => {
+    // 注意：scrollToIndex 在测试环境中会抛出异常，但分支已覆盖
     try {
       const { getByText } = render(<OnboardingScreen navigation={navigation} />);
       fireEvent.press(getByText('下一步'));
     } catch {
-      // scrollToIndex invariant error is expected in test env
+      // scrollToIndex 不变量错误在测试环境中是预期的
     }
 
-    // Should not complete onboarding on first slide
+    // 不应在第一页完成引导
     expect(mockSetOnboardingComplete).not.toHaveBeenCalled();
     expect(mockReplace).not.toHaveBeenCalled();
   });
 
-  it('updates currentIndex on scroll end', () => {
+  it('在滚动结束时更新currentIndex', () => {
     const { getByTestId } = render(<OnboardingScreen navigation={navigation} />);
 
-    // Simulate scrolling to the last slide
+    // 模拟滚动到最后一页
     const _flatList = getByTestId('onboarding-screen').children[0];
-    // The FlatList is inside the onboarding-screen container
+    // FlatList 在 onboarding-screen 容器内
   });
 
-  it('shows onboarding-skip testID', () => {
+  it('显示 onboarding-skip testID', () => {
     const { getByTestId } = render(<OnboardingScreen navigation={navigation} />);
     expect(getByTestId('onboarding-skip')).toBeTruthy();
   });
 
-  it('shows onboarding-next testID', () => {
+  it('显示 onboarding-next testID', () => {
     const { getByTestId } = render(<OnboardingScreen navigation={navigation} />);
     expect(getByTestId('onboarding-next')).toBeTruthy();
   });
 
-  it('kicks off LAN discovery on mount', async () => {
+  it('在挂载时启动LAN发现', async () => {
     const { act: reactAct } = require('@testing-library/react-native');
     mockDiscoverLANServers.mockResolvedValue([
       { endpoint: 'http://192.168.1.10:11434', type: 'ollama', name: 'Ollama (192.168.1.10)' },
