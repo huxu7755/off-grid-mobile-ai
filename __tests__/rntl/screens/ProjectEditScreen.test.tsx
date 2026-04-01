@@ -188,7 +188,7 @@ describe('ProjectEditScreen', () => {
     it('shows Cancel and Save buttons in header', () => {
       const { getByText } = render(<ProjectEditScreen />);
       expect(getByText('取消')).toBeTruthy();
-      expect(getByText('Save')).toBeTruthy();
+      expect(getByText('保存')).toBeTruthy();
     });
   });
 
@@ -196,11 +196,11 @@ describe('ProjectEditScreen', () => {
   // Rendering - New Project Mode
   // ============================================================================
   describe('new project mode rendering', () => {
-    it('renders "New Project" title when no projectId', () => {
+    it('当没有projectId时渲染"新建项目"标题', () => {
       mockRouteParams = {};
       mockGetProject.mockReturnValue(null as any);
       const { getByText } = render(<ProjectEditScreen />);
-      expect(getByText('New Project')).toBeTruthy();
+      expect(getByText('新建项目')).toBeTruthy();
     });
 
     it('shows empty inputs when creating new project', () => {

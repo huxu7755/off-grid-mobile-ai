@@ -63,11 +63,11 @@ export const ProjectEditScreen: React.FC = () => {
 
   const handleSave = () => {
     if (!formData.name.trim()) {
-      setAlertState(showAlert('Error', 'Please enter a name for the project'));
+      setAlertState(showAlert('错误', '请输入项目名称'));
       return;
     }
     if (!formData.systemPrompt.trim()) {
-      setAlertState(showAlert('Error', 'Please enter a system prompt'));
+      setAlertState(showAlert('错误', '请输入系统提示词'));
       return;
     }
 
@@ -97,13 +97,13 @@ export const ProjectEditScreen: React.FC = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerButton}>
-            <Text style={styles.cancelText}>Cancel</Text>
+            <Text style={styles.cancelText}>取消</Text>
           </TouchableOpacity>
           <Text style={styles.headerTitle}>
-            {existingProject ? 'Edit Project' : 'New Project'}
+            {existingProject ? '编辑项目' : '新建项目'}
           </Text>
           <TouchableOpacity onPress={handleSave} style={styles.headerButton}>
-            <Text style={styles.saveText}>Save</Text>
+            <Text style={styles.saveText}>保存</Text>
           </TouchableOpacity>
         </View>
 
@@ -113,44 +113,44 @@ export const ProjectEditScreen: React.FC = () => {
           keyboardShouldPersistTaps="handled"
         >
           {/* Name */}
-          <Text style={styles.label}>Name *</Text>
+          <Text style={styles.label}>名称 *</Text>
           <AttachStep index={8} fill>
             <TextInput
               style={styles.input}
               value={formData.name}
               onChangeText={(text) => setFormData({ ...formData, name: text })}
-              placeholder="e.g., Spanish Learning, Code Review"
+              placeholder="例如：西班牙语学习，代码审查"
               placeholderTextColor={colors.textMuted}
             />
           </AttachStep>
 
           {/* Description */}
-          <Text style={styles.label}>Description</Text>
+          <Text style={styles.label}>描述</Text>
           <TextInput
             style={styles.input}
             value={formData.description}
             onChangeText={(text) => setFormData({ ...formData, description: text })}
-            placeholder="Brief description of this project"
+            placeholder="此项目的简要描述"
             placeholderTextColor={colors.textMuted}
           />
 
           {/* System Prompt */}
-          <Text style={styles.label}>System Prompt *</Text>
+          <Text style={styles.label}>系统提示词 *</Text>
           <Text style={styles.hint}>
-            This context is sent to the AI at the start of every chat in this project.
+            此上下文会在该项目中每次聊天开始时发送给AI。
           </Text>
           <TextInput
             style={[styles.input, styles.textArea]}
             value={formData.systemPrompt}
             onChangeText={(text) => setFormData({ ...formData, systemPrompt: text })}
-            placeholder="Enter the instructions or context for the AI..."
+            placeholder="输入AI的指令或上下文..."
             placeholderTextColor={colors.textMuted}
             multiline
             textAlignVertical="top"
           />
 
           <Text style={styles.tip}>
-            Tip: Be specific about what you want the AI to do, how it should respond, and any context it needs.
+            提示：明确说明您希望AI做什么，它应该如何响应，以及它需要的任何上下文。
           </Text>
 
           <View style={styles.bottomPadding} />

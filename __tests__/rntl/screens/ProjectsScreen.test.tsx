@@ -122,18 +122,18 @@ describe('ProjectsScreen', () => {
     it('shows empty state description text', () => {
       const { getByText } = render(<ProjectsScreen />);
       expect(
-        getByText(/Create a project to organize your chats by topic/),
+        getByText(/创建一个项目，按主题组织您的聊天/),
       ).toBeTruthy();
     });
 
-    it('shows "Create Project" button in empty state', () => {
+    it('在空状态下渲染"创建项目"按钮', () => {
       const { getByText } = render(<ProjectsScreen />);
-      expect(getByText('Create Project')).toBeTruthy();
+      expect(getByText('创建项目')).toBeTruthy();
     });
 
-    it('navigates to ProjectEdit when "Create Project" is pressed', () => {
+    it('当点击"创建项目"时导航到ProjectEdit', () => {
       const { getByText } = render(<ProjectsScreen />);
-      fireEvent.press(getByText('Create Project'));
+      fireEvent.press(getByText('创建项目'));
 
       expect(mockNavigate).toHaveBeenCalledWith('ProjectEdit', {});
     });
