@@ -69,12 +69,12 @@ export const ServerCard: React.FC<{
         )}
         {!isConnecting && isConnected && (
           <View style={[styles.connectedBadge, { backgroundColor: `${colors.success}20`, borderColor: colors.success }]} testID={`discovered-server-${server.id}-connected`}>
-            <Text style={[styles.connectButtonText, { color: colors.success }]}>Connected</Text>
+            <Text style={[styles.connectButtonText, { color: colors.success }]}>已连接</Text>
           </View>
         )}
         {!isConnecting && !isConnected && (
           <TouchableOpacity style={[styles.connectButton, { borderColor: colors.primary }]} onPress={onConnect} testID={`discovered-server-${server.id}-connect`}>
-            <Text style={[styles.connectButtonText, { color: colors.primary }]}>Connect</Text>
+            <Text style={[styles.connectButtonText, { color: colors.primary }]}>连接</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -104,12 +104,12 @@ export const NetworkSection: React.FC<{
 
   return (
     <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Network Models</Text>
+      <Text style={styles.sectionTitle}>网络模型</Text>
 
       {isCheckingNetwork && !hasServers && (
         <View style={styles.scanningRow}>
           <ActivityIndicator size="small" color={colors.textSecondary} />
-          <Text style={styles.scanningText}>Scanning your network...</Text>
+          <Text style={styles.scanningText}>正在扫描您的网络...</Text>
         </View>
       )}
 
@@ -127,7 +127,7 @@ export const NetworkSection: React.FC<{
 
       {!isCheckingNetwork && !hasServers && (
         <Text style={styles.emptyText}>
-          No servers found. Make sure you're on the same WiFi network as your Ollama or LM Studio server, then scan or add it manually.
+          未找到服务器。请确保您与Ollama或LM Studio服务器在同一WiFi网络上，然后扫描或手动添加。
         </Text>
       )}
 
@@ -139,13 +139,13 @@ export const NetworkSection: React.FC<{
         >
           {busy
             ? <ActivityIndicator size="small" color={colors.primary} />
-            : <Text style={[styles.actionButtonText, { color: colors.primary }]}>Scan Network</Text>}
+            : <Text style={[styles.actionButtonText, { color: colors.primary }]}>扫描网络</Text>}
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.actionButton, { borderColor: colors.primary }]}
           onPress={onAddManually}
         >
-          <Text style={[styles.actionButtonText, { color: colors.primary }]}>Add Server</Text>
+          <Text style={[styles.actionButtonText, { color: colors.primary }]}>添加服务器</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -187,9 +187,9 @@ export const ModelDownloadScreen: React.FC<Props> = ({ navigation }) => {
       <View testID="model-download-screen" style={styles.container}>
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
           <View style={styles.header}>
-            <Text style={styles.title}>Set Up Your AI</Text>
+            <Text style={styles.title}>设置您的AI</Text>
             <Text style={styles.subtitle}>
-              Connect to a model server on your network, or download one to run directly on your device.
+              连接到您网络上的模型服务器，或下载一个直接在您的设备上运行。
             </Text>
           </View>
 
@@ -206,15 +206,15 @@ export const ModelDownloadScreen: React.FC<Props> = ({ navigation }) => {
             colors={colors}
           />
 
-          <Text style={styles.sectionTitle}>Download to Your Device</Text>
+          <Text style={styles.sectionTitle}>下载到您的设备</Text>
 
           <Card style={styles.deviceCard}>
             <View style={styles.deviceInfo}>
-              <Text style={styles.deviceLabel}>Your Device</Text>
+              <Text style={styles.deviceLabel}>您的设备</Text>
               <Text style={styles.deviceValue}>{deviceInfo?.deviceModel}</Text>
             </View>
             <View style={styles.deviceInfo}>
-              <Text style={styles.deviceLabel}>Available Memory</Text>
+              <Text style={styles.deviceLabel}>可用内存</Text>
               <Text style={styles.deviceValue}>{hardwareService.formatBytes(deviceInfo?.availableMemory || 0)}</Text>
             </View>
           </Card>
@@ -242,16 +242,16 @@ export const ModelDownloadScreen: React.FC<Props> = ({ navigation }) => {
 
           {recommendedModels.length === 0 && (
             <Card style={styles.warningCard}>
-              <Text style={styles.warningTitle}>Limited Compatibility</Text>
+              <Text style={styles.warningTitle}>兼容性有限</Text>
               <Text style={styles.warningText}>
-                Your device has limited memory. You can still browse and download smaller models from the model browser.
+                您的设备内存有限。您仍然可以从模型浏览器中浏览和下载较小的模型。
               </Text>
             </Card>
           )}
         </ScrollView>
 
         <View style={styles.footer}>
-          <Button title="Skip for Now" variant="ghost" onPress={() => navigation.replace('Main')} testID="model-download-skip" />
+          <Button title="暂时跳过" variant="ghost" onPress={() => navigation.replace('Main')} testID="model-download-skip" />
         </View>
 
         <CustomAlert visible={alertState.visible} title={alertState.title} message={alertState.message} buttons={alertState.buttons} onClose={() => setAlertState(hideAlert())} />

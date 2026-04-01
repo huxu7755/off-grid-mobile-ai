@@ -106,7 +106,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           {
             activeTextModel ? (
               <Button
-                title="New Chat"
+                title="新聊天"
                 onPress={startNewChat}
                 style={styles.newChatButton}
                 testID="new-chat-button"
@@ -115,19 +115,19 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
               <Card style={styles.setupCard} testID="setup-card">
                 <Text style={styles.setupText}>
                   {downloadedModels.length > 0 || remoteTextModels.length > 0
-                    ? 'Select a text model to start chatting'
-                    : 'Add a remote server or download a model to start chatting'}
+                    ? '选择一个文本模型开始聊天'
+                    : '添加远程服务器或下载模型开始聊天'}
                 </Text>
                 <View style={styles.setupActions}>
                   <Button
-                    title="Add Remote Server"
+                    title="添加远程服务器"
                     variant="outline"
                     size="small"
                     onPress={() => navigation.navigate('RemoteServers')}
                     testID="add-server-button"
                   />
                   <Button
-                    title={downloadedModels.length > 0 || remoteTextModels.length > 0 ? 'Select Model' : 'Browse Models'}
+                    title={downloadedModels.length > 0 || remoteTextModels.length > 0 ? '选择模型' : '浏览模型'}
                     variant="outline"
                     size="small"
                     onPress={() => downloadedModels.length > 0 || remoteTextModels.length > 0 ? setPickerType('text') : navigation.navigate('ModelsTab', { initialTab: 'text' })}
@@ -161,9 +161,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           >
             <Icon name="grid" size={18} color={colors.primary} />
             <View style={styles.galleryCardInfo}>
-              <Text style={styles.galleryCardTitle}>Image Gallery</Text>
+              <Text style={styles.galleryCardTitle}>图片画廊</Text>
               <Text style={styles.galleryCardMeta}>
-                {generatedImages.length} {generatedImages.length === 1 ? 'image' : 'images'}
+                {generatedImages.length} {generatedImages.length === 1 ? '张图片' : '张图片'}
               </Text>
             </View>
             <Icon name="chevron-right" size={16} color={colors.textMuted} />
@@ -174,17 +174,17 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             <View style={styles.statsRow}>
               <View style={styles.statItem}>
                 <Text style={styles.statValue}>{downloadedModels.length}</Text>
-                <Text style={styles.statLabel}>Text models</Text>
+                <Text style={styles.statLabel}>文本模型</Text>
               </View>
               <View style={styles.statDivider} />
               <View style={styles.statItem}>
                 <Text style={styles.statValue}>{downloadedImageModels.length}</Text>
-                <Text style={styles.statLabel}>Image models</Text>
+                <Text style={styles.statLabel}>图像模型</Text>
               </View>
               <View style={styles.statDivider} />
               <View style={styles.statItem}>
                 <Text style={styles.statValue}>{conversations.length}</Text>
-                <Text style={styles.statLabel}>Chats</Text>
+                <Text style={styles.statLabel}>聊天</Text>
               </View>
             </View>
           </AnimatedEntry>

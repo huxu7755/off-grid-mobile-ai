@@ -122,10 +122,10 @@ export const ProjectsScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <Text style={styles.title}>Projects</Text>
+        <Text style={styles.title}>项目</Text>
         <AttachStep index={7}>
           <Button
-            title="New"
+            title="新建"
             variant="primary"
             size="small"
             onPress={handleNewProject}
@@ -135,7 +135,7 @@ export const ProjectsScreen: React.FC = () => {
       </View>
 
       <Text style={styles.subtitle}>
-        Projects group related chats with shared context and instructions.
+        项目将相关聊天按主题分组，共享上下文和指令。
       </Text>
 
       {projects.length === 0 ? (
@@ -146,17 +146,17 @@ export const ProjectsScreen: React.FC = () => {
             </View>
           </AnimatedEntry>
           <AnimatedEntry index={1} staggerMs={60} trigger={focusTrigger}>
-            <Text style={styles.emptyTitle}>No Projects Yet</Text>
+            <Text style={styles.emptyTitle}>暂无项目</Text>
           </AnimatedEntry>
           <AnimatedEntry index={2} staggerMs={60} trigger={focusTrigger}>
             <Text style={styles.emptyText}>
-              Create a project to organize your chats by topic, like "Spanish Learning" or "Code Review".
+              创建一个项目，按主题组织您的聊天，如"西班牙语学习"或"代码审查"。
             </Text>
           </AnimatedEntry>
           <AnimatedEntry index={3} staggerMs={60} trigger={focusTrigger}>
             <TouchableOpacity style={styles.emptyButton} onPress={handleNewProject}>
               <Icon name="plus" size={14} color={colors.primary} />
-              <Text style={styles.emptyButtonText}>Create Project</Text>
+              <Text style={styles.emptyButtonText}>创建项目</Text>
             </TouchableOpacity>
           </AnimatedEntry>
         </View>
