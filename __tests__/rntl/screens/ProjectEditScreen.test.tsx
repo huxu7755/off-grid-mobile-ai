@@ -150,7 +150,7 @@ describe('ProjectEditScreen', () => {
   describe('edit mode rendering', () => {
     it('renders edit screen title', () => {
       const { getByText } = render(<ProjectEditScreen />);
-      expect(getByText('Edit Project')).toBeTruthy();
+      expect(getByText('编辑项目')).toBeTruthy();
     });
 
     it('shows name and description inputs', () => {
@@ -166,9 +166,9 @@ describe('ProjectEditScreen', () => {
 
     it('shows labels for all fields', () => {
       const { getByText } = render(<ProjectEditScreen />);
-      expect(getByText('Name *')).toBeTruthy();
-      expect(getByText('Description')).toBeTruthy();
-      expect(getByText('System Prompt *')).toBeTruthy();
+      expect(getByText('名称 *')).toBeTruthy();
+      expect(getByText('描述')).toBeTruthy();
+      expect(getByText('系统提示词 *')).toBeTruthy();
     });
 
     it('shows hint text for system prompt', () => {
@@ -185,7 +185,7 @@ describe('ProjectEditScreen', () => {
       ).toBeTruthy();
     });
 
-    it('shows Cancel and Save buttons in header', () => {
+    it('显示头部的取消和保存按钮', () => {
       const { getByText } = render(<ProjectEditScreen />);
       expect(getByText('取消')).toBeTruthy();
       expect(getByText('保存')).toBeTruthy();

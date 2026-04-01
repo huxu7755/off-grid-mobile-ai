@@ -93,9 +93,9 @@ describe('ProjectEditScreen Spotlight Integration', () => {
   });
 
   describe('screen renders correctly', () => {
-    it('renders project name input', () => {
+    it('渲染项目名称输入', () => {
       const { getByText } = renderScreen();
-      expect(getByText('Name *')).toBeTruthy();
+      expect(getByText('名称 *')).toBeTruthy();
     });
   });
 });

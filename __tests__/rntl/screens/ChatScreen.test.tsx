@@ -1737,7 +1737,7 @@ describe('ChatScreen', () => {
 
       // Image viewer should show Save and Close buttons
       await waitFor(() => {
-        expect(getByText('Save')).toBeTruthy();
+        expect(getByText('保存')).toBeTruthy();
         expect(getByText('Close')).toBeTruthy();
       });
     });
@@ -3457,7 +3457,7 @@ describe('ChatScreen', () => {
       });
       // handleGenerateImageFromMessage shows 'No Image Model' alert
       const alertTitle = getByTestId('alert-title').props.children;
-      expect(['No Image Model', 'Error']).toContain(alertTitle);
+      expect(['无图像模型', '错误']).toContain(alertTitle);
     });
   });
 
@@ -3600,7 +3600,7 @@ describe('ChatScreen', () => {
       await waitFor(() => {
         expect(queryByTestId('custom-alert')).toBeTruthy();
       }, { timeout: 3000 });
-      expect(getByTestId('alert-title').props.children).toBe('Generation Error');
+      expect(getByTestId('alert-title').props.children).toBe('生成错误');
     });
   });
 

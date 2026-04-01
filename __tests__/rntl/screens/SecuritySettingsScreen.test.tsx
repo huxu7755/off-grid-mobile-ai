@@ -137,12 +137,12 @@ jest.mock('../../../src/screens/PassphraseSetupScreen', () => ({
     const { View, Text, TouchableOpacity } = require('react-native');
     return (
       <View testID="passphrase-setup">
-        <Text>{isChanging ? 'Change Passphrase' : 'Set Passphrase'}</Text>
+        <Text>{isChanging ? '修改密码' : '设置密码'}</Text>
         <TouchableOpacity testID="passphrase-complete" onPress={onComplete}>
-          <Text>Complete</Text>
+          <Text>完成</Text>
         </TouchableOpacity>
         <TouchableOpacity testID="passphrase-cancel" onPress={onCancel}>
-          <Text>Cancel Setup</Text>
+          <Text>取消设置</Text>
         </TouchableOpacity>
       </View>
     );
@@ -295,25 +295,25 @@ describe('SecuritySettingsScreen', () => {
       mockAuthEnabled = true;
     });
 
-    it('shows "Change Passphrase" button when auth is enabled', () => {
+    it('当身份验证启用时显示"修改密码"按钮', () => {
       const { getByText } = render(<SecuritySettingsScreen />);
-      expect(getByText('Change Passphrase')).toBeTruthy();
+      expect(getByText('修改密码')).toBeTruthy();
     });
 
-    it('does not show "Change Passphrase" button when auth is disabled', () => {
+    it('当身份验证禁用时不显示"修改密码"按钮', () => {
       mockAuthEnabled = false;
       const { queryByText } = render(<SecuritySettingsScreen />);
-      expect(queryByText('Change Passphrase')).toBeNull();
+      expect(queryByText('修改密码')).toBeNull();
     });
 
     it('opens passphrase setup in change mode when button is pressed', () => {
       const { getByText, queryByTestId } = render(<SecuritySettingsScreen />);
 
-      fireEvent.press(getByText('Change Passphrase'));
+      fireEvent.press(getByText('修改密码'));
 
       expect(queryByTestId('passphrase-setup')).toBeTruthy();
-      // The PassphraseSetupScreen mock shows 'Change Passphrase' text when isChanging=true
-      // and the button text also says 'Change Passphrase', so we verify modal is open
+      // The PassphraseSetupScreen mock shows '修改密码' text when isChanging=true
+      // and the button text also says '修改密码', so we verify modal is open
     });
   });
 
