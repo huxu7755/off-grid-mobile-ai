@@ -150,11 +150,11 @@ const ImageModelsScrollContent: React.FC<ScrollContentProps> = ({
   }, [hfModelsLoading, filteredHFModels.length, goTo]);
   let emptyMessage: string;
   if (imageSearchQuery.trim()) {
-    emptyMessage = 'No models match your search';
+    emptyMessage = '没有模型匹配您的搜索';
   } else if (hasActiveImageFilters) {
-    emptyMessage = 'No models match your filters';
+    emptyMessage = '没有模型匹配您的筛选条件';
   } else {
-    emptyMessage = 'All available models are downloaded';
+    emptyMessage = '所有可用模型都已下载';
   }
 
   return (
@@ -164,7 +164,7 @@ const ImageModelsScrollContent: React.FC<ScrollContentProps> = ({
           <TouchableOpacity style={styles.recHint} onPress={() => setShowRecHint(false)} activeOpacity={0.7}>
             <Icon name="info" size={11} color={colors.primary} />
             <Text style={styles.recHintText}>
-              Showing recommended models only. Tap{' '}<Text style={{ color: colors.primary }}>★</Text>{' '}to see all.
+              仅显示推荐模型。点击{' '}<Text style={{ color: colors.primary }}>★</Text>{' '}查看全部。
             </Text>
           </TouchableOpacity>
         )}
@@ -195,7 +195,7 @@ const ImageModelsScrollContent: React.FC<ScrollContentProps> = ({
         {hfModelsLoading && (
           <View style={styles.hfLoadingContainer}>
             <ActivityIndicator size="small" color={colors.primary} />
-            <Text style={styles.loadingText}>Loading models...</Text>
+            <Text style={styles.loadingText}>正在加载模型...</Text>
           </View>
         )}
 
@@ -203,7 +203,7 @@ const ImageModelsScrollContent: React.FC<ScrollContentProps> = ({
           <View style={styles.hfErrorContainer}>
             <Text style={styles.hfErrorText}>{hfModelsError}</Text>
             <TouchableOpacity style={styles.retryButton} onPress={() => loadHFModels(true)}>
-              <Text style={styles.retryButtonText}>Retry</Text>
+              <Text style={styles.retryButtonText}>重试</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -265,7 +265,7 @@ export const ImageModelsTab: React.FC<Props> = ({
         <View style={[styles.searchContainer, styles.searchContainerNoPadding]}>
           <TextInput
             style={styles.searchInput}
-            placeholder="Search models..."
+            placeholder="搜索模型..."
             placeholderTextColor={colors.textMuted}
             value={imageSearchQuery}
             onChangeText={setImageSearchQuery}

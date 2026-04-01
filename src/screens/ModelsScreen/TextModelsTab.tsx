@@ -142,10 +142,10 @@ const ModelDetailView: React.FC<DetailProps> = ({
           <Text style={styles.statText}>{formatNumber(selectedModel.likes)} likes</Text>
         </View>
       </Card>
-      <Text style={styles.sectionTitle}>Available Files</Text>
+      <Text style={styles.sectionTitle}>可用文件</Text>
       <Text style={styles.sectionSubtitle}>
-        Choose a quantization level. Q4_K_M is recommended for mobile.
-        {modelFiles.some(f => f.mmProjFile) && ' Vision files include mmproj.'}
+        选择量化级别。Q4_K_M 是移动设备的推荐选择。
+        {modelFiles.some(f => f.mmProjFile) && ' 视觉模型文件包含 mmproj。'}
       </Text>
       {isLoadingFiles ? (
         <View style={styles.loadingContainer}><ActivityIndicator size="large" color={colors.primary} /></View>
@@ -155,7 +155,7 @@ const ModelDetailView: React.FC<DetailProps> = ({
           renderItem={renderFileItem}
           keyExtractor={item => item.name}
           contentContainerStyle={styles.listContent}
-          ListEmptyComponent={<Card style={styles.emptyCard}><Text style={styles.emptyText}>No compatible files found for this model.</Text></Card>}
+          ListEmptyComponent={<Card style={styles.emptyCard}><Text style={styles.emptyText}>未找到此模型的兼容文件。</Text></Card>}
         />
       )}
       <CustomAlert {...alertState} onClose={() => setAlertState(hideAlert())} />
@@ -242,7 +242,7 @@ export const TextModelsTab: React.FC<Props> = (props) => {
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
-          placeholder="Search models..."
+          placeholder="搜索模型..."
           placeholderTextColor={colors.textMuted}
           value={searchQuery}
           onChangeText={setSearchQuery}
@@ -259,7 +259,7 @@ export const TextModelsTab: React.FC<Props> = (props) => {
           <Icon name="sliders" size={14} color={(textFiltersVisible || hasActiveFilters) ? colors.primary : colors.textMuted} />
           {hasActiveFilters && <View style={styles.filterDot} />}
         </TouchableOpacity>
-        <Button title="Search" size="small" onPress={handleSearch} testID="search-button" />
+        <Button title="搜索" size="small" onPress={handleSearch} testID="search-button" />
       </View>
 
       {textFiltersVisible && (
@@ -279,7 +279,7 @@ export const TextModelsTab: React.FC<Props> = (props) => {
       {isLoading ? (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={colors.primary} />
-          <Text style={styles.loadingText}>Loading models...</Text>
+          <Text style={styles.loadingText}>正在加载模型...</Text>
         </View>
       ) : (
         <FlatList
@@ -293,19 +293,19 @@ export const TextModelsTab: React.FC<Props> = (props) => {
             <View>
               <View style={styles.deviceBanner}>
                 <Text style={styles.deviceBannerText}>
-                  {Math.round(ramGB)}GB RAM — models up to {deviceRecommendation.maxParameters}B recommended ({deviceRecommendation.recommendedQuantization})
+                  {Math.round(ramGB)}GB RAM — 推荐最大 {deviceRecommendation.maxParameters}B 的模型 ({deviceRecommendation.recommendedQuantization})
                 </Text>
               </View>
-              {recommendedAsModelInfo.length > 0 && <Text style={styles.recommendedTitle}>Recommended for your device</Text>}
+              {recommendedAsModelInfo.length > 0 && <Text style={styles.recommendedTitle}>为您的设备推荐</Text>}
             </View>
           )}
           ListEmptyComponent={
             <Card style={styles.emptyCard}>
               <Text style={styles.emptyText}>
                 {(() => {
-                  if (!hasSearched) return 'No recommended models available.';
-                  if (hasActiveFilters) return 'No models match your filters. Try adjusting or clearing them.';
-                  return 'No models found. Try a different search term.';
+                  if (!hasSearched) return '暂无推荐模型。';
+                  if (hasActiveFilters) return '没有模型匹配您的筛选条件。尝试调整或清除筛选条件。';
+                  return '未找到模型。尝试使用不同的搜索词。';
                 })()}
               </Text>
             </Card>
