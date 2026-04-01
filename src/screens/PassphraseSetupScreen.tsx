@@ -42,25 +42,25 @@ export const PassphraseSetupScreen: React.FC<PassphraseSetupScreenProps> = ({
 
   const validatePassphrase = (passphrase: string): string | null => {
     if (passphrase.length < 6) {
-      return 'Passphrase must be at least 6 characters';
+      return '密码至少需要6个字符';
     }
     if (passphrase.length > 50) {
-      return 'Passphrase must be 50 characters or less';
+      return '密码最多50个字符';
     }
     return null;
   };
 
   const handleSubmit = async () => {
-    // Validate new passphrase
+    // 验证新密码
     const error = validatePassphrase(newPassphrase);
     if (error) {
-      setAlertState(showAlert('Invalid Passphrase', error));
+      setAlertState(showAlert('无效密码', error));
       return;
     }
 
-    // Check confirmation matches
+    // 检查确认密码是否匹配
     if (newPassphrase !== confirmPassphrase) {
-      setAlertState(showAlert('Mismatch', 'Passphrases do not match'));
+      setAlertState(showAlert('不匹配', '两次输入的密码不一致'));
       return;
     }
 
@@ -68,30 +68,30 @@ export const PassphraseSetupScreen: React.FC<PassphraseSetupScreenProps> = ({
 
     try {
       if (isChanging) {
-        // Verify current passphrase and change
+        // 验证当前密码并修改
         const success = await authService.changePassphrase(currentPassphrase, newPassphrase);
         if (!success) {
-          setAlertState(showAlert('Error', 'Current passphrase is incorrect'));
+          setAlertState(showAlert('错误', '当前密码不正确'));
           setIsSubmitting(false);
           return;
         }
-        setAlertState(showAlert('Success', 'Passphrase changed successfully'));
+        setAlertState(showAlert('成功', '密码修改成功'));
       } else {
-        // Set new passphrase
+        // 设置新密码
         const success = await authService.setPassphrase(newPassphrase);
         if (!success) {
-          setAlertState(showAlert('Error', 'Failed to set passphrase'));
+          setAlertState(showAlert('错误', '设置密码失败'));
           setIsSubmitting(false);
           return;
         }
         setEnabled(true);
-        setAlertState(showAlert('Success', 'Passphrase lock enabled'));
+        setAlertState(showAlert('成功', '密码锁定已启用'));
       }
 
       onComplete();
     } catch (err) {
       logger.warn('[PassphraseSetup] Operation failed:', err);
-      setAlertState(showAlert('Error', 'An error occurred. Please try again.'));
+      setAlertState(showAlert('错误', '发生错误，请重试。'));
     } finally {
       setIsSubmitting(false);
     }
@@ -105,10 +105,10 @@ export const PassphraseSetupScreen: React.FC<PassphraseSetupScreenProps> = ({
       >
         <View style={styles.header}>
           <TouchableOpacity onPress={onCancel}>
-            <Text style={styles.cancelButton}>Cancel</Text>
+            <Text style={styles.cancelButton}>取消</Text>
           </TouchableOpacity>
           <Text style={styles.title}>
-            {isChanging ? 'Change Passphrase' : 'Set Up Passphrase'}
+            {isChanging ? '修改密码' : '设置密码'}
           </Text>
           <View style={styles.headerSpacer} />
         </View>
@@ -122,19 +122,19 @@ export const PassphraseSetupScreen: React.FC<PassphraseSetupScreenProps> = ({
 
           <Text style={styles.description}>
             {isChanging
-              ? 'Enter your current passphrase and then set a new one.'
-              : 'Create a passphrase to lock the app. You will need to enter it each time you open the app.'}
+              ? '输入您当前的密码，然后设置新密码。'
+              : '创建一个密码来锁定应用。每次打开应用时都需要输入。'}
           </Text>
 
           <Card style={styles.inputCard}>
             {isChanging && (
               <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>Current Passphrase</Text>
+                <Text style={styles.inputLabel}>当前密码</Text>
                 <TextInput
                   style={styles.input}
                   value={currentPassphrase}
                   onChangeText={setCurrentPassphrase}
-                  placeholder="Enter current passphrase"
+                  placeholder="输入当前密码"
                   placeholderTextColor={colors.textMuted}
                   secureTextEntry
                   autoCapitalize="none"
@@ -145,13 +145,13 @@ export const PassphraseSetupScreen: React.FC<PassphraseSetupScreenProps> = ({
 
             <View style={styles.inputGroup}>
               <Text style={styles.inputLabel}>
-                {isChanging ? 'New Passphrase' : 'Passphrase'}
+                {isChanging ? '新密码' : '密码'}
               </Text>
               <TextInput
                 style={styles.input}
                 value={newPassphrase}
                 onChangeText={setNewPassphrase}
-                placeholder="Enter passphrase (min 6 characters)"
+                placeholder="输入密码（至少6个字符）"
                 placeholderTextColor={colors.textMuted}
                 secureTextEntry
                 autoCapitalize="none"
@@ -160,12 +160,12 @@ export const PassphraseSetupScreen: React.FC<PassphraseSetupScreenProps> = ({
             </View>
 
             <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Confirm Passphrase</Text>
+              <Text style={styles.inputLabel}>确认密码</Text>
               <TextInput
                 style={styles.input}
                 value={confirmPassphrase}
                 onChangeText={setConfirmPassphrase}
-                placeholder="Re-enter passphrase"
+                placeholder="重新输入密码"
                 placeholderTextColor={colors.textMuted}
                 secureTextEntry
                 autoCapitalize="none"
@@ -175,16 +175,16 @@ export const PassphraseSetupScreen: React.FC<PassphraseSetupScreenProps> = ({
           </Card>
 
           <View style={styles.tips}>
-            <Text style={styles.tipsTitle}>Tips for a good passphrase:</Text>
-            <Text style={styles.tipItem}>• Use a mix of words and numbers</Text>
-            <Text style={styles.tipItem}>• Make it memorable but not obvious</Text>
-            <Text style={styles.tipItem}>• Avoid personal information</Text>
+            <Text style={styles.tipsTitle}>好密码的提示：</Text>
+            <Text style={styles.tipItem}>• 使用单词和数字的组合</Text>
+            <Text style={styles.tipItem}>• 使其容易记住但不明显</Text>
+            <Text style={styles.tipItem}>• 避免使用个人信息</Text>
           </View>
 
           <Button
             title={(() => {
-              if (isSubmitting) return 'Saving...';
-              return isChanging ? 'Change Passphrase' : 'Enable Lock';
+              if (isSubmitting) return '保存中...';
+              return isChanging ? '修改密码' : '启用锁定';
             })()}
             onPress={handleSubmit}
             disabled={isSubmitting}
