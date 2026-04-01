@@ -46,6 +46,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Get last tag
+        run: |
+          # Get last tag for release notes
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          echo "LAST_TAG=$LAST_TAG" >> $GITHUB_ENV
+
       - name: Bump patch version
         run: |
           git config user.name "github-actions[bot]"
@@ -69,11 +75,11 @@ jobs:
       - name: Generate release notes
         run: |
           # Get commits since last tag (or all commits if no tags)
-          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-          if [ -z "$LAST_TAG" ]; then
+          if [ -z "${{ env.LAST_TAG }}" ]; then
             COMMITS=$(git log --pretty=format:"- %s (%h)" --no-merges -20)
           else
-            COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges)
+            # Get commits from last tag to before the version bump commit
+            COMMITS=$(git log ${{ env.LAST_TAG }}..HEAD~1 --pretty=format:"- %s (%h)" --no-merges)
           fi
 
           # Write release notes
@@ -81,7 +87,7 @@ jobs:
           echo "" >> release-notes.md
           echo "$COMMITS" >> release-notes.md
           echo "" >> release-notes.md
-          echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${LAST_TAG:-v0.0.0}...v${{ env.NEW_VERSION }}" >> release-notes.md
+          echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ env.LAST_TAG:-v0.0.0 }}...v${{ env.NEW_VERSION }}" >> release-notes.md
 
           cat release-notes.md
 
