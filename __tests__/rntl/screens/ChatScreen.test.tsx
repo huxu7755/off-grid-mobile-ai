@@ -590,7 +590,7 @@ describe('ChatScreen', () => {
   // Chat Header
   // ============================================================================
   describe('chat header', () => {
-    it('shows conversation title or "New Chat" in header', () => {
+    it('显示对话标题或"新聊天"在头部', () => {
       const { modelId, conversationId } = setupFullChat();
       useChatStore.setState({
         conversations: [createConversation({
@@ -1132,7 +1132,7 @@ describe('ChatScreen', () => {
   });
 
   // ============================================================================
-  // Delete Conversation
+  // 删除对话
   // ============================================================================
   describe('delete conversation', () => {
     it('shows delete button in settings modal', () => {
@@ -1190,7 +1190,7 @@ describe('ChatScreen', () => {
       fireEvent.press(getByTestId('delete-conversation-btn'));
 
       await act(async () => {
-        fireEvent.press(getByTestId('alert-button-Delete'));
+        fireEvent.press(getByTestId('alert-button-删除'));
       });
 
       // Conversation should be deleted
@@ -1561,7 +1561,7 @@ describe('ChatScreen', () => {
   describe('error handling', () => {
     it('shows alert when no model is selected and trying to send', async () => {
       const { getByText } = renderChatScreen();
-      expect(getByText('No Model Selected')).toBeTruthy();
+      expect(getByText('未选择模型')).toBeTruthy();
     });
   });
 
@@ -2662,10 +2662,10 @@ describe('ChatScreen', () => {
       await act(async () => { fireEvent.press(getByTestId('delete-conversation-btn')); });
 
       // Should show confirmation alert with Delete button
-      expect(getByTestId('alert-title').props.children).toBe('Delete Conversation');
+      expect(getByTestId('alert-title').props.children).toBe('删除对话');
 
       // Press Delete
-      await act(async () => { fireEvent.press(getByTestId('alert-button-Delete')); });
+      await act(async () => { fireEvent.press(getByTestId('alert-button-删除')); });
       await act(async () => {});
 
       // Should have navigated back
@@ -2720,7 +2720,7 @@ describe('ChatScreen', () => {
     it('shows alert when no active conversation and no model', async () => {
       // No model set - shows "No Model Selected" screen
       const { getByText } = renderChatScreen();
-      expect(getByText('No Model Selected')).toBeTruthy();
+      expect(getByText('未选择模型')).toBeTruthy();
     });
   });
 
@@ -3483,7 +3483,7 @@ describe('ChatScreen', () => {
       // This renders the no-model state since activeModel is undefined
       const { getByText } = renderChatScreen();
       // The component shows "No Model Selected" when activeModel is null/undefined
-      expect(getByText('No Model Selected')).toBeTruthy();
+      expect(getByText('未选择模型')).toBeTruthy();
     });
   });
 
@@ -3627,7 +3627,7 @@ describe('ChatScreen', () => {
       // Open settings and delete
       await act(async () => { fireEvent.press(getByTestId('chat-settings-icon')); });
       await act(async () => { fireEvent.press(getByTestId('delete-conversation-btn')); });
-      await act(async () => { fireEvent.press(getByTestId('alert-button-Delete')); });
+      await act(async () => { fireEvent.press(getByTestId('alert-button-删除')); });
       await act(async () => { await new Promise<void>(r => setTimeout(() => r(), 200)); });
 
       // llmService.stopGeneration should have been called (was streaming)

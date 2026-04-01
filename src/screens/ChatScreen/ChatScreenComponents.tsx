@@ -122,7 +122,7 @@ export const ChatHeader: React.FC<{
       </TouchableOpacity>
       <View style={styles.headerLeft}>
         <Text style={styles.headerTitle} numberOfLines={1}>
-          {activeConversation?.title || 'New Chat'}
+          {activeConversation?.title || '新聊天'}
         </Text>
         <View style={styles.headerSubtitleRow}>
           <TouchableOpacity style={styles.modelSelector} onPress={() => setShowModelSelector(true)} testID="model-selector">

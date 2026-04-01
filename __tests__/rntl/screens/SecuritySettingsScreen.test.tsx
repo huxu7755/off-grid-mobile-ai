@@ -269,7 +269,7 @@ describe('SecuritySettingsScreen', () => {
       expect(queryByTestId('custom-alert')).toBeTruthy();
       expect(queryByTestId('alert-title')?.props.children).toBe('Disable Passphrase Lock');
       expect(getByText('Disable')).toBeTruthy();
-      expect(getByText('Cancel')).toBeTruthy();
+      expect(getByText('取消')).toBeTruthy();
     });
 
     it('does not disable auth when cancelled', () => {
@@ -279,7 +279,7 @@ describe('SecuritySettingsScreen', () => {
       fireEvent(switches[0], 'valueChange', false);
 
       // Press "Cancel" button in alert
-      fireEvent.press(getByTestId('alert-button-Cancel'));
+      fireEvent.press(getByTestId('alert-button-取消'));
 
       // Should NOT call removePassphrase
       expect(mockRemovePassphrase).not.toHaveBeenCalled();

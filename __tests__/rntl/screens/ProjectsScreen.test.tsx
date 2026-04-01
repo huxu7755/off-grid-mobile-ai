@@ -104,9 +104,9 @@ describe('ProjectsScreen', () => {
       ).toBeTruthy();
     });
 
-    it('renders the New button', () => {
+    it('渲染"新建"按钮', () => {
       const { getByText } = render(<ProjectsScreen />);
-      expect(getByText('New')).toBeTruthy();
+      expect(getByText('新建')).toBeTruthy();
     });
   });
 
@@ -215,10 +215,9 @@ describe('ProjectsScreen', () => {
   // Navigation
   // ==========================================================================
   describe('navigation', () => {
-    it('navigates to ProjectEdit when New button is pressed', () => {
+    it('当点击"新建"按钮时导航到ProjectEdit', () => {
       const { getByText } = render(<ProjectsScreen />);
-      fireEvent.press(getByText('New'));
-
+      fireEvent.press(getByText('新建'));
       expect(mockNavigate).toHaveBeenCalledWith('ProjectEdit', {});
     });
 

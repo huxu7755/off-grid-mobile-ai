@@ -187,7 +187,7 @@ describe('ProjectEditScreen', () => {
 
     it('shows Cancel and Save buttons in header', () => {
       const { getByText } = render(<ProjectEditScreen />);
-      expect(getByText('Cancel')).toBeTruthy();
+      expect(getByText('取消')).toBeTruthy();
       expect(getByText('Save')).toBeTruthy();
     });
   });
@@ -384,9 +384,9 @@ describe('ProjectEditScreen', () => {
   // Cancel / Navigation
   // ============================================================================
   describe('navigation', () => {
-    it('calls goBack when Cancel is pressed', () => {
+    it('当点击取消时调用goBack', () => {
       const { getByText } = render(<ProjectEditScreen />);
-      fireEvent.press(getByText('Cancel'));
+      fireEvent.press(getByText('取消'));
       expect(mockGoBack).toHaveBeenCalled();
     });
   });

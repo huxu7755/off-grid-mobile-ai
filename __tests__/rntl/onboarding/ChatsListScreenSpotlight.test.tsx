@@ -149,7 +149,7 @@ describe('ChatsListScreen Spotlight Integration', () => {
       });
 
       const { getByText } = renderScreen();
-      expect(getByText('New')).toBeTruthy();
+      expect(getByText('新建')).toBeTruthy();
     });
   });
 });
