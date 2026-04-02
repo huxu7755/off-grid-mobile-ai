@@ -255,7 +255,7 @@ describe('SecuritySettingsScreen', () => {
 
       // Should show the alert asking to confirm disabling
       expect(queryByTestId('custom-alert')).toBeTruthy();
-      expect(queryByTestId('alert-title')?.props.children).toBe('Disable Passphrase Lock');
+      expect(queryByTestId('alert-title')?.props.children).toBe('禁用密码锁定');
     });
 
     it('显示确认警告，带有禁用和取消按钮', () => {
