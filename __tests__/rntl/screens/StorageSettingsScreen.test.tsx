@@ -298,7 +298,7 @@ describe('StorageSettingsScreen', () => {
 
   // ---- Orphaned files section tests ----
 
-  it('shows "No orphaned files found" after scan completes', async () => {
+  it('shows "未发现孤立文件" after scan completes', async () => {
     mockGetOrphanedFiles.mockResolvedValue([]);
     const result = render(<StorageSettingsScreen />);
 
@@ -307,7 +307,7 @@ describe('StorageSettingsScreen', () => {
       await new Promise<void>(resolve => setTimeout(() => resolve(), 0));
     });
 
-    expect(result.getByText('No orphaned files found')).toBeTruthy();
+    expect(result.getByText('未发现孤立文件')).toBeTruthy();
   });
 
   it('shows orphaned files when they exist', async () => {
@@ -322,7 +322,7 @@ describe('StorageSettingsScreen', () => {
     });
 
     expect(result.getByText('stale-model.gguf')).toBeTruthy();
-    expect(result.getByText('Delete All Orphaned Files')).toBeTruthy();
+    expect(result.getByText('删除所有孤立文件')).toBeTruthy();
   });
 
   it('shows warning text when orphaned files exist', async () => {
@@ -550,8 +550,8 @@ describe('StorageSettingsScreen', () => {
       await new Promise<void>(resolve => setTimeout(() => resolve(), 0));
     });
 
-    // Press "Delete All Orphaned Files" button
-    fireEvent.press(result.getByText('Delete All Orphaned Files'));
+    // Press "删除所有孤立文件" button
+    fireEvent.press(result.getByText('删除所有孤立文件'));
 
     const alertButtons = mockShowAlert.mock.calls[0]?.[2];
     const deleteAllButton = alertButtons?.find((b: any) => b.text === 'Delete All');
@@ -568,7 +568,7 @@ describe('StorageSettingsScreen', () => {
     // handleDeleteAllOrphaned returns early if orphanedFiles.length === 0
     // Since orphanedFiles is initially empty, the button is not shown
     const { queryByText } = render(<StorageSettingsScreen />);
-    expect(queryByText('Delete All Orphaned Files')).toBeNull();
+    expect(queryByText('删除所有孤立文件')).toBeNull();
   });
 
   it('handles error during scan for orphaned files', async () => {
@@ -581,7 +581,7 @@ describe('StorageSettingsScreen', () => {
     });
 
     // Should still render without crashing
-    expect(result.getByText('No orphaned files found')).toBeTruthy();
+    expect(result.getByText('未发现孤立文件')).toBeTruthy();
   });
 
   it('clears all stale downloads when confirmed', () => {

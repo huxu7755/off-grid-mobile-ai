@@ -286,7 +286,7 @@ describe('ServerCard', () => {
       <ServerCard {...defaultCardProps} isConnected={true} />,
     );
     expect(getByTestId('discovered-server-server-1-connected')).toBeTruthy();
-    expect(getByText('Connected')).toBeTruthy();
+    expect(getByText('已连接')).toBeTruthy();
     expect(queryByTestId('discovered-server-server-1-connect')).toBeNull();
   });
 

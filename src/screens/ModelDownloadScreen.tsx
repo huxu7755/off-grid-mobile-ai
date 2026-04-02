@@ -141,20 +141,20 @@ export const ModelDownloadScreen: React.FC<Props> = ({ navigation }) => {
         const models = discoveredModels[server.id] || result.models || [];
         if (models.length === 0) {
           setAlertState(showAlert(
-            'Connected — No Models Found',
-            `${server.name} is reachable but has no models loaded. Start a model in Ollama/LM Studio, then reconnect.`,
+            '已连接 — 未找到模型',
+            `${server.name} 可访问，但没有加载模型。请在 Ollama/LM Studio 中启动模型，然后重新连接。`,
           ));
           return;
         }
         const textModel = models.find(m => !m.capabilities.supportsVision) || models[0];
         if (textModel) await remoteServerManager.setActiveRemoteTextModel(server.id, textModel.id);
         setAlertState(showAlert(
-          'Connected!',
-          `${server.name} is ready with ${models.length} model${models.length !== 1 ? 's' : ''}. You can start chatting now.`,
-          [{ text: 'Continue', onPress: () => { setAlertState(hideAlert()); navigation.replace('Main'); } }],
+          '已连接！',
+          `${server.name} 已准备好，有 ${models.length} 个模型。您可以开始聊天了。`,
+          [{ text: '继续', onPress: () => { setAlertState(hideAlert()); navigation.replace('Main'); } }],
         ));
       } else {
-        setAlertState(showAlert('Connection Failed', result.error || 'Could not connect to server.'));
+        setAlertState(showAlert('连接失败', result.error || '无法连接到服务器。'));
       }
     } catch (e) {
       setAlertState(showAlert('Connection Failed', (e as Error).message));

@@ -1738,7 +1738,7 @@ describe('ChatScreen', () => {
       // Image viewer should show Save and Close buttons
       await waitFor(() => {
         expect(getByText('保存')).toBeTruthy();
-        expect(getByText('Close')).toBeTruthy();
+        expect(getByText('关闭')).toBeTruthy();
       });
     });
 
@@ -1750,15 +1750,15 @@ describe('ChatScreen', () => {
         fireEvent.press(getByTestId(`image-press-${userMsg.id}`));
       });
 
-      expect(getByText('Save')).toBeTruthy();
+      expect(getByText('保存')).toBeTruthy();
 
       await act(async () => {
-        fireEvent.press(getByText('Close'));
+        fireEvent.press(getByText('关闭'));
       });
 
       // After closing, the image viewer Save/Close buttons should no longer be visible
       await waitFor(() => {
-        expect(queryByText('Save')).toBeNull();
+        expect(queryByText('保存')).toBeNull();
       });
     });
 
@@ -1772,7 +1772,7 @@ describe('ChatScreen', () => {
       });
 
       await act(async () => {
-        fireEvent.press(getByText('Save'));
+        fireEvent.press(getByText('保存'));
       });
 
       // Should call RNFS functions to save image
@@ -1901,7 +1901,7 @@ describe('ChatScreen', () => {
       // The component attempts to load in useEffect, but since mock resolves immediately,
       // it quickly finishes. Instead, let's test the loading screen branch
       // by making loadModel hang.
-      expect(getByText('Start a Conversation')).toBeTruthy();
+      expect(getByText('开始对话')).toBeTruthy();
     });
   });
 
@@ -3782,15 +3782,15 @@ describe('ChatScreen', () => {
         fireEvent.press(getByTestId(`image-press-${userMsg.id}`));
       });
 
-      expect(getByText('Save')).toBeTruthy();
+      expect(getByText('保存')).toBeTruthy();
 
       // Close by pressing Close button (since backdrop requires TouchableOpacity UNSAFE_getAllByType)
       await act(async () => {
-        fireEvent.press(getByText('Close'));
+        fireEvent.press(getByText('关闭'));
       });
 
       await waitFor(() => {
-        expect(queryByText('Save')).toBeNull();
+        expect(queryByText('保存')).toBeNull();
       });
     });
   });
@@ -4009,7 +4009,7 @@ describe('ChatScreen', () => {
       const { getByText, queryByTestId, getByTestId } = renderChatScreen();
 
       // Press Select Model button in no-model state
-      fireEvent.press(getByText('Select Model'));
+      fireEvent.press(getByText('选择模型'));
       expect(queryByTestId('model-selector-modal')).toBeTruthy();
 
       // Close the modal

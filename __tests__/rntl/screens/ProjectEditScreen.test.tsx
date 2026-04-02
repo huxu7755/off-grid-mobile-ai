@@ -245,7 +245,7 @@ describe('ProjectEditScreen', () => {
   describe('save handler', () => {
     it('calls updateProject and goBack when saving existing project', () => {
       const { getByText } = render(<ProjectEditScreen />);
-      fireEvent.press(getByText('Save'));
+      fireEvent.press(getByText('保存'));
       expect(mockUpdateProject).toHaveBeenCalledWith('proj1', {
         name: 'Test Project',
         description: 'Test desc',
@@ -268,7 +268,7 @@ describe('ProjectEditScreen', () => {
 
       fireEvent.changeText(textInputs[0], 'New Project Name');
       fireEvent.changeText(textInputs[2], 'New system prompt');
-      fireEvent.press(getByText('Save'));
+      fireEvent.press(getByText('保存'));
 
       // The first render's save won't have been called on the second render
       // Let's do a clean test
@@ -285,7 +285,7 @@ describe('ProjectEditScreen', () => {
       fireEvent.changeText(textInputs[1], 'A description');
       fireEvent.changeText(textInputs[2], 'You are helpful');
 
-      fireEvent.press(getByText('Save'));
+      fireEvent.press(getByText('保存'));
 
       expect(mockCreateProject).toHaveBeenCalledWith({
         name: 'My New Project',
@@ -302,7 +302,7 @@ describe('ProjectEditScreen', () => {
       fireEvent.changeText(getByDisplayValue('Test desc'), '  Trimmed Desc  ');
       fireEvent.changeText(getByDisplayValue('Be helpful'), '  Trimmed Prompt  ');
 
-      fireEvent.press(getByText('Save'));
+      fireEvent.press(getByText('保存'));
 
       expect(mockUpdateProject).toHaveBeenCalledWith('proj1', {
         name: 'Trimmed Name',
@@ -319,7 +319,7 @@ describe('ProjectEditScreen', () => {
     it('shows alert when name is empty on save', () => {
       const { getByDisplayValue, getByText } = render(<ProjectEditScreen />);
       fireEvent.changeText(getByDisplayValue('Test Project'), '');
-      fireEvent.press(getByText('Save'));
+      fireEvent.press(getByText('保存'));
 
       expect(mockShowAlert).toHaveBeenCalledWith(
         'Error',
@@ -332,7 +332,7 @@ describe('ProjectEditScreen', () => {
     it('shows alert when name is only whitespace on save', () => {
       const { getByDisplayValue, getByText } = render(<ProjectEditScreen />);
       fireEvent.changeText(getByDisplayValue('Test Project'), '   ');
-      fireEvent.press(getByText('Save'));
+      fireEvent.press(getByText('保存'));
 
       expect(mockShowAlert).toHaveBeenCalledWith(
         'Error',
@@ -344,7 +344,7 @@ describe('ProjectEditScreen', () => {
     it('shows alert when system prompt is empty on save', () => {
       const { getByDisplayValue, getByText } = render(<ProjectEditScreen />);
       fireEvent.changeText(getByDisplayValue('Be helpful'), '');
-      fireEvent.press(getByText('Save'));
+      fireEvent.press(getByText('保存'));
 
       expect(mockShowAlert).toHaveBeenCalledWith(
         'Error',
@@ -357,7 +357,7 @@ describe('ProjectEditScreen', () => {
     it('shows alert when system prompt is only whitespace on save', () => {
       const { getByDisplayValue, getByText } = render(<ProjectEditScreen />);
       fireEvent.changeText(getByDisplayValue('Be helpful'), '   ');
-      fireEvent.press(getByText('Save'));
+      fireEvent.press(getByText('保存'));
 
       expect(mockShowAlert).toHaveBeenCalledWith(
         'Error',
@@ -369,7 +369,7 @@ describe('ProjectEditScreen', () => {
       const { getByDisplayValue, getByText } = render(<ProjectEditScreen />);
       fireEvent.changeText(getByDisplayValue('Test Project'), '');
       fireEvent.changeText(getByDisplayValue('Be helpful'), '');
-      fireEvent.press(getByText('Save'));
+      fireEvent.press(getByText('保存'));
 
       // Name validation error should show first
       expect(mockShowAlert).toHaveBeenCalledWith(

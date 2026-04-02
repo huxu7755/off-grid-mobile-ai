@@ -55,7 +55,7 @@ export const OrphanedFilesSection: React.FC<Props> = ({ onStorageChange }) => {
       setOrphanedFiles(prev => prev.filter(f => f.path !== file.path));
       onStorageChange();
     } catch (_err) {
-      setAlertState(showAlert('Error', 'Failed to delete file'));
+      setAlertState(showAlert('错误', '删除文件失败'));
     } finally {
       setIsDeleting(null);
     }
@@ -65,12 +65,12 @@ export const OrphanedFilesSection: React.FC<Props> = ({ onStorageChange }) => {
     (file: OrphanedFile) => {
       setAlertState(
         showAlert(
-          'Delete Orphaned File',
-          `Delete "${file.name}"?\n\nThis will free up ${hardwareService.formatBytes(file.size)}.`,
+          '删除孤立文件',
+          `删除 "${file.name}"？\n\n这将释放 ${hardwareService.formatBytes(file.size)}。`,
           [
-            { text: 'Cancel', style: 'cancel' },
+            { text: '取消', style: 'cancel' },
             {
-              text: 'Delete',
+              text: '删除',
               style: 'destructive',
               onPress: () => {
                 setAlertState(hideAlert());
@@ -89,12 +89,12 @@ export const OrphanedFilesSection: React.FC<Props> = ({ onStorageChange }) => {
     const totalSize = orphanedFiles.reduce((sum, f) => sum + f.size, 0);
     setAlertState(
       showAlert(
-        'Delete All Orphaned Files',
-        `Delete ${orphanedFiles.length} orphaned file(s)?\n\nThis will free up ${hardwareService.formatBytes(totalSize)}.`,
+        '删除所有孤立文件',
+        `删除 ${orphanedFiles.length} 个孤立文件？\n\n这将释放 ${hardwareService.formatBytes(totalSize)}。`,
         [
-          { text: 'Cancel', style: 'cancel' },
+          { text: '取消', style: 'cancel' },
           {
-            text: 'Delete All',
+            text: '全部删除',
             style: 'destructive',
             onPress: () => {
               const doDeleteAll = async () => {
@@ -123,7 +123,7 @@ export const OrphanedFilesSection: React.FC<Props> = ({ onStorageChange }) => {
     <>
       <Card style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Orphaned Files</Text>
+          <Text style={styles.sectionTitle}>孤立文件</Text>
           <TouchableOpacity
             style={styles.scanButton}
             onPress={scanForOrphanedFiles}
@@ -139,13 +139,13 @@ export const OrphanedFilesSection: React.FC<Props> = ({ onStorageChange }) => {
 
         {orphanedFiles.length === 0 ? (
           <Text style={styles.emptyText}>
-            {isScanning ? 'Scanning...' : 'No orphaned files found'}
+            {isScanning ? '扫描中...' : '未发现孤立文件'}
           </Text>
         ) : (
           <>
             <Text style={styles.warningText}>
-              These files/folders exist on disk but aren't tracked as models.
-              They may be from failed or cancelled downloads.
+              这些文件/文件夹存在于磁盘上，但未被跟踪为模型。
+              它们可能来自失败或取消的下载。
             </Text>
             {orphanedFiles.map(file => (
               <View key={file.path} style={styles.orphanedRow}>
@@ -175,7 +175,7 @@ export const OrphanedFilesSection: React.FC<Props> = ({ onStorageChange }) => {
               onPress={handleDeleteAll}
             >
               <Icon name="trash-2" size={16} color={colors.error} />
-              <Text style={styles.deleteAllText}>Delete All Orphaned Files</Text>
+              <Text style={styles.deleteAllText}>删除所有孤立文件</Text>
             </TouchableOpacity>
           </>
         )}
