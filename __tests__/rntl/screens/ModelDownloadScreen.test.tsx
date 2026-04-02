@@ -398,8 +398,8 @@ describe('ModelDownloadScreen', () => {
 
     expect(mockAppState.addDownloadedModel).toHaveBeenCalledWith(completedModel);
     expect(mockShowAlert).toHaveBeenCalledWith(
-      'Download Complete!',
-      expect.stringContaining('downloaded successfully'),
+      '下载完成！',
+      expect.stringContaining('已成功下载'),
       expect.any(Array),
     );
   });
@@ -422,10 +422,10 @@ describe('ModelDownloadScreen', () => {
     });
 
     await act(async () => {
-      capturedOnError?.(new Error('Download failed'));
+      capturedOnError?.(new Error('下载失败'));
     });
 
-    expect(mockShowAlert).toHaveBeenCalledWith('Download Failed', 'Download failed');
+    expect(mockShowAlert).toHaveBeenCalledWith('下载失败', '下载失败');
   });
 
   it('download catch block shows error on exception', async () => {
@@ -441,7 +441,7 @@ describe('ModelDownloadScreen', () => {
       fireEvent.press(downloadBtn);
     });
 
-    expect(mockShowAlert).toHaveBeenCalledWith('Download Failed', 'Unexpected error');
+    expect(mockShowAlert).toHaveBeenCalledWith('下载失败', 'Unexpected error');
   });
 
   it('init error shows error alert', async () => {
@@ -454,6 +454,6 @@ describe('ModelDownloadScreen', () => {
       await Promise.resolve();
     });
 
-    expect(mockShowAlert).toHaveBeenCalledWith('Error', 'Failed to initialize. Please try again.');
+    expect(mockShowAlert).toHaveBeenCalledWith('错误', '初始化失败，请重试。');
   });
 });
