@@ -45,7 +45,7 @@ jest.mock('../../../src/components', () => ({
         <Text testID="alert-title">{title}</Text>
         <Text testID="alert-message">{message}</Text>
         <TouchableOpacity testID="alert-close-button" onPress={onClose}>
-          <Text>Close</Text>
+          <Text>关闭</Text>
         </TouchableOpacity>
       </View>
     );
@@ -72,7 +72,7 @@ jest.mock('../../../src/components/CustomAlert', () => ({
         <Text testID="alert-title">{title}</Text>
         <Text testID="alert-message">{message}</Text>
         <TouchableOpacity testID="alert-close-button" onPress={onClose}>
-          <Text>Close</Text>
+          <Text>关闭</Text>
         </TouchableOpacity>
       </View>
     );
@@ -142,27 +142,27 @@ describe('LockScreen', () => {
 
   it('renders lock icon and title', () => {
     const { getByText } = render(<LockScreen {...defaultProps} />);
-    expect(getByText('App Locked')).toBeTruthy();
+    expect(getByText('应用已锁定')).toBeTruthy();
   });
 
   it('renders passphrase input', () => {
     const { getByPlaceholderText } = render(<LockScreen {...defaultProps} />);
-    expect(getByPlaceholderText('Enter passphrase')).toBeTruthy();
+    expect(getByPlaceholderText('输入密码')).toBeTruthy();
   });
 
   it('shows unlock button', () => {
     const { getByText } = render(<LockScreen {...defaultProps} />);
-    expect(getByText('Unlock')).toBeTruthy();
+    expect(getByText('解锁')).toBeTruthy();
   });
 
   it('shows subtitle text', () => {
     const { getByText } = render(<LockScreen {...defaultProps} />);
-    expect(getByText('Enter your passphrase to unlock')).toBeTruthy();
+    expect(getByText('输入您的密码以解锁')).toBeTruthy();
   });
 
   it('shows footer with security message', () => {
     const { getByText } = render(<LockScreen {...defaultProps} />);
-    expect(getByText('Your data is protected and stored locally')).toBeTruthy();
+    expect(getByText('您的数据受到保护并存储在本地')).toBeTruthy();
   });
 
   // ---- Unlock flow tests ----
@@ -175,12 +175,12 @@ describe('LockScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase'),
+      getByPlaceholderText('输入密码'),
       'correct-pass',
     );
 
     await act(async () => {
-      fireEvent.press(getByText('Unlock'));
+      fireEvent.press(getByText('解锁'));
     });
 
     expect(mockVerifyPassphrase).toHaveBeenCalledWith('correct-pass');
@@ -194,7 +194,7 @@ describe('LockScreen', () => {
     // The unlock button should be disabled when input is empty
     // But let's also test the handleUnlock validation
     // The button is disabled when !passphrase.trim(), so let's enter spaces
-    fireEvent.press(getByText('Unlock'));
+    fireEvent.press(getByText('解锁'));
 
     // Button is disabled so onPress won't fire - verify no verification call
     expect(mockVerifyPassphrase).not.toHaveBeenCalled();
@@ -209,12 +209,12 @@ describe('LockScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase'),
+      getByPlaceholderText('输入密码'),
       'wrong-pass',
     );
 
     await act(async () => {
-      fireEvent.press(getByText('Unlock'));
+      fireEvent.press(getByText('解锁'));
     });
 
     expect(mockVerifyPassphrase).toHaveBeenCalledWith('wrong-pass');
@@ -222,7 +222,7 @@ describe('LockScreen', () => {
     expect(defaultProps.onUnlock).not.toHaveBeenCalled();
   });
 
-  it('shows "Incorrect Passphrase" alert on wrong password', async () => {
+  it('shows "密码不正确" alert on wrong password', async () => {
     mockVerifyPassphrase.mockResolvedValue(false);
     mockRecordFailedAttempt.mockReturnValue(false);
 
@@ -231,17 +231,17 @@ describe('LockScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase'),
+      getByPlaceholderText('输入密码'),
       'wrong-pass',
     );
 
     await act(async () => {
-      fireEvent.press(getByText('Unlock'));
+      fireEvent.press(getByText('解锁'));
     });
 
     expect(mockShowAlert).toHaveBeenCalledWith(
-      'Incorrect Passphrase',
-      expect.stringContaining('attempt'),
+      '密码不正确',
+      expect.stringContaining('次'),
     );
   });
 
@@ -254,17 +254,17 @@ describe('LockScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase'),
+      getByPlaceholderText('输入密码'),
       'wrong-pass',
     );
 
     await act(async () => {
-      fireEvent.press(getByText('Unlock'));
+      fireEvent.press(getByText('解锁'));
     });
 
     expect(mockShowAlert).toHaveBeenCalledWith(
-      'Too Many Attempts',
-      expect.stringContaining('locked out'),
+      '尝试次数过多',
+      expect.stringContaining('锁定'),
     );
   });
 
@@ -278,12 +278,12 @@ describe('LockScreen', () => {
       <LockScreen {...defaultProps} />,
     );
 
-    expect(getByText('Too many failed attempts')).toBeTruthy();
-    expect(getByText('Please wait before trying again')).toBeTruthy();
+    expect(getByText('尝试次数过多')).toBeTruthy();
+    expect(getByText('请在尝试前等待')).toBeTruthy();
     // The timer should show formatted time (3:00)
     expect(getByText('3:00')).toBeTruthy();
     // Input should not be visible during lockout
-    expect(queryByPlaceholderText('Enter passphrase')).toBeNull();
+    expect(queryByPlaceholderText('输入密码')).toBeNull();
   });
 
   it('shows lockout timer with correct format', () => {
@@ -310,7 +310,7 @@ describe('LockScreen', () => {
     });
 
     const { getByText } = render(<LockScreen {...defaultProps} />);
-    expect(getByText('3 attempts remaining')).toBeTruthy();
+    expect(getByText('还剩 3 次尝试')).toBeTruthy();
   });
 
   it('shows singular "attempt" when only 1 remaining', () => {
@@ -324,7 +324,7 @@ describe('LockScreen', () => {
     });
 
     const { getByText } = render(<LockScreen {...defaultProps} />);
-    expect(getByText('1 attempt remaining')).toBeTruthy();
+    expect(getByText('还剩 1 次尝试')).toBeTruthy();
   });
 
   it('does not show attempts counter when no failed attempts', () => {
@@ -339,7 +339,7 @@ describe('LockScreen', () => {
     });
 
     const { queryByText } = render(<LockScreen {...defaultProps} />);
-    expect(queryByText(/attempts? remaining/)).toBeNull();
+    expect(queryByText(/还剩.*次尝试/)).toBeNull();
   });
 
   // ---- Error handling tests ----
@@ -352,17 +352,17 @@ describe('LockScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase'),
+      getByPlaceholderText('输入密码'),
       'some-pass',
     );
 
     await act(async () => {
-      fireEvent.press(getByText('Unlock'));
+      fireEvent.press(getByText('解锁'));
     });
 
     expect(mockShowAlert).toHaveBeenCalledWith(
-      'Error',
-      'Failed to verify passphrase',
+      '错误',
+      '验证密码失败',
     );
     expect(defaultProps.onUnlock).not.toHaveBeenCalled();
   });
@@ -370,7 +370,7 @@ describe('LockScreen', () => {
   it('unlock button is disabled when input is empty', () => {
     const { getByText } = render(<LockScreen {...defaultProps} />);
     // When disabled, pressing Unlock should NOT trigger verifyPassphrase
-    fireEvent.press(getByText('Unlock'));
+    fireEvent.press(getByText('解锁'));
     expect(mockVerifyPassphrase).not.toHaveBeenCalled();
   });
 
@@ -382,12 +382,12 @@ describe('LockScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase'),
+      getByPlaceholderText('输入密码'),
       'some-text',
     );
 
     await act(async () => {
-      fireEvent.press(getByText('Unlock'));
+      fireEvent.press(getByText('解锁'));
     });
 
     // When enabled with text, pressing Unlock SHOULD trigger verifyPassphrase
@@ -403,7 +403,7 @@ describe('LockScreen', () => {
     );
 
     // During lockout the input is hidden, so user can't submit
-    expect(queryByPlaceholderText('Enter passphrase')).toBeNull();
+    expect(queryByPlaceholderText('输入密码')).toBeNull();
     expect(mockVerifyPassphrase).not.toHaveBeenCalled();
   });
 
@@ -415,11 +415,11 @@ describe('LockScreen', () => {
       <LockScreen {...defaultProps} />,
     );
 
-    const input = getByPlaceholderText('Enter passphrase');
+    const input = getByPlaceholderText('输入密码');
     fireEvent.changeText(input, 'wrong-pass');
 
     await act(async () => {
-      fireEvent.press(getByText('Unlock'));
+      fireEvent.press(getByText('解锁'));
     });
 
     // After failed attempt, the input should be cleared
@@ -433,7 +433,7 @@ describe('LockScreen', () => {
     // The button is disabled when input is empty, but onSubmitEditing still fires
     const { getByPlaceholderText } = render(<LockScreen {...defaultProps} />);
 
-    const input = getByPlaceholderText('Enter passphrase');
+    const input = getByPlaceholderText('输入密码');
     // Passphrase is empty — fire keyboard return key
     await act(async () => {
       fireEvent(input, 'onSubmitEditing');
@@ -441,8 +441,8 @@ describe('LockScreen', () => {
 
     // handleUnlock ran the empty-passphrase guard and showed an alert
     expect(mockShowAlert).toHaveBeenCalledWith(
-      'Error',
-      'Please enter your passphrase',
+      '错误',
+      '请输入您的密码',
     );
     expect(mockVerifyPassphrase).not.toHaveBeenCalled();
   });
@@ -456,7 +456,7 @@ describe('LockScreen', () => {
 
     const { getByPlaceholderText } = render(<LockScreen {...defaultProps} />);
 
-    const input = getByPlaceholderText('Enter passphrase');
+    const input = getByPlaceholderText('输入密码');
     fireEvent.changeText(input, 'some-pass');
 
     await act(async () => {
@@ -475,17 +475,17 @@ describe('LockScreen', () => {
       <LockScreen {...defaultProps} />,
     );
 
-    fireEvent.changeText(getByPlaceholderText('Enter passphrase'), 'wrong');
+    fireEvent.changeText(getByPlaceholderText('输入密码'), 'wrong');
 
     await act(async () => {
-      fireEvent.press(getByText('Unlock'));
+      fireEvent.press(getByText('解锁'));
     });
 
     // Alert is now visible
     expect(queryByTestId('custom-alert')).toBeTruthy();
 
     // Press the close button rendered by our mock — triggers onClose
-    fireEvent.press(getByText('Close'));
+    fireEvent.press(getByText('关闭'));
 
     // Alert should be dismissed (hideAlert was called)
     const { hideAlert } = require('../../../src/components/CustomAlert');
