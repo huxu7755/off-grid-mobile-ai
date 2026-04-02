@@ -137,7 +137,7 @@ describe('NetworkSection', () => {
   it('shows empty text when no servers and not checking', () => {
     const { getByText } = render(<NetworkSection {...defaultNetworkProps} />);
     expect(
-      getByText(/No servers found\. Make sure you're on the same WiFi/),
+      getByText(/未找到服务器。请确保您与Ollama或LM Studio服务器在同一WiFi网络上/),
     ).toBeTruthy();
   });
 
@@ -231,9 +231,9 @@ describe('ServerCard', () => {
 
   it('shows "Ollama" for port 11434 endpoints', () => {
     const { getAllByText } = render(<ServerCard {...defaultCardProps} />);
-    // The server type "Ollama" appears in the meta line (e.g., "Ollama · 3 models")
+    // The server type "Ollama" appears in the meta line (e.g., "Ollama · 3 个模型")
     expect(getAllByText(/Ollama/).length).toBeGreaterThanOrEqual(1);
-    expect(getAllByText(/Ollama · 3 models/).length).toBe(1);
+    expect(getAllByText(/Ollama · 3 个模型/).length).toBe(1);
   });
 
   it('shows "LM Studio" for non-11434 endpoints', () => {
@@ -241,22 +241,22 @@ describe('ServerCard', () => {
       <ServerCard {...defaultCardProps} server={mockLMStudioServer} />,
     );
     expect(getAllByText(/LM Studio/).length).toBeGreaterThanOrEqual(1);
-    expect(getAllByText(/LM Studio · 3 models/).length).toBe(1);
+    expect(getAllByText(/LM Studio · 3 个模型/).length).toBe(1);
   });
 
   it('shows model count text', () => {
     const { getByText } = render(<ServerCard {...defaultCardProps} modelCount={3} />);
-    expect(getByText(/3 models/)).toBeTruthy();
+    expect(getByText(/3 个模型/)).toBeTruthy();
   });
 
   it('shows singular "model" for count 1', () => {
     const { getByText } = render(<ServerCard {...defaultCardProps} modelCount={1} />);
-    expect(getByText(/1 model(?!s)/)).toBeTruthy();
+    expect(getByText(/1 个模型/)).toBeTruthy();
   });
 
-  it('shows "Tap to connect" when modelCount is 0', () => {
+  it('shows "点击连接" when modelCount is 0', () => {
     const { getByText } = render(<ServerCard {...defaultCardProps} modelCount={0} />);
-    expect(getByText(/Tap to connect/)).toBeTruthy();
+    expect(getByText(/点击连接/)).toBeTruthy();
   });
 
   it('shows spinner when isConnecting', () => {
