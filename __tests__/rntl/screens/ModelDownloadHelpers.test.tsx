@@ -264,12 +264,12 @@ describe('ServerCard', () => {
       <ServerCard {...defaultCardProps} isConnecting={true} />,
     );
     // Connect button text should not be present when spinner is shown
-    expect(queryByText('Connect')).toBeNull();
+    expect(queryByText('连接')).toBeNull();
   });
 
   it('shows Connect button when not connecting', () => {
     const { getByText } = render(<ServerCard {...defaultCardProps} />);
-    expect(getByText('Connect')).toBeTruthy();
+    expect(getByText('连接')).toBeTruthy();
   });
 
   it('calls onConnect when pressed', () => {
@@ -277,7 +277,7 @@ describe('ServerCard', () => {
     const { getByText } = render(
       <ServerCard {...defaultCardProps} onConnect={onConnect} />,
     );
-    fireEvent.press(getByText('Connect'));
+    fireEvent.press(getByText('连接'));
     expect(onConnect).toHaveBeenCalledTimes(1);
   });
 
