@@ -30,16 +30,16 @@ export const TextGenerationSection: React.FC = () => {
 
   return (
     <Card style={styles.section}>
-      <Text style={styles.settingHelp}>Configure LLM behavior for text responses.</Text>
+      <Text style={styles.settingHelp}>配置 LLM 文本响应行为。</Text>
 
       {/* ── Basic Settings ── */}
 
       <View style={styles.sliderSection}>
         <View style={styles.sliderHeader}>
-          <Text style={styles.sliderLabel}>Temperature</Text>
+          <Text style={styles.sliderLabel}>温度</Text>
           <Text style={styles.sliderValue}>{(settings?.temperature || 0.7).toFixed(2)}</Text>
         </View>
-        <Text style={styles.sliderDesc}>Higher = more creative, Lower = more focused</Text>
+        <Text style={styles.sliderDesc}>越高 = 更有创意，越低 = 更专注</Text>
         <Slider
           style={styles.slider}
           minimumValue={0}
@@ -55,10 +55,10 @@ export const TextGenerationSection: React.FC = () => {
 
       <View style={styles.sliderSection}>
         <View style={styles.sliderHeader}>
-          <Text style={styles.sliderLabel}>Max Tokens</Text>
+          <Text style={styles.sliderLabel}>最大令牌数</Text>
           <Text style={styles.sliderValue}>{maxTokensLabel}</Text>
         </View>
-        <Text style={styles.sliderDesc}>Maximum response length</Text>
+        <Text style={styles.sliderDesc}>最大响应长度</Text>
         <Slider
           style={styles.slider}
           minimumValue={64}
@@ -74,13 +74,13 @@ export const TextGenerationSection: React.FC = () => {
 
       <View style={styles.sliderSection}>
         <View style={styles.sliderHeader}>
-          <Text style={styles.sliderLabel}>Context Length</Text>
+          <Text style={styles.sliderLabel}>上下文长度</Text>
           <Text style={styles.sliderValue}>{contextLengthLabel}</Text>
         </View>
-        <Text style={styles.sliderDesc}>KV cache size — larger uses more RAM (requires reload)</Text>
+        <Text style={styles.sliderDesc}>KV 缓存大小 — 越大使用更多内存（需要重新加载）</Text>
         {contextLength > HIGH_CONTEXT_THRESHOLD && (
           <Text style={[styles.sliderDesc, { color: colors.error }]}>
-            High context uses significant RAM and may crash on some devices
+            高上下文使用大量内存，可能在某些设备上崩溃
           </Text>
         )}
         <Slider
@@ -98,9 +98,9 @@ export const TextGenerationSection: React.FC = () => {
 
       <View style={styles.toggleRow}>
         <View style={styles.toggleInfo}>
-          <Text style={styles.toggleLabel}>Show Generation Details</Text>
+          <Text style={styles.toggleLabel}>显示生成详情</Text>
           <Text style={styles.toggleDesc}>
-            Display tokens/sec, timing, and memory usage on responses
+            在响应上显示令牌/秒、时间和内存使用情况
           </Text>
         </View>
         <Switch
