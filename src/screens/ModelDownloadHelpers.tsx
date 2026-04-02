@@ -61,7 +61,7 @@ export const ServerCard: React.FC<{
         <View style={styles.serverInfo}>
           <Text style={styles.serverName}>{server.name}</Text>
           <Text style={styles.serverMeta}>
-            {serverType} · {modelCount > 0 ? `${modelCount} model${modelCount !== 1 ? 's' : ''}` : 'Tap to connect'}
+            {serverType} · {modelCount > 0 ? `${modelCount} 个模型` : '点击连接'}
           </Text>
         </View>
         {isConnecting && (

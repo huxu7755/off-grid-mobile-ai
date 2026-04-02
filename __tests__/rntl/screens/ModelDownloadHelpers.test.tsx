@@ -100,16 +100,16 @@ describe('NetworkSection', () => {
     jest.clearAllMocks();
   });
 
-  it('renders "Network Models" title', () => {
+  it('renders "网络模型" title', () => {
     const { getByText } = render(<NetworkSection {...defaultNetworkProps} />);
-    expect(getByText('Network Models')).toBeTruthy();
+    expect(getByText('网络模型')).toBeTruthy();
   });
 
   it('shows scanning spinner when isCheckingNetwork=true and no servers', () => {
     const { getByText } = render(
       <NetworkSection {...defaultNetworkProps} isCheckingNetwork={true} />,
     );
-    expect(getByText('Scanning your network...')).toBeTruthy();
+    expect(getByText('正在扫描您的网络...')).toBeTruthy();
   });
 
   it('does NOT show scanning spinner when servers exist even if isCheckingNetwork=true', () => {
@@ -120,7 +120,7 @@ describe('NetworkSection', () => {
         servers={[mockServer]}
       />,
     );
-    expect(queryByText('Scanning your network...')).toBeNull();
+    expect(queryByText('正在扫描您的网络...')).toBeNull();
   });
 
   it('shows server cards when servers provided', () => {
@@ -141,13 +141,13 @@ describe('NetworkSection', () => {
     ).toBeTruthy();
   });
 
-  it('always shows "Scan Network" and "Add Server" buttons', () => {
+  it('always shows "扫描网络" and "添加服务器" buttons', () => {
     const { getByText } = render(<NetworkSection {...defaultNetworkProps} />);
-    expect(getByText('Scan Network')).toBeTruthy();
-    expect(getByText('Add Server')).toBeTruthy();
+    expect(getByText('扫描网络')).toBeTruthy();
+    expect(getByText('添加服务器')).toBeTruthy();
   });
 
-  it('"Scan Network" button is disabled when isScanning', () => {
+  it('"扫描网络" button is disabled when isScanning', () => {
     const onScan = jest.fn();
     const { queryByText } = render(
       <NetworkSection
@@ -157,10 +157,10 @@ describe('NetworkSection', () => {
       />,
     );
     // When busy, the button shows a spinner instead of text
-    expect(queryByText('Scan Network')).toBeNull();
+    expect(queryByText('扫描网络')).toBeNull();
   });
 
-  it('"Scan Network" button is disabled when isCheckingNetwork', () => {
+  it('"扫描网络" button is disabled when isCheckingNetwork', () => {
     const onScan = jest.fn();
     const { queryByText } = render(
       <NetworkSection
@@ -171,24 +171,24 @@ describe('NetworkSection', () => {
       />,
     );
     // When busy, the button shows a spinner instead of text
-    expect(queryByText('Scan Network')).toBeNull();
+    expect(queryByText('扫描网络')).toBeNull();
   });
 
-  it('calls onScanNetwork when "Scan Network" pressed', () => {
+  it('calls onScanNetwork when "扫描网络" pressed', () => {
     const onScan = jest.fn();
     const { getByText } = render(
       <NetworkSection {...defaultNetworkProps} onScanNetwork={onScan} />,
     );
-    fireEvent.press(getByText('Scan Network'));
+    fireEvent.press(getByText('扫描网络'));
     expect(onScan).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onAddManually when "Add Server" pressed', () => {
+  it('calls onAddManually when "添加服务器" pressed', () => {
     const onAdd = jest.fn();
     const { getByText } = render(
       <NetworkSection {...defaultNetworkProps} onAddManually={onAdd} />,
     );
-    fireEvent.press(getByText('Add Server'));
+    fireEvent.press(getByText('添加服务器'));
     expect(onAdd).toHaveBeenCalledTimes(1);
   });
 
