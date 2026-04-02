@@ -120,9 +120,9 @@ describe('PassphraseSetupScreen', () => {
 
   // ---- Rendering tests ----
 
-  it('renders "Set Up Passphrase" title for new setup', () => {
+  it('renders "设置密码" title for new setup', () => {
     const { getByText } = render(<PassphraseSetupScreen {...defaultProps} />);
-    expect(getByText('Set Up Passphrase')).toBeTruthy();
+    expect(getByText('设置密码')).toBeTruthy();
   });
 
   it('renders passphrase input fields', () => {
@@ -130,7 +130,7 @@ describe('PassphraseSetupScreen', () => {
       <PassphraseSetupScreen {...defaultProps} />,
     );
     expect(
-      getByPlaceholderText('Enter passphrase (min 6 characters)'),
+      getByPlaceholderText('输入密码（至少6个字符）'),
     ).toBeTruthy();
   });
 
@@ -138,55 +138,55 @@ describe('PassphraseSetupScreen', () => {
     const { getByPlaceholderText } = render(
       <PassphraseSetupScreen {...defaultProps} />,
     );
-    expect(getByPlaceholderText('Re-enter passphrase')).toBeTruthy();
+    expect(getByPlaceholderText('重新输入密码')).toBeTruthy();
   });
 
   it('shows current passphrase field when isChanging=true', () => {
     const { getAllByText, getByText, getByPlaceholderText } = render(
       <PassphraseSetupScreen {...defaultProps} isChanging={true} />,
     );
-    expect(getAllByText('Change Passphrase').length).toBeGreaterThanOrEqual(1);
-    expect(getByText('Current Passphrase')).toBeTruthy();
+    expect(getAllByText('修改密码').length).toBeGreaterThanOrEqual(1);
+    expect(getByText('当前密码')).toBeTruthy();
     expect(
-      getByPlaceholderText('Enter current passphrase'),
+      getByPlaceholderText('输入当前密码'),
     ).toBeTruthy();
   });
 
   it('cancel button calls onCancel', () => {
     const { getByText } = render(<PassphraseSetupScreen {...defaultProps} />);
-    fireEvent.press(getByText('Cancel'));
+    fireEvent.press(getByText('取消'));
     expect(defaultProps.onCancel).toHaveBeenCalledTimes(1);
   });
 
-  it('shows "Enable Lock" button text for new setup', () => {
+  it('shows "启用锁定" button text for new setup', () => {
     const { getByText } = render(<PassphraseSetupScreen {...defaultProps} />);
-    expect(getByText('Enable Lock')).toBeTruthy();
+    expect(getByText('启用锁定')).toBeTruthy();
   });
 
-  it('shows "Change Passphrase" button text when isChanging', () => {
+  it('shows "修改密码" button text when isChanging', () => {
     const { getAllByText } = render(
       <PassphraseSetupScreen {...defaultProps} isChanging />,
     );
-    // Title and button both say "Change Passphrase"
-    expect(getAllByText('Change Passphrase').length).toBeGreaterThanOrEqual(2);
+    // Title and button both say "修改密码"
+    expect(getAllByText('修改密码').length).toBeGreaterThanOrEqual(2);
   });
 
   it('renders tips section', () => {
     const { getByText } = render(<PassphraseSetupScreen {...defaultProps} />);
-    expect(getByText('Tips for a good passphrase:')).toBeTruthy();
-    expect(getByText(/Use a mix of words/)).toBeTruthy();
+    expect(getByText('好密码的提示：')).toBeTruthy();
+    expect(getByText(/使用单词和数字的组合/)).toBeTruthy();
   });
 
   it('shows description for new setup', () => {
     const { getByText } = render(<PassphraseSetupScreen {...defaultProps} />);
-    expect(getByText(/Create a passphrase to lock the app/)).toBeTruthy();
+    expect(getByText(/创建一个密码来锁定应用/)).toBeTruthy();
   });
 
   it('shows description for change mode', () => {
     const { getByText } = render(
       <PassphraseSetupScreen {...defaultProps} isChanging />,
     );
-    expect(getByText(/Enter your current passphrase/)).toBeTruthy();
+    expect(getByText(/输入您当前的密码/)).toBeTruthy();
   });
 
   // ---- Validation tests ----
@@ -197,18 +197,18 @@ describe('PassphraseSetupScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase (min 6 characters)'),
+      getByPlaceholderText('输入密码（至少6个字符）'),
       'abc',
     );
-    fireEvent.changeText(getByPlaceholderText('Re-enter passphrase'), 'abc');
+    fireEvent.changeText(getByPlaceholderText('重新输入密码'), 'abc');
 
     await act(async () => {
-      fireEvent.press(getByText('Enable Lock'));
+      fireEvent.press(getByText('启用锁定'));
     });
 
     expect(mockShowAlert).toHaveBeenCalledWith(
-      'Invalid Passphrase',
-      'Passphrase must be at least 6 characters',
+      '无效密码',
+      '密码至少需要6个字符',
     );
     expect(mockSetPassphrase).not.toHaveBeenCalled();
   });
@@ -220,18 +220,18 @@ describe('PassphraseSetupScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase (min 6 characters)'),
+      getByPlaceholderText('输入密码（至少6个字符）'),
       longPass,
     );
-    fireEvent.changeText(getByPlaceholderText('Re-enter passphrase'), longPass);
+    fireEvent.changeText(getByPlaceholderText('重新输入密码'), longPass);
 
     await act(async () => {
-      fireEvent.press(getByText('Enable Lock'));
+      fireEvent.press(getByText('启用锁定'));
     });
 
     expect(mockShowAlert).toHaveBeenCalledWith(
-      'Invalid Passphrase',
-      'Passphrase must be 50 characters or less',
+      '无效密码',
+      '密码最多50个字符',
     );
     expect(mockSetPassphrase).not.toHaveBeenCalled();
   });
@@ -242,21 +242,21 @@ describe('PassphraseSetupScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase (min 6 characters)'),
+      getByPlaceholderText('输入密码（至少6个字符）'),
       'password123',
     );
     fireEvent.changeText(
-      getByPlaceholderText('Re-enter passphrase'),
+      getByPlaceholderText('重新输入密码'),
       'differentpassword',
     );
 
     await act(async () => {
-      fireEvent.press(getByText('Enable Lock'));
+      fireEvent.press(getByText('启用锁定'));
     });
 
     expect(mockShowAlert).toHaveBeenCalledWith(
-      'Mismatch',
-      'Passphrases do not match',
+      '不匹配',
+      '两次输入的密码不一致',
     );
     expect(mockSetPassphrase).not.toHaveBeenCalled();
   });
@@ -271,16 +271,16 @@ describe('PassphraseSetupScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase (min 6 characters)'),
+      getByPlaceholderText('输入密码（至少6个字符）'),
       'securepass123',
     );
     fireEvent.changeText(
-      getByPlaceholderText('Re-enter passphrase'),
+      getByPlaceholderText('重新输入密码'),
       'securepass123',
     );
 
     await act(async () => {
-      fireEvent.press(getByText('Enable Lock'));
+      fireEvent.press(getByText('启用锁定'));
     });
 
     expect(mockSetPassphrase).toHaveBeenCalledWith('securepass123');
@@ -296,20 +296,20 @@ describe('PassphraseSetupScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter current passphrase'),
+      getByPlaceholderText('输入当前密码'),
       'oldpassword',
     );
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase (min 6 characters)'),
+      getByPlaceholderText('输入密码（至少6个字符）'),
       'newpassword',
     );
     fireEvent.changeText(
-      getByPlaceholderText('Re-enter passphrase'),
+      getByPlaceholderText('重新输入密码'),
       'newpassword',
     );
 
-    // Press "Change Passphrase" button (last one)
-    const buttons = getAllByText('Change Passphrase');
+    // Press "修改密码" button (last one)
+    const buttons = getAllByText('修改密码');
     await act(async () => {
       fireEvent.press(buttons[buttons.length - 1]);
     });
@@ -328,26 +328,26 @@ describe('PassphraseSetupScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter current passphrase'),
+      getByPlaceholderText('输入当前密码'),
       'wrongpassword',
     );
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase (min 6 characters)'),
+      getByPlaceholderText('输入密码（至少6个字符）'),
       'newpassword',
     );
     fireEvent.changeText(
-      getByPlaceholderText('Re-enter passphrase'),
+      getByPlaceholderText('重新输入密码'),
       'newpassword',
     );
 
-    const buttons = getAllByText('Change Passphrase');
+    const buttons = getAllByText('修改密码');
     await act(async () => {
       fireEvent.press(buttons[buttons.length - 1]);
     });
 
     expect(mockShowAlert).toHaveBeenCalledWith(
-      'Error',
-      'Current passphrase is incorrect',
+      '错误',
+      '当前密码不正确',
     );
     expect(defaultProps.onComplete).not.toHaveBeenCalled();
   });
@@ -360,21 +360,21 @@ describe('PassphraseSetupScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase (min 6 characters)'),
+      getByPlaceholderText('输入密码（至少6个字符）'),
       'validpass123',
     );
     fireEvent.changeText(
-      getByPlaceholderText('Re-enter passphrase'),
+      getByPlaceholderText('重新输入密码'),
       'validpass123',
     );
 
     await act(async () => {
-      fireEvent.press(getByText('Enable Lock'));
+      fireEvent.press(getByText('启用锁定'));
     });
 
     expect(mockShowAlert).toHaveBeenCalledWith(
-      'Error',
-      'Failed to set passphrase',
+      '错误',
+      '设置密码失败',
     );
     expect(defaultProps.onComplete).not.toHaveBeenCalled();
   });
@@ -387,25 +387,25 @@ describe('PassphraseSetupScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase (min 6 characters)'),
+      getByPlaceholderText('输入密码（至少6个字符）'),
       'validpass123',
     );
     fireEvent.changeText(
-      getByPlaceholderText('Re-enter passphrase'),
+      getByPlaceholderText('重新输入密码'),
       'validpass123',
     );
 
     await act(async () => {
-      fireEvent.press(getByText('Enable Lock'));
+      fireEvent.press(getByText('启用锁定'));
     });
 
     expect(mockShowAlert).toHaveBeenCalledWith(
-      'Error',
-      'An error occurred. Please try again.',
+      '错误',
+      '发生错误，请重试。',
     );
   });
 
-  it('shows "Saving..." button text while submitting', async () => {
+  it('shows "保存中..." button text while submitting', async () => {
     // Make setPassphrase hang to observe loading state
     let resolveSetPassphrase: (value: boolean) => void;
     mockSetPassphrase.mockImplementation(
@@ -417,21 +417,21 @@ describe('PassphraseSetupScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase (min 6 characters)'),
+      getByPlaceholderText('输入密码（至少6个字符）'),
       'validpass123',
     );
     fireEvent.changeText(
-      getByPlaceholderText('Re-enter passphrase'),
+      getByPlaceholderText('重新输入密码'),
       'validpass123',
     );
 
     // Start submit
     await act(async () => {
-      fireEvent.press(getByText('Enable Lock'));
+      fireEvent.press(getByText('启用锁定'));
     });
 
     // During submission, button text changes
-    expect(queryByText('Saving...')).toBeTruthy();
+    expect(queryByText('保存中...')).toBeTruthy();
 
     // Resolve
     await act(async () => {
@@ -447,19 +447,19 @@ describe('PassphraseSetupScreen', () => {
     );
 
     fireEvent.changeText(
-      getByPlaceholderText('Enter current passphrase'),
+      getByPlaceholderText('输入当前密码'),
       'oldpass',
     );
     fireEvent.changeText(
-      getByPlaceholderText('Enter passphrase (min 6 characters)'),
+      getByPlaceholderText('输入密码（至少6个字符）'),
       'newpass123',
     );
     fireEvent.changeText(
-      getByPlaceholderText('Re-enter passphrase'),
+      getByPlaceholderText('重新输入密码'),
       'newpass123',
     );
 
-    const buttons = getAllByText('Change Passphrase');
+    const buttons = getAllByText('修改密码');
     await act(async () => {
       fireEvent.press(buttons[buttons.length - 1]);
     });
@@ -468,18 +468,18 @@ describe('PassphraseSetupScreen', () => {
     expect(mockSetEnabled).not.toHaveBeenCalled();
   });
 
-  it('shows Passphrase label for new setup', () => {
+  it('shows Password label for new setup', () => {
     const { getByText, queryByText } = render(
       <PassphraseSetupScreen {...defaultProps} />,
     );
-    expect(getByText('Passphrase')).toBeTruthy();
-    expect(queryByText('New Passphrase')).toBeNull();
+    expect(getByText('密码')).toBeTruthy();
+    expect(queryByText('新密码')).toBeNull();
   });
 
   it('shows New Passphrase label for change mode', () => {
     const { getByText } = render(
       <PassphraseSetupScreen {...defaultProps} isChanging />,
     );
-    expect(getByText('New Passphrase')).toBeTruthy();
+    expect(getByText('新密码')).toBeTruthy();
   });
 });

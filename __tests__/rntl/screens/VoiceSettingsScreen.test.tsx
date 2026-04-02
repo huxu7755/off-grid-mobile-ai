@@ -231,13 +231,13 @@ describe('VoiceSettingsScreen', () => {
     beforeEach(() => {
       mockWhisperStoreValues = {
         ...mockWhisperStoreValues,
-        downloadedModelId: 'base',
+        downloadedModelId: 'base.en',
       };
     });
 
     it('shows downloaded model name', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Whisper Base')).toBeTruthy();
+      expect(getByText('Whisper Base (English)')).toBeTruthy();
     });
 
     it('显示"已下载"状态标签', () => {
