@@ -36,9 +36,9 @@ const GpuSection: React.FC<GpuSectionProps> = ({
     <>
       <View style={styles.toggleRow}>
         <View style={styles.toggleInfo}>
-          <Text style={styles.toggleLabel}>GPU Acceleration</Text>
+          <Text style={styles.toggleLabel}>GPU 加速</Text>
           <Text style={styles.toggleDesc}>
-            Offload model layers to GPU. Requires model reload.
+            将模型层卸载到 GPU。需要重新加载模型。
           </Text>
         </View>
         <Switch
@@ -53,11 +53,11 @@ const GpuSection: React.FC<GpuSectionProps> = ({
       {isGpuEnabled && (
         <View style={styles.sliderSection}>
           <View style={styles.sliderHeader}>
-            <Text style={styles.sliderLabel}>GPU Layers</Text>
+            <Text style={styles.sliderLabel}>GPU 层数</Text>
             <Text style={styles.sliderValue}>{gpuLayersEffective}</Text>
           </View>
           <Text style={styles.sliderDesc}>
-            Layers offloaded to GPU. Higher = faster but may crash on low-VRAM devices.
+            卸载到 GPU 的层数。越高 = 越快，但可能在低显存设备上崩溃。
           </Text>
           <Slider
             testID="gpu-layers-slider"
@@ -89,7 +89,7 @@ const FlashAttentionSection: React.FC<{ trackColor: { false: string; true: strin
       <View style={styles.toggleInfo}>
         <Text style={styles.toggleLabel}>Flash Attention</Text>
         <Text style={styles.toggleDesc}>
-          Faster inference and lower memory. Required for quantized KV cache (q8_0/q4_0). Requires model reload.
+          更快的推理和更低的内存。量化 KV 缓存 (q8_0/q4_0) 所需。需要重新加载模型。
         </Text>
       </View>
       <Switch
@@ -113,7 +113,7 @@ const KvCacheSection: React.FC<{ cacheDisabled: boolean }> = ({ cacheDisabled })
     <>
       <View style={styles.toggleRow}>
         <View style={styles.toggleInfo}>
-          <Text style={styles.toggleLabel}>KV Cache Type</Text>
+          <Text style={styles.toggleLabel}>KV 缓存类型</Text>
           <Text style={styles.toggleDesc}>
             {CACHE_TYPE_DESCRIPTIONS[displayCacheType]}
           </Text>
@@ -135,12 +135,12 @@ const KvCacheSection: React.FC<{ cacheDisabled: boolean }> = ({ cacheDisabled })
       </View>
       {cacheDisabled && (
         <Text style={styles.warningText}>
-          GPU acceleration on Android requires f16 KV cache.
+          Android 上的 GPU 加速需要 f16 KV 缓存。
         </Text>
       )}
       {!cacheDisabled && !isFlashAttnOn && (
         <Text style={styles.warningText}>
-          Quantized cache (q8_0/q4_0) will auto-enable flash attention.
+          量化缓存 (q8_0/q4_0) 将自动启用 flash attention。
         </Text>
       )}
     </>
@@ -157,17 +157,17 @@ const ModelLoadingStrategySection: React.FC = () => {
     <>
       <View style={styles.toggleRow}>
         <View style={styles.toggleInfo}>
-          <Text style={styles.toggleLabel}>Model Loading Strategy</Text>
+          <Text style={styles.toggleLabel}>模型加载策略</Text>
           <Text style={styles.toggleDesc}>
             {settings?.modelLoadingStrategy === 'performance'
-              ? 'Keep models loaded for faster responses'
-              : 'Load models on demand to save memory'}
+              ? '保持模型加载以获得更快的响应'
+              : '按需加载模型以节省内存'}
           </Text>
         </View>
       </View>
       <View style={styles.strategyButtons}>
         <Button
-          title="Save Memory"
+          title="节省内存"
           variant="secondary"
           size="small"
           testID="strategy-memory-button"
@@ -176,7 +176,7 @@ const ModelLoadingStrategySection: React.FC = () => {
           style={styles.flex1}
         />
         <Button
-          title="Fast"
+          title="快速"
           variant="secondary"
           size="small"
           testID="strategy-performance-button"
@@ -211,7 +211,7 @@ export const TextGenerationAdvanced: React.FC = () => {
           <Text style={styles.sliderLabel}>Top P</Text>
           <Text style={styles.sliderValue}>{(settings?.topP || 0.9).toFixed(2)}</Text>
         </View>
-        <Text style={styles.sliderDesc}>Nucleus sampling threshold</Text>
+        <Text style={styles.sliderDesc}>核采样阈值</Text>
         <Slider
           style={styles.slider}
           minimumValue={0.1}
@@ -227,10 +227,10 @@ export const TextGenerationAdvanced: React.FC = () => {
 
       <View style={styles.sliderSection}>
         <View style={styles.sliderHeader}>
-          <Text style={styles.sliderLabel}>Repeat Penalty</Text>
+          <Text style={styles.sliderLabel}>重复惩罚</Text>
           <Text style={styles.sliderValue}>{(settings?.repeatPenalty || 1.1).toFixed(2)}</Text>
         </View>
-        <Text style={styles.sliderDesc}>Penalize repeated tokens</Text>
+        <Text style={styles.sliderDesc}>惩罚重复的令牌</Text>
         <Slider
           style={styles.slider}
           minimumValue={1.0}
@@ -246,10 +246,10 @@ export const TextGenerationAdvanced: React.FC = () => {
 
       <View style={styles.sliderSection}>
         <View style={styles.sliderHeader}>
-          <Text style={styles.sliderLabel}>CPU Threads</Text>
+          <Text style={styles.sliderLabel}>CPU 线程</Text>
           <Text style={styles.sliderValue}>{settings?.nThreads || 6}</Text>
         </View>
-        <Text style={styles.sliderDesc}>Parallel threads for inference</Text>
+        <Text style={styles.sliderDesc}>推理并行线程</Text>
         <Slider
           style={styles.slider}
           minimumValue={1}
@@ -265,10 +265,10 @@ export const TextGenerationAdvanced: React.FC = () => {
 
       <View style={styles.sliderSection}>
         <View style={styles.sliderHeader}>
-          <Text style={styles.sliderLabel}>Batch Size</Text>
+          <Text style={styles.sliderLabel}>批大小</Text>
           <Text style={styles.sliderValue}>{settings?.nBatch || 256}</Text>
         </View>
-        <Text style={styles.sliderDesc}>Tokens processed per batch</Text>
+        <Text style={styles.sliderDesc}>每批处理的令牌数</Text>
         <Slider
           style={styles.slider}
           minimumValue={32}

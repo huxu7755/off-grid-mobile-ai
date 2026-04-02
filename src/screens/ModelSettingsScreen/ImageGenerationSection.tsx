@@ -19,11 +19,11 @@ const EnhanceImageToggle: React.FC = () => {
   return (
     <View style={styles.toggleRow}>
       <View style={styles.toggleInfo}>
-        <Text style={styles.toggleLabel}>Enhance Image Prompts</Text>
+        <Text style={styles.toggleLabel}>增强图像提示词</Text>
         <Text style={styles.toggleDesc}>
           {settings?.enhanceImagePrompts
-            ? 'Text model refines your prompt before image generation (slower but better results)'
-            : 'Use your prompt directly for image generation (faster)'}
+            ? '文本模型在图像生成前优化您的提示词（较慢但效果更好）'
+            : '直接使用您的提示词进行图像生成（更快）'}
         </Text>
       </View>
       <Switch
@@ -48,9 +48,9 @@ const ImageGpuSection: React.FC = () => {
     <>
       <View style={styles.toggleRow}>
         <View style={styles.toggleInfo}>
-          <Text style={styles.toggleLabel}>OpenCL GPU Acceleration</Text>
+          <Text style={styles.toggleLabel}>OpenCL GPU 加速</Text>
           <Text style={styles.toggleDesc}>
-            Use GPU for faster image generation. First run may be slower while optimizing for your device.
+            使用 GPU 加速图像生成。首次运行可能较慢，因为需要为您的设备进行优化。
           </Text>
         </View>
         <Switch
@@ -67,7 +67,7 @@ const ImageGpuSection: React.FC = () => {
           disabled={clearing}
         >
           <Text style={styles.clearCacheText}>
-            {clearing ? 'Clearing...' : 'Clear GPU Cache'}
+            {clearing ? '清除中...' : '清除 GPU 缓存'}
           </Text>
         </TouchableOpacity>
       )}
@@ -83,15 +83,15 @@ const DetectionMethodRow: React.FC = () => {
 
   return (
     <View style={styles.settingSection}>
-      <Text style={styles.settingLabel}>Detection Method</Text>
+      <Text style={styles.settingLabel}>检测方法</Text>
       <Text style={styles.settingDesc}>
         {settings?.autoDetectMethod === 'pattern'
-          ? 'Fast keyword matching'
-          : 'Uses text model for classification'}
+          ? '快速关键词匹配'
+          : '使用文本模型进行分类'}
       </Text>
       <View style={styles.buttonRow}>
         <Button
-          title="Pattern"
+          title="模式"
           variant="secondary"
           size="medium"
           active={settings?.autoDetectMethod === 'pattern'}
@@ -122,10 +122,10 @@ const ImageAdvancedSection: React.FC = () => {
     <>
       <View style={styles.sliderSection}>
         <View style={styles.sliderHeader}>
-          <Text style={styles.sliderLabel}>Guidance Scale</Text>
+          <Text style={styles.sliderLabel}>引导比例</Text>
           <Text style={styles.sliderValue}>{(settings?.imageGuidanceScale || 7.5).toFixed(1)}</Text>
         </View>
-        <Text style={styles.sliderDesc}>Higher = follows prompt more strictly</Text>
+        <Text style={styles.sliderDesc}>越高 = 越严格遵循提示词</Text>
         <Slider
           style={styles.slider}
           minimumValue={1}
@@ -141,11 +141,11 @@ const ImageAdvancedSection: React.FC = () => {
 
       <View style={styles.sliderSection}>
         <View style={styles.sliderHeader}>
-          <Text style={styles.sliderLabel}>Image Threads</Text>
+          <Text style={styles.sliderLabel}>图像线程</Text>
           <Text style={styles.sliderValue}>{settings?.imageThreads ?? 4}</Text>
         </View>
         <Text style={styles.sliderDesc}>
-          CPU threads used for image generation (applies on next image model load)
+          用于图像生成的 CPU 线程（在下次加载图像模型时生效）
         </Text>
         <Slider
           style={styles.slider}
@@ -182,18 +182,18 @@ export const ImageGenerationSection: React.FC = () => {
   return (
     <Card style={styles.section}>
       <Text style={styles.settingHelp}>
-        Control how image generation requests are handled in chat.
+        控制聊天中图像生成请求的处理方式。
       </Text>
 
       {/* ── Basic Settings ── */}
 
       <View style={styles.toggleRow}>
         <View style={styles.toggleInfo}>
-          <Text style={styles.toggleLabel}>Automatic Detection</Text>
+          <Text style={styles.toggleLabel}>自动检测</Text>
           <Text style={styles.toggleDesc}>
             {isAutoMode
-              ? 'LLM will classify if your message is asking for an image'
-              : 'Only generate images when you tap the image button'}
+              ? 'LLM 将判断您的消息是否在请求图像'
+              : '仅在您点击图像按钮时生成图像'}
           </Text>
         </View>
         <Switch
@@ -207,16 +207,16 @@ export const ImageGenerationSection: React.FC = () => {
       </View>
       <Text style={styles.toggleNote}>
         {isAutoMode
-          ? 'In Auto mode, messages like "Draw me a sunset" will automatically generate an image when an image model is loaded.'
-          : 'In Manual mode, you must tap the IMG button in chat to generate images.'}
+          ? '在自动模式下，当加载了图像模型时，像"给我画一个日落"这样的消息将自动生成图像。'
+          : '在手动模式下，您必须点击聊天中的 IMG 按钮来生成图像。'}
       </Text>
 
       <View style={styles.sliderSection}>
         <View style={styles.sliderHeader}>
-          <Text style={styles.sliderLabel}>Image Steps</Text>
+          <Text style={styles.sliderLabel}>图像步数</Text>
           <Text style={styles.sliderValue}>{settings?.imageSteps || 8}</Text>
         </View>
-        <Text style={styles.sliderDesc}>More steps = better quality but slower (4-8 fast, 20-50 high quality)</Text>
+        <Text style={styles.sliderDesc}>更多步数 = 更好的质量但更慢（4-8 快速，20-50 高质量）</Text>
         <Slider
           style={styles.slider}
           minimumValue={4}
@@ -232,10 +232,10 @@ export const ImageGenerationSection: React.FC = () => {
 
       <View style={styles.sliderSection}>
         <View style={styles.sliderHeader}>
-          <Text style={styles.sliderLabel}>Image Size</Text>
+          <Text style={styles.sliderLabel}>图像大小</Text>
           <Text style={styles.sliderValue}>{settings?.imageWidth ?? 256}x{settings?.imageHeight ?? 256}</Text>
         </View>
-        <Text style={styles.sliderDesc}>Output resolution (smaller = faster, larger = more detail)</Text>
+        <Text style={styles.sliderDesc}>输出分辨率（越小 = 越快，越大 = 更多细节）</Text>
         <Slider
           style={styles.slider}
           minimumValue={128}
