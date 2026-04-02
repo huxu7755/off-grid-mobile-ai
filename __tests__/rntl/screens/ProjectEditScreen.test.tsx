@@ -174,14 +174,14 @@ describe('ProjectEditScreen', () => {
     it('shows hint text for system prompt', () => {
       const { getByText } = render(<ProjectEditScreen />);
       expect(
-        getByText(/This context is sent to the AI at the start of every chat/),
+        getByText(/此上下文会在该项目中每次聊天开始时发送给AI/),
       ).toBeTruthy();
     });
 
     it('shows tip text', () => {
       const { getByText } = render(<ProjectEditScreen />);
       expect(
-        getByText(/Tip: Be specific about what you want the AI to do/),
+        getByText(/提示：明确说明您希望AI做什么/),
       ).toBeTruthy();
     });
 
@@ -322,8 +322,8 @@ describe('ProjectEditScreen', () => {
       fireEvent.press(getByText('保存'));
 
       expect(mockShowAlert).toHaveBeenCalledWith(
-        'Error',
-        'Please enter a name for the project',
+        '错误',
+        '请输入项目名称',
       );
       expect(mockUpdateProject).not.toHaveBeenCalled();
       expect(mockGoBack).not.toHaveBeenCalled();
@@ -335,8 +335,8 @@ describe('ProjectEditScreen', () => {
       fireEvent.press(getByText('保存'));
 
       expect(mockShowAlert).toHaveBeenCalledWith(
-        'Error',
-        'Please enter a name for the project',
+        '错误',
+        '请输入项目名称',
       );
       expect(mockUpdateProject).not.toHaveBeenCalled();
     });
@@ -347,8 +347,8 @@ describe('ProjectEditScreen', () => {
       fireEvent.press(getByText('保存'));
 
       expect(mockShowAlert).toHaveBeenCalledWith(
-        'Error',
-        'Please enter a system prompt',
+        '错误',
+        '请输入系统提示词',
       );
       expect(mockUpdateProject).not.toHaveBeenCalled();
       expect(mockGoBack).not.toHaveBeenCalled();
@@ -360,8 +360,8 @@ describe('ProjectEditScreen', () => {
       fireEvent.press(getByText('保存'));
 
       expect(mockShowAlert).toHaveBeenCalledWith(
-        'Error',
-        'Please enter a system prompt',
+        '错误',
+        '请输入系统提示词',
       );
     });
 
@@ -373,8 +373,8 @@ describe('ProjectEditScreen', () => {
 
       // Name validation error should show first
       expect(mockShowAlert).toHaveBeenCalledWith(
-        'Error',
-        'Please enter a name for the project',
+        '错误',
+        '请输入项目名称',
       );
       expect(mockShowAlert).toHaveBeenCalledTimes(1);
     });

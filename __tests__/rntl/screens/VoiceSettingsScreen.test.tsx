@@ -198,9 +198,8 @@ describe('VoiceSettingsScreen', () => {
     });
 
     it('shows model size for each option', () => {
-      const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('75 MB')).toBeTruthy();
-      expect(getByText('75 MB')).toBeTruthy();
+      const { getAllByText, getByText } = render(<VoiceSettingsScreen />);
+      expect(getAllByText('75 MB').length).toBe(2);
       expect(getByText('142 MB')).toBeTruthy();
     });
 
