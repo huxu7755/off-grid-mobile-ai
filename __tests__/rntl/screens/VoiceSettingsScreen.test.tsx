@@ -101,10 +101,11 @@ jest.mock('../../../src/stores', () => ({
 
 jest.mock('../../../src/services', () => ({
   WHISPER_MODELS: [
-    { id: 'tiny', name: 'Whisper Tiny', size: '75', description: 'Fastest, lower accuracy' },
-    { id: 'base', name: 'Whisper Base', size: '141', description: 'Good accuracy' },
-    { id: 'small', name: 'Whisper Small', size: '461', description: 'Better accuracy' },
-    { id: 'medium', name: 'Whisper Medium', size: '1500', description: 'Best accuracy' },
+    { id: 'tiny.en', name: 'Whisper Tiny (English)', size: 75, description: '最快，仅英语，适合基本转录' },
+    { id: 'tiny', name: 'Whisper Tiny (Multilingual)', size: 75, description: '快速，支持多种语言' },
+    { id: 'base.en', name: 'Whisper Base (English)', size: 142, description: '更好的准确性，仅英语' },
+    { id: 'base', name: 'Whisper Base (Multilingual)', size: 142, description: '更好的准确性，多种语言' },
+    { id: 'small.en', name: 'Whisper Small (English)', size: 466, description: '高准确性，仅英语，需要更多内存' },
   ],
 }));
 
@@ -180,15 +181,15 @@ describe('VoiceSettingsScreen', () => {
   describe('下载选项（无模型）', () => {
     it('当未下载模型时显示下载选项', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      expect(getByText('Whisper Tiny')).toBeTruthy();
-      expect(getByText('Whisper Base')).toBeTruthy();
-      expect(getByText('Whisper Small')).toBeTruthy();
+      expect(getByText('Whisper Tiny (English)')).toBeTruthy();
+      expect(getByText('Whisper Tiny (Multilingual)')).toBeTruthy();
+      expect(getByText('Whisper Base (English)')).toBeTruthy();
     });
 
     it('只显示前3个模型 (slice(0, 3))', () => {
       const { queryByText } = render(<VoiceSettingsScreen />);
-      // 4th model (medium) should NOT be shown due to .slice(0, 3)
-      expect(queryByText('Whisper Medium')).toBeNull();
+      // 4th model (base multilingual) should NOT be shown due to .slice(0, 3)
+      expect(queryByText('Whisper Base (Multilingual)')).toBeNull();
     });
 
     it('显示"选择要下载的模型"标签', () => {
@@ -199,8 +200,8 @@ describe('VoiceSettingsScreen', () => {
     it('shows model size for each option', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
       expect(getByText('75 MB')).toBeTruthy();
-      expect(getByText('141 MB')).toBeTruthy();
-      expect(getByText('461 MB')).toBeTruthy();
+      expect(getByText('75 MB')).toBeTruthy();
+      expect(getByText('142 MB')).toBeTruthy();
     });
 
     it('shows model description for each option', () => {
@@ -212,14 +213,14 @@ describe('VoiceSettingsScreen', () => {
 
     it('calls downloadModel when a model option is pressed', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      fireEvent.press(getByText('Whisper Base'));
-      expect(mockDownloadModel).toHaveBeenCalledWith('base');
+      fireEvent.press(getByText('Whisper Base (English)'));
+      expect(mockDownloadModel).toHaveBeenCalledWith('base.en');
     });
 
     it('calls downloadModel with correct id for tiny model', () => {
       const { getByText } = render(<VoiceSettingsScreen />);
-      fireEvent.press(getByText('Whisper Tiny'));
-      expect(mockDownloadModel).toHaveBeenCalledWith('tiny');
+      fireEvent.press(getByText('Whisper Tiny (English)'));
+      expect(mockDownloadModel).toHaveBeenCalledWith('tiny.en');
     });
   });
 
